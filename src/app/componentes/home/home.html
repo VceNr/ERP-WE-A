@@ -1,0 +1,88 @@
+<!-- home.html — Portal ERP Empresarial -->
+<div class="shell">
+
+  <!-- ============ NAVBAR ============ -->
+  <header class="topbar">
+    <a class="brand" href="#" aria-label="Inicio">
+      <span class="brand-mark" aria-hidden="true"></span>
+      <span class="brand-text">ERP<em>/Chuchetumare</em></span>
+    </a>
+
+    <div class="topbar-right">
+      <button class="user-chip" type="button" aria-label="Perfil de usuario">
+        <span>Cuenta</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- ============ HERO / PORTADA ============ -->
+  <main class="hero">
+    <div class="hero-copy">
+      <p class="eyebrow">SISTEMA OPERATIVO COMERCIAL — BUILD 2026.06</p>
+
+      <h1 class="hero-title">
+        Vende en tres pasos.<br>
+        <span class="hero-title-accent">Informa en uno.</span>
+      </h1>
+
+      <p class="hero-sub">
+        Sin menús infinitos ni pantallas intermedias. Cada acción del día
+        — registrar una venta, emitir un informe — está a un atajo de distancia.
+      </p>
+
+      <div class="hero-actions">
+        <button class="btn-primary" type="button" (click)="irAlogin()">Iniciar sesión</button>
+        <button class="btn-ghost"   type="button">Registrar Cuenta</button>
+      </div>
+    </div>
+
+    <!-- Panel de estado del sistema -->
+    <aside class="status-panel" aria-label="Estado del sistema">
+      <div class="status-head">
+        <span>ESTADO / HOY</span>
+        <span class="status-time">11 JUN 2026</span>
+      </div>
+
+      <dl class="status-grid">
+        <div class="stat">
+          <dt>Ventas registradas</dt>
+          <dd class="stat-good">128</dd>
+        </div>
+        <div class="stat">
+          <dt>Tiempo medio / venta</dt>
+          <dd class="stat-accent">00:42<small>s</small></dd>
+        </div>
+        <div class="stat">
+          <dt>Informes generados</dt>
+          <dd>17</dd>
+        </div>
+        <div class="stat">
+          <dt>Stock crítico</dt>
+          <dd class="stat-alert">3<small> ítems</small></dd>
+        </div>
+      </dl>
+
+      <div class="status-bar-wrap">
+        <div class="status-bar-header">
+          <span>META DIARIA</span>
+          <span class="status-bar-pct">64%</span>
+        </div>
+        <div class="status-bar">
+          <span class="status-bar-fill" style="width: 64%"></span>
+        </div>
+      </div>
+
+      <p class="status-foot">128 DE 200 OPERACIONES COMPLETADAS HOY</p>
+    </aside>
+  </main>
+
+  <!-- ============ FRANJA DE MÓDULOS ============ -->
+  <footer class="module-strip" aria-label="Módulos del sistema">
+    <span class="module">01 — VENTAS</span>
+    <span class="module">02 — INVENTARIO</span>
+    <span class="module">03 — INFORMES</span>
+    <span class="module">04 — CLIENTES</span>
+    <span class="module">05 — FINANZAS</span>
+  </footer>
+
+</div>

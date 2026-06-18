@@ -1,1 +1,42 @@
-/* You can add global styles to this file, and also import other style files */
+/* Estilos globales ERP */
+
+/* ── Variables de diseño (aquí para que Angular no las encapsule) ── */
+:root {
+  --bg:          #04080f;
+  --bg-2:        #070c17;
+  --surface:     #0b1120;
+  --surface-2:   #0f1829;
+  --border:      #1e2d4a;
+  --border-soft: #121b2e;
+  --text:        #e8edf8;
+  --text-2:      #8fa3c4;
+  --muted:       #506075;
+  --blue:        #3b7ef8;
+  --blue-bright: #6fa3ff;
+  --blue-dim:    #0e2147;
+  --cyan:        #00d4ff;
+  --cyan-dim:    #002a3d;
+  --green:       #00e5a0;
+  --amber:       #f5a623;
+  --red:         #ff4d6a;
+
+  --font-body:    'IBM Plex Sans', system-ui, sans-serif;
+  --font-mono:    'IBM Plex Mono', monospace;
+  --font-display: 'Archivo', system-ui, sans-serif;
+}
+
+*,
+*::before,
+*::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body {
+  height: 100%;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-body);
+}
+
+app-root {
+  display: block;
+  height: 100%;
+}

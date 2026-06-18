@@ -1,0 +1,24 @@
+<div class="login-shell">
+  <div class="login-card">
+    <div class="login-brand">
+      <span class="login-brand-mark" aria-hidden="true"></span>
+      <span class="login-brand-text">ERP<em>/Chuchetumare</em></span>
+    </div>
+
+    <h1 class="login-title">Iniciar sesión</h1>
+
+    <form class="login-form" (submit)="$event.preventDefault()">
+      <div class="field">
+        <label for="usuario" class="field-label">Usuario</label>
+        <input id="usuario" type="text" class="field-input" placeholder="tu@correo.com" autocomplete="username">
+      </div>
+
+      <div class="field">
+        <label for="password" class="field-label">Contraseña</label>
+        <input id="password" type="password" class="field-input" placeholder="••••••••" autocomplete="current-password">
+      </div>
+
+      <button class="btn-login" type="button" (click)="irDash()">Iniciar sesión</button>
+    </form>
+  </div>
+</div>

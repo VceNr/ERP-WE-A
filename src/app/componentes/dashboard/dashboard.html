@@ -1,0 +1,143 @@
+<!-- dashboard.html — Layout estilo Dynamics 365 -->
+<div class="erp-layout">
+
+  <!-- ===== TOPBAR ===== -->
+  <header class="topbar">
+
+    <div class="topbar-left">
+      <button class="waffle-btn" title="Menú">
+        <span class="waffle-dot"></span><span class="waffle-dot"></span><span class="waffle-dot"></span>
+        <span class="waffle-dot"></span><span class="waffle-dot"></span><span class="waffle-dot"></span>
+        <span class="waffle-dot"></span><span class="waffle-dot"></span><span class="waffle-dot"></span>
+      </button>
+      <span class="brand-name">ERP <em>Pro</em></span>
+      <span class="topbar-sep"></span>
+      <span class="module-name">Dashboard</span>
+    </div>
+
+    <div class="topbar-center">
+      <div class="topbar-search">
+        <span class="search-icon">&#128269;</span>
+        <input type="text" placeholder="Buscar..." class="search-input">
+      </div>
+    </div>
+
+    <div class="topbar-right">
+      <button class="icon-btn" title="Nuevo">&#43;</button>
+      <button class="icon-btn" title="Notificaciones">
+        &#128276;
+        <span class="badge">5</span>
+      </button>
+      <button class="icon-btn" title="Configuración">&#9881;</button>
+      <button class="icon-btn" title="Ayuda">&#63;</button>
+      <div class="topbar-avatar-circle" title="Admin">A</div>
+    </div>
+
+  </header>
+
+  <!-- ===== CUERPO (sidebar + contenido) ===== -->
+  <div class="erp-body">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+
+      <!-- Principal -->
+      <div class="sidebar-section" [class.open]="open['principal']">
+        <button class="sidebar-heading" type="button" (click)="toggle('principal')">
+          <span>Principal</span>
+          <svg class="sidebar-arrow" viewBox="0 0 10 10" aria-hidden="true">
+            <polyline points="2,3 5,7 8,3" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+        <div class="sidebar-items">
+          <a class="sidebar-item" routerLink="overview" routerLinkActive="active">
+            <span class="si-icon">&#9711;</span> Dashboard
+          </a>
+          <a class="sidebar-item" routerLink="ventas" routerLinkActive="active">
+            <span class="si-icon">&#8599;</span> Ventas
+            <span class="si-badge">12</span>
+          </a>
+          <a class="sidebar-item" routerLink="compras" routerLinkActive="active">
+            <span class="si-icon">&#9632;</span> Compras
+          </a>
+          <a class="sidebar-item" routerLink="inventario" routerLinkActive="active">
+            <span class="si-icon">&#9632;</span> Inventario
+            <span class="si-badge warn">3</span>
+          </a>
+          <a class="sidebar-item" routerLink="clientes" routerLinkActive="active">
+            <span class="si-icon">&#9632;</span> Clientes / CRM
+          </a>
+        </div>
+      </div>
+
+      <!-- Gestión -->
+      <div class="sidebar-section" [class.open]="open['gestion']">
+        <button class="sidebar-heading" type="button" (click)="toggle('gestion')">
+          <span>Gestión</span>
+          <svg class="sidebar-arrow" viewBox="0 0 10 10" aria-hidden="true">
+            <polyline points="2,3 5,7 8,3" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+        <div class="sidebar-items">
+          <a class="sidebar-item" routerLink="finanzas" routerLinkActive="active">
+            <span class="si-icon">&#9632;</span> Finanzas
+          </a>
+          <a class="sidebar-item" routerLink="contabilidad" routerLinkActive="active">
+            <span class="si-icon">&#9632;</span> Contabilidad
+          </a>
+          <a class="sidebar-item" routerLink="rrhh" routerLinkActive="active">
+            <span class="si-icon">&#9632;</span> Recursos Humanos
+          </a>
+          <a class="sidebar-item" routerLink="produccion" routerLinkActive="active">
+            <span class="si-icon">&#9632;</span> Producción
+          </a>
+          <a class="sidebar-item" routerLink="proyectos" routerLinkActive="active">
+            <span class="si-icon">&#9632;</span> Proyectos
+          </a>
+        </div>
+      </div>
+
+      <!-- Análisis -->
+      <div class="sidebar-section" [class.open]="open['analisis']">
+        <button class="sidebar-heading" type="button" (click)="toggle('analisis')">
+          <span>Análisis</span>
+          <svg class="sidebar-arrow" viewBox="0 0 10 10" aria-hidden="true">
+            <polyline points="2,3 5,7 8,3" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+        <div class="sidebar-items">
+          <a class="sidebar-item" routerLink="reportes" routerLinkActive="active">
+            <span class="si-icon">&#9632;</span> Reportes
+          </a>
+          <a class="sidebar-item" routerLink="auditoria" routerLinkActive="active">
+            <span class="si-icon">&#9632;</span> Auditoría
+          </a>
+        </div>
+      </div>
+
+      <!-- Sistema -->
+      <div class="sidebar-section" [class.open]="open['sistema']">
+        <button class="sidebar-heading" type="button" (click)="toggle('sistema')">
+          <span>Sistema</span>
+          <svg class="sidebar-arrow" viewBox="0 0 10 10" aria-hidden="true">
+            <polyline points="2,3 5,7 8,3" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+        <div class="sidebar-items">
+          <a class="sidebar-item" routerLink="configuracion" routerLinkActive="active">
+            <span class="si-icon">&#9632;</span> Configuración
+          </a>
+        </div>
+      </div>
+
+    </aside>
+
+    <!-- MAIN WRAPPER -->
+    <div class="main-wrapper">
+      <main class="main-content">
+        <router-outlet />
+      </main>
+    </div>
+
+  </div>
+</div>

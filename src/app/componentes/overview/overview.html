@@ -1,0 +1,327 @@
+<!-- overview.html — Vista principal del dashboard -->
+
+<!-- ACCIONES RÁPIDAS -->
+<section class="panel quick-actions-top">
+  <div class="panel-header">
+    <h2 class="panel-title">Acciones Rápidas</h2>
+  </div>
+  <div class="quick-actions">
+    <button class="qa-btn" type="button">
+      <span class="qa-icon blue">&#43;</span>
+      Nueva Venta
+    </button>
+    <button class="qa-btn" type="button">
+      <span class="qa-icon green">&#128203;</span>
+      Nueva Orden
+    </button>
+    <button class="qa-btn" type="button">
+      <span class="qa-icon amber">&#128230;</span>
+      Ajuste Stock
+    </button>
+    <button class="qa-btn" type="button">
+      <span class="qa-icon purple">&#128101;</span>
+      Nuevo Cliente
+    </button>
+    <button class="qa-btn" type="button">
+      <span class="qa-icon teal">&#128184;</span>
+      Nueva Factura
+    </button>
+    <button class="qa-btn" type="button">
+      <span class="qa-icon gray">&#128202;</span>
+      Generar Reporte
+    </button>
+  </div>
+</section>
+
+<!-- KPIs -->
+<section class="kpi-grid">
+
+  <div class="kpi-card kpi-blue">
+    <div class="kpi-header">
+      <span class="kpi-label">Ventas del Mes</span>
+      <span class="kpi-icon">&#128200;</span>
+    </div>
+    <div class="kpi-value">$284,500</div>
+    <div class="kpi-footer">
+      <span class="kpi-change up">&#8679; 12.4%</span>
+      <span class="kpi-compare">vs mes anterior</span>
+    </div>
+  </div>
+
+  <div class="kpi-card kpi-green">
+    <div class="kpi-header">
+      <span class="kpi-label">Órdenes Activas</span>
+      <span class="kpi-icon">&#128203;</span>
+    </div>
+    <div class="kpi-value">1,284</div>
+    <div class="kpi-footer">
+      <span class="kpi-change up">&#8679; 8.1%</span>
+      <span class="kpi-compare">vs semana pasada</span>
+    </div>
+  </div>
+
+  <div class="kpi-card kpi-amber">
+    <div class="kpi-header">
+      <span class="kpi-label">Stock Crítico</span>
+      <span class="kpi-icon">&#128230;</span>
+    </div>
+    <div class="kpi-value">23</div>
+    <div class="kpi-footer">
+      <span class="kpi-change down">&#8681; 3 ítems</span>
+      <span class="kpi-compare">requieren reposición</span>
+    </div>
+  </div>
+
+  <div class="kpi-card kpi-purple">
+    <div class="kpi-header">
+      <span class="kpi-label">Clientes Activos</span>
+      <span class="kpi-icon">&#128101;</span>
+    </div>
+    <div class="kpi-value">4,820</div>
+    <div class="kpi-footer">
+      <span class="kpi-change up">&#8679; 2.3%</span>
+      <span class="kpi-compare">este trimestre</span>
+    </div>
+  </div>
+
+  <div class="kpi-card kpi-teal">
+    <div class="kpi-header">
+      <span class="kpi-label">Gastos Operativos</span>
+      <span class="kpi-icon">&#128184;</span>
+    </div>
+    <div class="kpi-value">$91,200</div>
+    <div class="kpi-footer">
+      <span class="kpi-change down red">&#8681; 5.7%</span>
+      <span class="kpi-compare">vs mes anterior</span>
+    </div>
+  </div>
+
+  <div class="kpi-card kpi-gray">
+    <div class="kpi-header">
+      <span class="kpi-label">Empleados</span>
+      <span class="kpi-icon">&#128104;</span>
+    </div>
+    <div class="kpi-value">347</div>
+    <div class="kpi-footer">
+      <span class="kpi-change up">&#8679; 4 nuevos</span>
+      <span class="kpi-compare">este mes</span>
+    </div>
+  </div>
+
+</section>
+
+<!-- FILA CENTRAL -->
+<section class="mid-row">
+
+  <div class="panel">
+    <div class="panel-header">
+      <h2 class="panel-title">Órdenes Recientes</h2>
+      <a href="#" class="panel-link">Ver todas &#8594;</a>
+    </div>
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>N° Orden</th>
+          <th>Cliente</th>
+          <th>Monto</th>
+          <th>Estado</th>
+          <th>Fecha</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="mono">#ORD-8821</td>
+          <td>Distribuidora Norte SA</td>
+          <td class="mono">$14,200</td>
+          <td><span class="pill pill-green">Completada</span></td>
+          <td class="muted">14 Jun</td>
+        </tr>
+        <tr>
+          <td class="mono">#ORD-8820</td>
+          <td>Tech Solutions Corp</td>
+          <td class="mono">$8,750</td>
+          <td><span class="pill pill-blue">En proceso</span></td>
+          <td class="muted">14 Jun</td>
+        </tr>
+        <tr>
+          <td class="mono">#ORD-8819</td>
+          <td>Comercial Pérez Hnos</td>
+          <td class="mono">$3,100</td>
+          <td><span class="pill pill-amber">Pendiente</span></td>
+          <td class="muted">13 Jun</td>
+        </tr>
+        <tr>
+          <td class="mono">#ORD-8818</td>
+          <td>Importaciones Global</td>
+          <td class="mono">$22,400</td>
+          <td><span class="pill pill-green">Completada</span></td>
+          <td class="muted">13 Jun</td>
+        </tr>
+        <tr>
+          <td class="mono">#ORD-8817</td>
+          <td>Logística Express SA</td>
+          <td class="mono">$6,900</td>
+          <td><span class="pill pill-red">Cancelada</span></td>
+          <td class="muted">12 Jun</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="side-panels">
+
+    <div class="panel">
+      <div class="panel-header">
+        <h2 class="panel-title">Alertas</h2>
+        <span class="badge-count">5</span>
+      </div>
+      <ul class="alert-list">
+        <li class="alert-item alert-warn">
+          <span class="alert-dot"></span>
+          <div class="alert-body">
+            <span class="alert-msg">3 productos bajo stock mínimo</span>
+            <span class="alert-time">Hace 10 min</span>
+          </div>
+        </li>
+        <li class="alert-item alert-info">
+          <span class="alert-dot"></span>
+          <div class="alert-body">
+            <span class="alert-msg">Factura #4490 vence mañana</span>
+            <span class="alert-time">Hace 45 min</span>
+          </div>
+        </li>
+        <li class="alert-item alert-danger">
+          <span class="alert-dot"></span>
+          <div class="alert-body">
+            <span class="alert-msg">Pago vencido — Cliente Distribuidora Norte</span>
+            <span class="alert-time">Hace 2 h</span>
+          </div>
+        </li>
+        <li class="alert-item alert-success">
+          <span class="alert-dot"></span>
+          <div class="alert-body">
+            <span class="alert-msg">Backup diario completado</span>
+            <span class="alert-time">Hace 3 h</span>
+          </div>
+        </li>
+        <li class="alert-item alert-info">
+          <span class="alert-dot"></span>
+          <div class="alert-body">
+            <span class="alert-msg">Nuevo usuario registrado: jlopez</span>
+            <span class="alert-time">Ayer</span>
+          </div>
+        </li>
+      </ul>
+    </div>
+
+  </div>
+</section>
+
+<!-- FILA INFERIOR -->
+<section class="bottom-row">
+
+  <div class="panel">
+    <div class="panel-header">
+      <h2 class="panel-title">Resumen Financiero — Jun 2026</h2>
+      <a href="#" class="panel-link">Contabilidad &#8594;</a>
+    </div>
+    <div class="finance-grid">
+      <div class="finance-item">
+        <span class="finance-label">Ingresos</span>
+        <span class="finance-value green">$284,500</span>
+        <div class="mini-bar"><span style="width: 71%;" class="mini-fill green"></span></div>
+      </div>
+      <div class="finance-item">
+        <span class="finance-label">Gastos</span>
+        <span class="finance-value red">$91,200</span>
+        <div class="mini-bar"><span style="width: 23%;" class="mini-fill red"></span></div>
+      </div>
+      <div class="finance-item">
+        <span class="finance-label">Utilidad Neta</span>
+        <span class="finance-value blue">$193,300</span>
+        <div class="mini-bar"><span style="width: 48%;" class="mini-fill blue"></span></div>
+      </div>
+      <div class="finance-item">
+        <span class="finance-label">Cuentas por Cobrar</span>
+        <span class="finance-value amber">$42,800</span>
+        <div class="mini-bar"><span style="width: 11%;" class="mini-fill amber"></span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="panel">
+    <div class="panel-header">
+      <h2 class="panel-title">Estado del Sistema</h2>
+    </div>
+    <ul class="module-status-list">
+      <li class="ms-item">
+        <span class="ms-name">Servidor de Base de Datos</span>
+        <div class="ms-right"><span class="ms-bar ok" style="width:98%"></span><span class="ms-pct ok">98%</span></div>
+      </li>
+      <li class="ms-item">
+        <span class="ms-name">API de Pagos</span>
+        <div class="ms-right"><span class="ms-bar ok"></span><span class="ms-pct ok">Online</span></div>
+      </li>
+      <li class="ms-item">
+        <span class="ms-name">Servicio de Email</span>
+        <div class="ms-right"><span class="ms-bar warn" style="width:72%"></span><span class="ms-pct warn">72%</span></div>
+      </li>
+      <li class="ms-item">
+        <span class="ms-name">Módulo de Reportes</span>
+        <div class="ms-right"><span class="ms-bar ok"></span><span class="ms-pct ok">Online</span></div>
+      </li>
+      <li class="ms-item">
+        <span class="ms-name">Sincronización EDI</span>
+        <div class="ms-right"><span class="ms-bar err"></span><span class="ms-pct err">Offline</span></div>
+      </li>
+      <li class="ms-item">
+        <span class="ms-name">Almacenamiento en Nube</span>
+        <div class="ms-right"><span class="ms-bar ok" style="width:85%"></span><span class="ms-pct ok">85%</span></div>
+      </li>
+    </ul>
+  </div>
+
+  <div class="panel">
+    <div class="panel-header">
+      <h2 class="panel-title">Actividad Reciente</h2>
+    </div>
+    <ul class="activity-list">
+      <li class="act-item">
+        <div class="act-dot act-blue"></div>
+        <div class="act-body">
+          <span class="act-text">Juan García creó orden <strong>#ORD-8821</strong></span>
+          <span class="act-time">10:42</span>
+        </div>
+      </li>
+      <li class="act-item">
+        <div class="act-dot act-green"></div>
+        <div class="act-body">
+          <span class="act-text">Pago aprobado para factura <strong>#F-4489</strong></span>
+          <span class="act-time">10:15</span>
+        </div>
+      </li>
+      <li class="act-item">
+        <div class="act-dot act-amber"></div>
+        <div class="act-body">
+          <span class="act-text">Stock actualizado — Bodega Central</span>
+          <span class="act-time">09:58</span>
+        </div>
+      </li>
+      <li class="act-item">
+        <div class="act-dot act-purple"></div>
+        <div class="act-body">
+          <span class="act-text">Cliente <strong>Tech Solutions</strong> actualizado</span>
+          <span class="act-time">09:30</span>
+        </div>
+      </li>
+      <li class="act-item">
+        <div class="act-dot act-red"></div>
+        <div class="act-body">
+          <span class="act-text">Orden <strong>#ORD-8817</strong> cancelada por cliente</span>
+          <span class="act-time">08:55</span>
+        </div>
+      </li>
+    </ul>
+  </div>
+
+</section>
