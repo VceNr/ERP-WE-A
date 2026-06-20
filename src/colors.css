@@ -1,0 +1,31 @@
+import { Component, Input } from '@angular/core';
+import { CommonModule } from '@angular/common';
+
+/** Status pill — outlined chip with a faint tint. Muted accent classifies a row.
+ *
+ *   <mui-pill tone="green">Completada</mui-pill>
+ *   <mui-pill tone="amber">Pendiente</mui-pill>
+ */
+@Component({
+  selector: 'mui-pill',
+  standalone: true,
+  imports: [CommonModule],
+  template: `<span class="mui-pill" [style.color]="color" [style.borderColor]="color" [style.background]="bg"><ng-content></ng-content></span>`,
+  styles: [`
+    .mui-pill {
+      display: inline-block; font-size: var(--text-2xs); font-weight: var(--weight-medium);
+      line-height: 1.5; padding: 2px 8px; border-radius: var(--radius-xs);
+      border: 1px solid; white-space: nowrap;
+    }
+  `],
+})
+export class PillComponent {
+  @Input() tone: 'green' | 'blue' | 'amber' | 'red' | 'purple' | 'teal' | 'neutral' = 'neutral';
+
+  get color(): string {
+    return this.tone === 'neutral' ? 'var(--text-2)' : `var(--${this.tone})`;
+  }
+  get bg(): string {
+    return this.tone === 'neutral' ? 'var(--gray-dim)' : `var(--${this.tone}-dim)`;
+  }
+}

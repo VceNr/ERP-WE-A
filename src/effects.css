@@ -1,0 +1,48 @@
+import { Component, Input } from '@angular/core';
+import { CommonModule } from '@angular/common';
+
+/** Thin labeled progress / status bar. Track is a hairline; fill is a 2–3px tinted line.
+ *
+ *   <mui-stat-bar label="Ventas" [percent]="72" value="72%" tone="ok"></mui-stat-bar>
+ */
+@Component({
+  selector: 'mui-stat-bar',
+  standalone: true,
+  imports: [CommonModule],
+  template: `
+    <div class="mui-stat">
+      <span class="mui-stat__label" *ngIf="label">{{ label }}</span>
+      <span class="mui-stat__track" [style.height.px]="thickness">
+        <span class="mui-stat__fill" [style.width.%]="clampedPercent" [style.background]="color"></span>
+      </span>
+      <span class="mui-stat__value" *ngIf="value != null" [style.color]="color">{{ value }}</span>
+    </div>
+  `,
+  styles: [`
+    .mui-stat { display: flex; align-items: center; gap: 10px; }
+    .mui-stat__label { font-size: var(--text-2xs); color: var(--text-secondary); min-width: 60px; white-space: nowrap; }
+    .mui-stat__track {
+      flex: 1; background: var(--border-default); border-radius: var(--radius-pill);
+      overflow: hidden; min-width: 30px;
+    }
+    .mui-stat__fill { display: block; height: 100%; border-radius: var(--radius-pill); }
+    .mui-stat__value {
+      font-family: var(--font-mono); font-size: var(--text-2xs); font-weight: 700;
+      min-width: 36px; text-align: right;
+    }
+  `],
+})
+export class StatBarComponent {
+  @Input() label?: string;
+  @Input() value: string | null = null;
+  @Input() percent = 100;
+  @Input() tone: 'ok' | 'warn' | 'err' | 'blue' | 'teal' | 'purple' | 'red' = 'blue';
+  @Input() thickness = 3;
+
+  private tones: Record<string, string> = {
+    ok: 'var(--green)', warn: 'var(--amber)', err: 'var(--border-2)',
+    blue: 'var(--blue)', teal: 'var(--teal)', purple: 'var(--purple)', red: 'var(--red)',
+  };
+  get color(): string { return this.tones[this.tone] || this.tones['blue']; }
+  get clampedPercent(): number { return Math.max(0, Math.min(100, this.percent)); }
+}

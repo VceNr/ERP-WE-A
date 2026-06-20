@@ -1,0 +1,239 @@
+<div class="page-header">
+  <div>
+    <div class="page-eyebrow">GESTIÓN DE PROYECTOS</div>
+    <div class="page-title">Proyectos</div>
+  </div>
+  <div class="page-actions">
+    <button class="btn btn-primary">+ Nuevo Proyecto</button>
+    <button class="btn">Exportar</button>
+  </div>
+</div>
+
+<div class="kpi-row">
+  <div class="kpi-cell">
+    <div class="kpi-lbl">Proyectos Activos</div>
+    <div class="kpi-val">12</div>
+    <div class="kpi-delta up">↑ 2 iniciados este mes</div>
+  </div>
+  <div class="kpi-cell">
+    <div class="kpi-lbl">En Riesgo</div>
+    <div class="kpi-val">2</div>
+    <div class="kpi-delta warn">⚠ Requieren atención</div>
+  </div>
+  <div class="kpi-cell">
+    <div class="kpi-lbl">Completados YTD</div>
+    <div class="kpi-val">8</div>
+    <div class="kpi-delta up">↑ Meta anual: 14</div>
+  </div>
+  <div class="kpi-cell">
+    <div class="kpi-lbl">Horas Registradas</div>
+    <div class="kpi-val">1,840</div>
+    <div class="kpi-delta up">↑ 6.2% vs semana ant.</div>
+  </div>
+</div>
+
+<app-section-panel num="01" title="Proyectos Activos" link="#" linkLabel="Ver todos">
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <thead>
+        <tr>
+          <th>Proyecto</th>
+          <th>Cliente</th>
+          <th>Responsable</th>
+          <th>Avance</th>
+          <th>Fecha Límite</th>
+          <th>Estado</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Implementación ERP Fase 2</td>
+          <td>Minera Cordillera S.A.</td>
+          <td>Camila Rojas</td>
+          <td>
+            <div style="display:flex;align-items:center;gap:0.5rem">
+              <div style="width:80px;height:4px;background:var(--border);border-radius:999px;overflow:hidden">
+                <div style="width:68%;height:100%;background:var(--blue);border-radius:999px"></div>
+              </div>
+              <span class="mono" style="font-size:var(--text-2xs);color:var(--blue)">68%</span>
+            </div>
+          </td>
+          <td class="muted-cell">30 Jul 2024</td>
+          <td><span class="pill pill-green">En curso</span></td>
+        </tr>
+        <tr>
+          <td>Rediseño planta productiva</td>
+          <td>Constructora Andina S.A.</td>
+          <td>Diego Herrera</td>
+          <td>
+            <div style="display:flex;align-items:center;gap:0.5rem">
+              <div style="width:80px;height:4px;background:var(--border);border-radius:999px;overflow:hidden">
+                <div style="width:34%;height:100%;background:var(--amber);border-radius:999px"></div>
+              </div>
+              <span class="mono" style="font-size:var(--text-2xs);color:var(--amber)">34%</span>
+            </div>
+          </td>
+          <td class="muted-cell" style="color:var(--red)">22 Jun 2024</td>
+          <td><span class="pill pill-red">En riesgo</span></td>
+        </tr>
+        <tr>
+          <td>Portal e-commerce B2B</td>
+          <td>Retail Moderno SpA</td>
+          <td>Valentina Muñoz</td>
+          <td>
+            <div style="display:flex;align-items:center;gap:0.5rem">
+              <div style="width:80px;height:4px;background:var(--border);border-radius:999px;overflow:hidden">
+                <div style="width:82%;height:100%;background:var(--green);border-radius:999px"></div>
+              </div>
+              <span class="mono" style="font-size:var(--text-2xs);color:var(--green)">82%</span>
+            </div>
+          </td>
+          <td class="muted-cell">15 Jul 2024</td>
+          <td><span class="pill pill-green">En curso</span></td>
+        </tr>
+        <tr>
+          <td>Automatización línea de empaque</td>
+          <td>Logística Sur Ltda.</td>
+          <td>Sebastián Vega</td>
+          <td>
+            <div style="display:flex;align-items:center;gap:0.5rem">
+              <div style="width:80px;height:4px;background:var(--border);border-radius:999px;overflow:hidden">
+                <div style="width:20%;height:100%;background:var(--amber);border-radius:999px"></div>
+              </div>
+              <span class="mono" style="font-size:var(--text-2xs);color:var(--amber)">20%</span>
+            </div>
+          </td>
+          <td class="muted-cell" style="color:var(--red)">18 Jun 2024</td>
+          <td><span class="pill pill-red">En riesgo</span></td>
+        </tr>
+        <tr>
+          <td>Certificación ISO 9001:2015</td>
+          <td>Interno</td>
+          <td>Andrea Pérez</td>
+          <td>
+            <div style="display:flex;align-items:center;gap:0.5rem">
+              <div style="width:80px;height:4px;background:var(--border);border-radius:999px;overflow:hidden">
+                <div style="width:55%;height:100%;background:var(--blue);border-radius:999px"></div>
+              </div>
+              <span class="mono" style="font-size:var(--text-2xs);color:var(--blue)">55%</span>
+            </div>
+          </td>
+          <td class="muted-cell">30 Sep 2024</td>
+          <td><span class="pill pill-green">En curso</span></td>
+        </tr>
+        <tr>
+          <td>Migración infraestructura cloud</td>
+          <td>Interno — TI</td>
+          <td>Roberto Fuentes</td>
+          <td>
+            <div style="display:flex;align-items:center;gap:0.5rem">
+              <div style="width:80px;height:4px;background:var(--border);border-radius:999px;overflow:hidden">
+                <div style="width:10%;height:100%;background:var(--muted);border-radius:999px"></div>
+              </div>
+              <span class="mono" style="font-size:var(--text-2xs);color:var(--muted)">10%</span>
+            </div>
+          </td>
+          <td class="muted-cell">31 Dic 2024</td>
+          <td><span class="pill pill-amber">Pausado</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</app-section-panel>
+
+<div class="two-col">
+  <app-section-panel num="02" title="Tareas Pendientes" link="#" linkLabel="Ver backlog">
+    <div class="card-body">
+      <div class="status-row">
+        <div style="flex:1">
+          <div class="status-name">Revisar entregable Fase 2 — módulo inventario</div>
+          <div style="font-size:var(--text-2xs);color:var(--muted)">Camila Rojas — ERP Minera</div>
+        </div>
+        <div class="status-right">
+          <span class="muted-cell">20 Jun</span>
+          <span class="pill pill-red">Alta</span>
+        </div>
+      </div>
+      <div class="status-row">
+        <div style="flex:1">
+          <div class="status-name">Entrega planos revisados al cliente</div>
+          <div style="font-size:var(--text-2xs);color:var(--muted)">Diego Herrera — Rediseño Andina</div>
+        </div>
+        <div class="status-right">
+          <span class="muted-cell">21 Jun</span>
+          <span class="pill pill-red">Alta</span>
+        </div>
+      </div>
+      <div class="status-row">
+        <div style="flex:1">
+          <div class="status-name">UAT pruebas portal B2B — lote 3</div>
+          <div style="font-size:var(--text-2xs);color:var(--muted)">Valentina Muñoz — E-commerce</div>
+        </div>
+        <div class="status-right">
+          <span class="muted-cell">25 Jun</span>
+          <span class="pill pill-amber">Media</span>
+        </div>
+      </div>
+      <div class="status-row">
+        <div style="flex:1">
+          <div class="status-name">Auditoría interna pre-certificación</div>
+          <div style="font-size:var(--text-2xs);color:var(--muted)">Andrea Pérez — ISO 9001</div>
+        </div>
+        <div class="status-right">
+          <span class="muted-cell">28 Jun</span>
+          <span class="pill pill-amber">Media</span>
+        </div>
+      </div>
+      <div class="status-row">
+        <div style="flex:1">
+          <div class="status-name">Definir arquitectura cloud objetivo</div>
+          <div style="font-size:var(--text-2xs);color:var(--muted)">Roberto Fuentes — Cloud TI</div>
+        </div>
+        <div class="status-right">
+          <span class="muted-cell">15 Jul</span>
+          <span class="pill pill-green">Baja</span>
+        </div>
+      </div>
+    </div>
+  </app-section-panel>
+
+  <app-section-panel num="03" title="Horas por Proyecto">
+    <div class="card-body">
+      <div class="status-row">
+        <span class="status-name">Implementación ERP Fase 2</span>
+        <div class="status-right">
+          <div class="mini-bar"><div class="mini-fill fill-blue" style="width:100%"></div></div>
+          <span class="pct pct-blue">620h</span>
+        </div>
+      </div>
+      <div class="status-row">
+        <span class="status-name">Portal E-commerce B2B</span>
+        <div class="status-right">
+          <div class="mini-bar"><div class="mini-fill fill-green" style="width:76%"></div></div>
+          <span class="pct pct-green">480h</span>
+        </div>
+      </div>
+      <div class="status-row">
+        <span class="status-name">Rediseño planta</span>
+        <div class="status-right">
+          <div class="mini-bar"><div class="mini-fill fill-amber" style="width:48%"></div></div>
+          <span class="pct pct-amber">300h</span>
+        </div>
+      </div>
+      <div class="status-row">
+        <span class="status-name">ISO 9001:2015</span>
+        <div class="status-right">
+          <div class="mini-bar"><div class="mini-fill fill-blue" style="width:35%"></div></div>
+          <span class="pct pct-blue">220h</span>
+        </div>
+      </div>
+      <div class="status-row">
+        <span class="status-name">Otros proyectos</span>
+        <div class="status-right">
+          <div class="mini-bar"><div class="mini-fill fill-green" style="width:35%"></div></div>
+          <span class="pct pct-green">220h</span>
+        </div>
+      </div>
+    </div>
+  </app-section-panel>
+</div>

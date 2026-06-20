@@ -15,6 +15,10 @@ export class Dashboard {
     sistema:   false,
   };
 
+  sidebarOpen = false;
+  toggleSidebar() { this.sidebarOpen = !this.sidebarOpen; }
+  closeSidebar()  { this.sidebarOpen = false; }
+
   toggle(section: string) {
     this.open[section] = !this.open[section];
   }

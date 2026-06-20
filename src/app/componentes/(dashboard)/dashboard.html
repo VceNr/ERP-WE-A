@@ -5,20 +5,23 @@
   <header class="topbar">
 
     <div class="topbar-left">
-      <button class="waffle-btn" title="Menú">
-        <span class="waffle-dot"></span><span class="waffle-dot"></span><span class="waffle-dot"></span>
-        <span class="waffle-dot"></span><span class="waffle-dot"></span><span class="waffle-dot"></span>
-        <span class="waffle-dot"></span><span class="waffle-dot"></span><span class="waffle-dot"></span>
+      <button class="hamburger-btn" (click)="toggleSidebar()" aria-label="Menú" title="Menú">
+        <span></span><span></span><span></span>
       </button>
-      <span class="brand-name">ERP <em>Pro</em></span>
+      <span class="brand-logo" aria-hidden="true">
+        <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M11 1 L21 7.5 L21 14.5 L11 21 L1 14.5 L1 7.5 Z" fill="var(--blue)" stroke="none"/>
+        </svg>
+      </span>
+      <span class="brand-name">ERP <em>MISIÓN</em></span>
       <span class="topbar-sep"></span>
-      <span class="module-name">Dashboard</span>
+      <span class="module-name">Principal / Dashboard</span>
     </div>
 
     <div class="topbar-center">
       <div class="topbar-search">
         <span class="search-icon">&#128269;</span>
-        <input type="text" placeholder="Buscar..." class="search-input">
+        <input type="text" placeholder="Buscar órdenes, clientes, productos..." class="search-input">
       </div>
     </div>
 
@@ -26,10 +29,13 @@
       <button class="icon-btn" title="Nuevo">&#43;</button>
       <button class="icon-btn" title="Notificaciones">
         &#128276;
-        <span class="badge">5</span>
+        <span class="badge">2</span>
       </button>
       <button class="icon-btn" title="Configuración">&#9881;</button>
-      <button class="icon-btn" title="Ayuda">&#63;</button>
+      <button class="icon-btn icon-btn-export" title="Exportar">
+        <span class="export-arrow">&#8599;</span>
+        <span class="export-label">Exportar</span>
+      </button>
       <div class="topbar-avatar-circle" title="Admin">A</div>
     </div>
 
@@ -38,8 +44,11 @@
   <!-- ===== CUERPO (sidebar + contenido) ===== -->
   <div class="erp-body">
 
+    <!-- SIDEBAR OVERLAY -->
+    <div class="sidebar-overlay" [class.visible]="sidebarOpen" (click)="closeSidebar()"></div>
+
     <!-- SIDEBAR -->
-    <aside class="sidebar">
+    <aside class="sidebar" [class.sidebar-open]="sidebarOpen">
 
       <!-- Principal -->
       <div class="sidebar-section" [class.open]="open['principal']">

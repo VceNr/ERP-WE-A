@@ -1,0 +1,22 @@
+<!-- section-panel.html -->
+<div class="sp-root" [class.sp-open]="open">
+  <button class="sp-header" type="button" (click)="toggle()" [attr.aria-expanded]="open">
+    <div class="sp-header-left">
+      <span class="sp-num">{{ num }}</span>
+      <span class="sp-title">{{ title }}</span>
+      <span class="sp-badge" *ngIf="badge !== null && badge > 0">{{ badge }}</span>
+    </div>
+    <div class="sp-header-right">
+      <a *ngIf="link && linkLabel" [href]="link" class="sp-link" (click)="$event.stopPropagation()">
+        {{ linkLabel }} &#8594;
+      </a>
+      <svg class="sp-arrow" viewBox="0 0 10 10" aria-hidden="true">
+        <polyline points="2,3 5,7 8,3" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </div>
+  </button>
+
+  <div class="sp-body" *ngIf="open">
+    <ng-content></ng-content>
+  </div>
+</div>

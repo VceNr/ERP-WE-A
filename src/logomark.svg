@@ -1,0 +1,10 @@
+<svg width="240" height="48" viewBox="0 0 240 48" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Misión ERP">
+  <defs>
+    <linearGradient id="me-lk" x1="0" y1="0" x2="36" y2="36" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#3b7ef8"></stop>
+      <stop offset="1" stop-color="#00d4ff"></stop>
+    </linearGradient>
+  </defs>
+  <path d="M6 8 H42 V31.4 L31.4 42 H6 Z" fill="url(#me-lk)"></path>
+  <text x="58" y="31" font-family="&#39;Roboto Mono&#39;,&#39;IBM Plex Mono&#39;,monospace" font-size="18" font-weight="600" letter-spacing="1.2" fill="#d4d6dc">ERP<tspan fill="#00d4ff">/MISIÓN</tspan></text>
+</svg>

@@ -1,0 +1,189 @@
+<div class="page-header">
+  <div>
+    <div class="page-eyebrow">GESTIÓN DE ABASTECIMIENTO</div>
+    <div class="page-title">Compras</div>
+  </div>
+  <div class="page-actions">
+    <button class="btn btn-primary">+ Nueva Orden de Compra</button>
+    <button class="btn">Exportar</button>
+  </div>
+</div>
+
+<div class="kpi-row">
+  <div class="kpi-cell">
+    <div class="kpi-lbl">Órdenes Activas</div>
+    <div class="kpi-val">23</div>
+    <div class="kpi-delta up">↑ 4 nuevas esta semana</div>
+  </div>
+  <div class="kpi-cell">
+    <div class="kpi-lbl">Gasto del Mes</div>
+    <div class="kpi-val">$148,200</div>
+    <div class="kpi-delta warn">↑ 8.2% vs meta</div>
+  </div>
+  <div class="kpi-cell">
+    <div class="kpi-lbl">Proveedores Activos</div>
+    <div class="kpi-val">34</div>
+    <div class="kpi-delta up">↑ 2 nuevos este mes</div>
+  </div>
+  <div class="kpi-cell">
+    <div class="kpi-lbl">Pendiente Recepción</div>
+    <div class="kpi-val">7</div>
+    <div class="kpi-delta warn">⚠ 2 vencen esta semana</div>
+  </div>
+</div>
+
+<app-section-panel num="01" title="Órdenes de Compra" link="#" linkLabel="Ver todas">
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <thead>
+        <tr>
+          <th>N° OC</th>
+          <th>Proveedor</th>
+          <th>Descripción</th>
+          <th>Monto</th>
+          <th>Estado</th>
+          <th>Fecha Entrega</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="mono">#OC-2024-0318</td>
+          <td>Aceros del Pacífico S.A.</td>
+          <td>Perfiles estructurales HEB 200</td>
+          <td class="mono">$24,600</td>
+          <td><span class="pill pill-teal">En tránsito</span></td>
+          <td class="muted-cell">22 Jun 2024</td>
+        </tr>
+        <tr>
+          <td class="mono">#OC-2024-0317</td>
+          <td>Distribuidora Química Norte</td>
+          <td>Solventes industriales 200L</td>
+          <td class="mono">$8,340</td>
+          <td><span class="pill pill-green">Aprobada</span></td>
+          <td class="muted-cell">25 Jun 2024</td>
+        </tr>
+        <tr>
+          <td class="mono">#OC-2024-0316</td>
+          <td>TechSupply Ltda.</td>
+          <td>Laptops Dell Core i7 x 12</td>
+          <td class="mono">$18,000</td>
+          <td><span class="pill pill-amber">Pendiente</span></td>
+          <td class="muted-cell">28 Jun 2024</td>
+        </tr>
+        <tr>
+          <td class="mono">#OC-2024-0315</td>
+          <td>Embalajes y Logística Sur</td>
+          <td>Cajas de cartón doble onda x 5000</td>
+          <td class="mono">$3,750</td>
+          <td><span class="pill pill-green">Aprobada</span></td>
+          <td class="muted-cell">20 Jun 2024</td>
+        </tr>
+        <tr>
+          <td class="mono">#OC-2024-0314</td>
+          <td>Combustibles Araucania</td>
+          <td>Diésel industrial 10,000L</td>
+          <td class="mono">$11,200</td>
+          <td><span class="pill pill-teal">En tránsito</span></td>
+          <td class="muted-cell">19 Jun 2024</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</app-section-panel>
+
+<div class="two-col">
+  <app-section-panel num="02" title="Proveedores Frecuentes" link="#" linkLabel="Gestionar">
+    <div class="card-body">
+      <div class="status-row">
+        <div>
+          <div class="status-name">Aceros del Pacífico S.A.</div>
+          <div style="font-size:var(--text-2xs);color:var(--muted)">Materiales / Metales</div>
+        </div>
+        <div class="status-right">
+          <span class="mono" style="color:var(--text-2)">8 OC</span>
+          <span class="pill pill-green">Activo</span>
+        </div>
+      </div>
+      <div class="status-row">
+        <div>
+          <div class="status-name">Distribuidora Química Norte</div>
+          <div style="font-size:var(--text-2xs);color:var(--muted)">Insumos / Químicos</div>
+        </div>
+        <div class="status-right">
+          <span class="mono" style="color:var(--text-2)">5 OC</span>
+          <span class="pill pill-green">Activo</span>
+        </div>
+      </div>
+      <div class="status-row">
+        <div>
+          <div class="status-name">TechSupply Ltda.</div>
+          <div style="font-size:var(--text-2xs);color:var(--muted)">Tecnología / TI</div>
+        </div>
+        <div class="status-right">
+          <span class="mono" style="color:var(--text-2)">4 OC</span>
+          <span class="pill pill-blue">Activo</span>
+        </div>
+      </div>
+      <div class="status-row">
+        <div>
+          <div class="status-name">Combustibles Araucania</div>
+          <div style="font-size:var(--text-2xs);color:var(--muted)">Energía / Combustibles</div>
+        </div>
+        <div class="status-right">
+          <span class="mono" style="color:var(--text-2)">3 OC</span>
+          <span class="pill pill-amber">Revisión</span>
+        </div>
+      </div>
+      <div class="status-row">
+        <div>
+          <div class="status-name">Embalajes y Logística Sur</div>
+          <div style="font-size:var(--text-2xs);color:var(--muted)">Embalajes / Packaging</div>
+        </div>
+        <div class="status-right">
+          <span class="mono" style="color:var(--text-2)">3 OC</span>
+          <span class="pill pill-green">Activo</span>
+        </div>
+      </div>
+    </div>
+  </app-section-panel>
+
+  <app-section-panel num="03" title="Gasto por Categoría">
+    <div class="card-body">
+      <div class="status-row">
+        <span class="status-name">Materiales y Metales</span>
+        <div class="status-right">
+          <div class="mini-bar"><div class="mini-fill fill-blue" style="width:85%"></div></div>
+          <span class="pct pct-blue">38%</span>
+        </div>
+      </div>
+      <div class="status-row">
+        <span class="status-name">Tecnología y TI</span>
+        <div class="status-right">
+          <div class="mini-bar"><div class="mini-fill fill-blue" style="width:55%"></div></div>
+          <span class="pct pct-blue">24%</span>
+        </div>
+      </div>
+      <div class="status-row">
+        <span class="status-name">Energía / Combustibles</span>
+        <div class="status-right">
+          <div class="mini-bar"><div class="mini-fill fill-amber" style="width:38%"></div></div>
+          <span class="pct pct-amber">17%</span>
+        </div>
+      </div>
+      <div class="status-row">
+        <span class="status-name">Insumos Químicos</span>
+        <div class="status-right">
+          <div class="mini-bar"><div class="mini-fill fill-amber" style="width:28%"></div></div>
+          <span class="pct pct-amber">12%</span>
+        </div>
+      </div>
+      <div class="status-row">
+        <span class="status-name">Embalajes</span>
+        <div class="status-right">
+          <div class="mini-bar"><div class="mini-fill fill-green" style="width:18%"></div></div>
+          <span class="pct pct-green">9%</span>
+        </div>
+      </div>
+    </div>
+  </app-section-panel>
+</div>

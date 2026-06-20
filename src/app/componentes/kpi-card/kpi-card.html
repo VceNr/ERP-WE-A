@@ -1,0 +1,21 @@
+<!-- kpi-card.html -->
+<div class="kpi-root" [class]="'kpi-color-' + color">
+  <div class="kpi-top">
+    <span class="kpi-label">{{ label }}</span>
+    <div class="kpi-delta" [class.up]="deltaDir === 'up'" [class.down]="deltaDir === 'down'">
+      <span class="kpi-arrow">{{ deltaDir === 'up' ? '↑' : '↓' }}</span>
+      <span>{{ delta }}</span>
+    </div>
+  </div>
+
+  <div class="kpi-value">{{ value }}</div>
+
+  <div class="kpi-bottom">
+    <span class="kpi-compare">{{ compare }}</span>
+    <div class="kpi-spark" *ngIf="sparkPath">
+      <svg viewBox="0 0 100 28" preserveAspectRatio="none" aria-hidden="true">
+        <path [attr.d]="sparkPath" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="spark-line"/>
+      </svg>
+    </div>
+  </div>
+</div>

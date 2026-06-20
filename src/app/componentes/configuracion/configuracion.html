@@ -1,0 +1,286 @@
+<div class="page-header">
+  <div>
+    <div class="page-eyebrow">AJUSTES DEL SISTEMA</div>
+    <div class="page-title">Configuración</div>
+  </div>
+  <div class="page-actions">
+    <button class="btn btn-primary">Guardar Cambios</button>
+    <button class="btn">Restaurar</button>
+  </div>
+</div>
+
+<div class="content">
+  <div class="three-col">
+
+    <!-- General -->
+    <div class="card">
+      <div class="card-head">
+        <span class="card-title">General</span>
+      </div>
+      <div class="card-body">
+        <div class="cfg-field">
+          <div class="cfg-label">Nombre de empresa</div>
+          <div class="cfg-input">Industrias del Sur S.A.</div>
+        </div>
+        <div class="cfg-field">
+          <div class="cfg-label">RUT empresa</div>
+          <div class="cfg-input">76.482.100-K</div>
+        </div>
+        <div class="cfg-field">
+          <div class="cfg-label">Moneda principal</div>
+          <div class="cfg-input cfg-select">CLP — Peso Chileno ▾</div>
+        </div>
+        <div class="cfg-field">
+          <div class="cfg-label">Zona horaria</div>
+          <div class="cfg-input cfg-select">America/Santiago (UTC-4) ▾</div>
+        </div>
+        <div class="cfg-field">
+          <div class="cfg-label">Formato de fecha</div>
+          <div class="cfg-input cfg-select">DD/MM/YYYY ▾</div>
+        </div>
+        <div class="cfg-field">
+          <div class="cfg-label">Idioma del sistema</div>
+          <div class="cfg-input cfg-select">Español (Chile) ▾</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Usuarios y Permisos -->
+    <div class="card">
+      <div class="card-head">
+        <span class="card-title">Usuarios y Permisos</span>
+        <a class="card-link" href="#">+ Nuevo</a>
+      </div>
+      <table class="tbl">
+        <thead>
+          <tr>
+            <th>Nombre</th>
+            <th>Rol</th>
+            <th>Último acceso</th>
+            <th>Estado</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>admin</td>
+            <td><span class="pill pill-red">Superadmin</span></td>
+            <td class="muted-cell">Hoy 14:32</td>
+            <td><div class="toggle toggle-on"></div></td>
+          </tr>
+          <tr>
+            <td>c.rojas</td>
+            <td><span class="pill pill-blue">Ventas</span></td>
+            <td class="muted-cell">Hoy 12:10</td>
+            <td><div class="toggle toggle-on"></div></td>
+          </tr>
+          <tr>
+            <td>d.herrera</td>
+            <td><span class="pill pill-green">Compras</span></td>
+            <td class="muted-cell">Hoy 11:45</td>
+            <td><div class="toggle toggle-on"></div></td>
+          </tr>
+          <tr>
+            <td>v.munoz</td>
+            <td><span class="pill pill-teal">Contabilidad</span></td>
+            <td class="muted-cell">Ayer 17:20</td>
+            <td><div class="toggle toggle-on"></div></td>
+          </tr>
+          <tr>
+            <td>s.vega</td>
+            <td><span class="pill pill-amber">Producción</span></td>
+            <td class="muted-cell">Hoy 09:30</td>
+            <td><div class="toggle toggle-off"></div></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Integraciones -->
+    <div class="card">
+      <div class="card-head">
+        <span class="card-title">Integraciones</span>
+        <a class="card-link" href="#">Agregar</a>
+      </div>
+      <div class="card-body">
+        <div class="integration-row">
+          <div>
+            <div class="status-name">API Pagos — Transbank</div>
+            <div style="font-size:var(--text-2xs);color:var(--muted)">Última sync: Hoy 08:00</div>
+          </div>
+          <div class="toggle toggle-on"></div>
+        </div>
+        <div class="integration-row">
+          <div>
+            <div class="status-name">Email SMTP — Google Workspace</div>
+            <div style="font-size:var(--text-2xs);color:var(--muted)">Última sync: Hoy 10:15</div>
+          </div>
+          <div class="toggle toggle-on"></div>
+        </div>
+        <div class="integration-row">
+          <div>
+            <div class="status-name">EDI — Intercambio electrónico</div>
+            <div style="font-size:var(--text-2xs);color:var(--muted)">No configurado</div>
+          </div>
+          <div class="toggle toggle-off"></div>
+        </div>
+        <div class="integration-row">
+          <div>
+            <div class="status-name">ERP Externo — SAP Bridge</div>
+            <div style="font-size:var(--text-2xs);color:var(--muted)">Última sync: Ayer 23:00</div>
+          </div>
+          <div class="toggle toggle-on"></div>
+        </div>
+        <div class="integration-row">
+          <div>
+            <div class="status-name">Facturación SII — Chile</div>
+            <div style="font-size:var(--text-2xs);color:var(--muted)">Última sync: Hoy 06:30</div>
+          </div>
+          <div class="toggle toggle-on"></div>
+        </div>
+        <div class="integration-row">
+          <div>
+            <div class="status-name">WhatsApp Business API</div>
+            <div style="font-size:var(--text-2xs);color:var(--muted)">No configurado</div>
+          </div>
+          <div class="toggle toggle-off"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Notificaciones -->
+    <div class="card">
+      <div class="card-head">
+        <span class="card-title">Notificaciones</span>
+      </div>
+      <div class="card-body">
+        <div class="notif-row">
+          <div class="notif-check notif-on"></div>
+          <div>
+            <div class="status-name">Alertas de stock crítico</div>
+            <div style="font-size:var(--text-2xs);color:var(--muted)">Email + sistema cuando stock &lt; mínimo</div>
+          </div>
+        </div>
+        <div class="notif-row">
+          <div class="notif-check notif-on"></div>
+          <div>
+            <div class="status-name">Órdenes de compra pendientes</div>
+            <div style="font-size:var(--text-2xs);color:var(--muted)">Recordatorio 48h antes de vencimiento</div>
+          </div>
+        </div>
+        <div class="notif-row">
+          <div class="notif-check notif-on"></div>
+          <div>
+            <div class="status-name">Facturas vencidas sin pagar</div>
+            <div style="font-size:var(--text-2xs);color:var(--muted)">Alerta diaria a jefe de finanzas</div>
+          </div>
+        </div>
+        <div class="notif-row">
+          <div class="notif-check notif-off"></div>
+          <div>
+            <div class="status-name">Reportes automáticos generados</div>
+            <div style="font-size:var(--text-2xs);color:var(--muted)">Notificación al ejecutarse</div>
+          </div>
+        </div>
+        <div class="notif-row">
+          <div class="notif-check notif-on"></div>
+          <div>
+            <div class="status-name">Alertas de seguridad y login</div>
+            <div style="font-size:var(--text-2xs);color:var(--muted)">Email inmediato a administrador</div>
+          </div>
+        </div>
+        <div class="notif-row">
+          <div class="notif-check notif-off"></div>
+          <div>
+            <div class="status-name">Resumen diario de actividad</div>
+            <div style="font-size:var(--text-2xs);color:var(--muted)">Enviado cada día a las 08:00</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Backup -->
+    <div class="card">
+      <div class="card-head">
+        <span class="card-title">Backup y Recuperación</span>
+      </div>
+      <div class="card-body">
+        <div style="padding:0.5rem 0.75rem;background:rgba(63,140,99,0.08);border:1px solid rgba(63,140,99,0.25);border-radius:4px;margin-bottom:0.75rem">
+          <div style="font-size:var(--text-xs);font-weight:600;color:var(--green);margin-bottom:0.1rem">Sistema OK — Backup al día</div>
+          <div style="font-size:var(--text-2xs);color:var(--muted)">Último backup: Hoy 02:00 — Completado (2.4 GB)</div>
+        </div>
+        <div class="cfg-field">
+          <div class="cfg-label">Próximo backup automático</div>
+          <div class="cfg-input">Mañana 02:00 — Incremental</div>
+        </div>
+        <div style="font-family:var(--font-mono);font-size:var(--text-2xs);letter-spacing:var(--tracking-label);text-transform:uppercase;color:var(--muted);margin:0.75rem 0 0.4rem">Historial</div>
+        <div class="status-row">
+          <div>
+            <div class="status-name">Backup Completo — 18 Jun 02:00</div>
+            <div style="font-size:var(--text-2xs);color:var(--muted)">2.4 GB — S3 us-east-1</div>
+          </div>
+          <span class="pill pill-green">OK</span>
+        </div>
+        <div class="status-row">
+          <div>
+            <div class="status-name">Backup Incremental — 17 Jun 02:00</div>
+            <div style="font-size:var(--text-2xs);color:var(--muted)">184 MB — S3 us-east-1</div>
+          </div>
+          <span class="pill pill-green">OK</span>
+        </div>
+        <div class="status-row">
+          <div>
+            <div class="status-name">Backup Incremental — 16 Jun 02:00</div>
+            <div style="font-size:var(--text-2xs);color:var(--muted)">210 MB — S3 us-east-1</div>
+          </div>
+          <span class="pill pill-green">OK</span>
+        </div>
+        <div style="margin-top:0.75rem">
+          <button class="btn" style="width:100%;justify-content:center">Ejecutar Backup Ahora</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Apariencia -->
+    <div class="card">
+      <div class="card-head">
+        <span class="card-title">Apariencia</span>
+      </div>
+      <div class="card-body">
+        <div style="font-family:var(--font-mono);font-size:var(--text-2xs);letter-spacing:var(--tracking-label);text-transform:uppercase;color:var(--muted);margin-bottom:0.6rem">Tema del sistema</div>
+        <div style="display:flex;flex-direction:column;gap:0.5rem;margin-bottom:1rem">
+          <div class="theme-option theme-selected">
+            <div class="theme-swatch" style="background:linear-gradient(135deg,#ede5d3 50%,#efedeb 50%)"></div>
+            <div>
+              <div style="font-size:var(--text-xs);font-weight:600;color:var(--text)">Crema / Claro</div>
+              <div style="font-size:var(--text-2xs);color:var(--muted)">Tema actual — claro y suave</div>
+            </div>
+            <span class="pill pill-green" style="margin-left:auto">Activo</span>
+          </div>
+          <div class="theme-option">
+            <div class="theme-swatch" style="background:linear-gradient(135deg,#1e1e1e 50%,#2a2a2a 50%)"></div>
+            <div>
+              <div style="font-size:var(--text-xs);font-weight:600;color:var(--text)">Oscuro</div>
+              <div style="font-size:var(--text-2xs);color:var(--muted)">Dark mode — próximamente</div>
+            </div>
+            <span class="pill pill-amber" style="margin-left:auto">Beta</span>
+          </div>
+          <div class="theme-option">
+            <div class="theme-swatch" style="background:linear-gradient(135deg,#f5f5f5 50%,#ffffff 50%)"></div>
+            <div>
+              <div style="font-size:var(--text-xs);font-weight:600;color:var(--text)">Blanco / Neutro</div>
+              <div style="font-size:var(--text-2xs);color:var(--muted)">Estilo minimalista</div>
+            </div>
+            <span class="pill pill-blue" style="margin-left:auto">Disponible</span>
+          </div>
+        </div>
+        <div style="font-family:var(--font-mono);font-size:var(--text-2xs);letter-spacing:var(--tracking-label);text-transform:uppercase;color:var(--muted);margin-bottom:0.6rem">Densidad de contenido</div>
+        <div style="display:flex;gap:0.4rem">
+          <button class="btn" style="flex:1;justify-content:center">Compacta</button>
+          <button class="btn btn-primary" style="flex:1;justify-content:center">Normal</button>
+          <button class="btn" style="flex:1;justify-content:center">Espaciada</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>

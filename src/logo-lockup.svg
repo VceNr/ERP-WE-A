@@ -1,0 +1,121 @@
+# Misión ERP — Paquete de integración Angular
+
+Componentes **standalone** y tokens CSS listos para pegar en tu repo Angular
+(`ERP-WE-A`). Todo el estilo vive en variables CSS, así que cambiar la paleta
+es editar un solo archivo (`tokens/colors.css`).
+
+---
+
+## 1. Copiar los archivos
+
+```
+angular_handoff/
+├── styles.css            ← punto de entrada (solo @import)
+├── tokens/               ← colores, tipografía, espaciado, efectos, fuentes
+├── assets/               ← logos (SVG)
+└── mision-ui/            ← componentes standalone (.component.ts)
+```
+
+Copia `styles.css`, `tokens/`, `assets/` y `mision-ui/` dentro de `src/` de tu
+proyecto. Sugerencia:
+
+```
+src/
+├── styles.css            (reemplaza o @import en el tuyo)
+├── tokens/
+├── assets/mision/
+└── app/ui/mision-ui/
+```
+
+## 2. Registrar los estilos globales
+
+En **`angular.json`** → `projects > [tu-app] > architect > build > options > styles`:
+
+```json
+"styles": [
+  "src/styles.css"
+]
+```
+
+`styles.css` solo contiene `@import` a los tokens y carga las fuentes desde
+Google Fonts (Inter, Roboto Mono, Archivo). Si necesitas fuentes self-hosted
+para producción offline, descarga los `.woff2` y reemplaza `tokens/fonts.css`.
+
+## 3. Usar un componente
+
+Los componentes son **standalone** — se importan directo en el `imports` del
+componente o ruta donde los uses (Angular 15+):
+
+```ts
+import { Component } from '@angular/core';
+import { ButtonComponent, PillComponent, PanelComponent }
+  from '../ui/mision-ui';
+
+@Component({
+  selector: 'app-ventas',
+  standalone: true,
+  imports: [ButtonComponent, PillComponent, PanelComponent],
+  template: `
+    <mui-panel title="Órdenes Recientes" [bordered]="true">
+      <a action href="#">Ver todas →</a>
+      <table>…
+        <td><mui-pill tone="green">Completada</mui-pill></td>
+      </table>
+    </mui-panel>
+
+    <mui-button variant="primary" (click)="nuevaVenta()">Nueva Venta</mui-button>
+  `,
+})
+export class VentasComponent { /* … */ }
+```
+
+> Si tu app aún usa **NgModules**, agrega cada componente standalone al
+> `imports:` del módulo donde lo necesites (los standalone se pueden importar
+> en NgModules sin problema).
+
+---
+
+## Componentes disponibles
+
+| Selector | Inputs principales |
+|---|---|
+| `<mui-button>` | `variant` (primary·ghost·subtle·danger), `size` (sm·md·lg), `uppercase`, `disabled` |
+| `<mui-icon-button>` | `title`, `badge`, `active`, `size` — proyecta un `<i>`/SVG dentro |
+| `<mui-input>` | `label`, `placeholder`, `type`, `mono`, `hint`, `value` |
+| `<mui-pill>` | `tone` (green·blue·amber·red·purple·teal·neutral) |
+| `<mui-badge>` | `variant` (count·warn·outline) |
+| `<mui-panel>` | `title`, `bordered` — slot `[action]` a la derecha |
+| `<mui-kpi-card>` | `label`, `value`, `delta`, `deltaDir` (up·down·bad), `compare` |
+| `<mui-stat-bar>` | `label`, `value`, `percent`, `tone`, `thickness` |
+
+## Iconos
+
+El sistema usa **Lucide** (16px, stroke 1.5). Instálalo o cárgalo por CDN:
+
+```html
+<!-- index.html -->
+<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+```
+
+Luego en tu componente, tras renderizar: `lucide.createIcons({ attrs: { 'stroke-width': 1.5 } });`
+o usa el paquete `lucide-angular`.
+
+---
+
+## Tokens clave (de `tokens/colors.css`)
+
+Toda la paleta es editable en un solo lugar. Superficies actuales (tema claro):
+
+- `--bg` lienzo crema-beige · `--surface` paneles (tiza) · `--sidebar` chrome
+- Texto: `--text` / `--text-2` / `--muted`
+- Acentos apagados: `--blue --green --amber --purple --teal --red` (+ `-dim` tintes)
+- Estados: `--status-success/info/warning/danger`
+
+## Referencia visual completa
+
+Las vistas del UI kit (`ui_kits/erp_app/` en el design system original, en React)
+son la **referencia pixel-a-pixel** del dashboard, sidebar, topbar, tablas y
+todas las vistas de módulo. Úsalas como guía de layout al construir las pantallas
+Angular; los componentes de arriba cubren los primitivos.
+
+Repo origen de referencia: https://github.com/VceNr/ERP-WE-A

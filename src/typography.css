@@ -1,0 +1,73 @@
+/* ============================================================
+   colors.css — Misión ERP color system · LIGHT / CREAM
+   Thesis: "color que no afecte lo visual" — soft, warm, paper-
+   like surfaces with muted accents that classify data without
+   shouting. Cream canvas, cream panels, hairline structure.
+   ============================================================ */
+
+:root {
+  /* ---- Application surfaces (warm cream + bone info panels) ---- */
+  --bg:          #ede5d3;   /* app canvas — soft cream-beige */
+  --surface:     #efedeb;   /* panels, cards, search bar — "Tiza" chalk */
+  --surface-2:   #ece4d3;   /* hover, inset, chips */
+  --sidebar:     #f0e8d8;   /* chrome: topbar + sidebar */
+  --sidebar-sub: #e8dfca;   /* expanded sidebar list */
+
+  /* ---- Borders (the structure does the work, not fills) ---- */
+  --border:      #e7e2d6;   /* default hairline */
+  --border-2:    #d8d2c2;   /* stronger / focus */
+  --hairline:    rgba(60,52,36,0.06); /* faint overlay line */
+
+  /* ---- Text ---- */
+  --text:        #2c2a24;   /* primary — warm near-black */
+  --text-2:      #746f63;   /* secondary, labels */
+  --muted:       #a8a191;   /* faint, captions, icons */
+
+  /* ---- Text/icon color on top of an accent fill ---- */
+  --on-brand:    #efedeb;
+
+  /* ---- Muted data accents + 10% tints (status & categories) ---- */
+  --blue:        #3f6fb0;  --blue-dim:   rgba(63,111,176,0.10);
+  --green:       #3f8c63;  --green-dim:  rgba(63,140,99,0.11);
+  --amber:       #a6781f;  --amber-dim:  rgba(166,120,31,0.11);
+  --purple:      #6f5aa8;  --purple-dim: rgba(111,90,168,0.10);
+  --teal:        #2f8080;  --teal-dim:   rgba(47,128,128,0.11);
+  --red:         #b03a4a;  --red-dim:    rgba(176,58,74,0.10);
+  --gray-dim:    rgba(116,111,99,0.10);
+
+  /* ---- Marketing / portal accents (saturated — landing only) ---- */
+  --accent-blue:        #2f6fe0;
+  --accent-blue-bright: #5b93f5;
+  --accent-cyan:        #0e9bb8;
+  --marketing-bg:       #e6dcc4;
+  --marketing-surface:  #efedeb;
+
+  /* ===== Semantic aliases (prefer these in product UI) ===== */
+  --surface-page:    var(--bg);
+  --surface-card:    var(--surface);
+  --surface-raised:  var(--surface-2);
+  --surface-chrome:  var(--sidebar);
+
+  --border-default:  var(--border);
+  --border-strong:   var(--border-2);
+
+  --text-body:       var(--text);
+  --text-secondary:  var(--text-2);
+  --text-faint:      var(--muted);
+
+  --brand:           var(--blue);
+
+  --status-success:      var(--green);  --status-success-dim: var(--green-dim);
+  --status-info:         var(--blue);   --status-info-dim:    var(--blue-dim);
+  --status-warning:      var(--amber);  --status-warning-dim: var(--amber-dim);
+  --status-danger:       var(--red);    --status-danger-dim:  var(--red-dim);
+  --status-neutral:      var(--text-2); --status-neutral-dim: var(--gray-dim);
+
+  /* category accents (charts, dots, tags) */
+  --cat-1: var(--blue);
+  --cat-2: var(--green);
+  --cat-3: var(--amber);
+  --cat-4: var(--purple);
+  --cat-5: var(--teal);
+  --cat-6: var(--red);
+}

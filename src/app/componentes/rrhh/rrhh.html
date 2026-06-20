@@ -1,0 +1,189 @@
+<div class="page-header">
+  <div>
+    <div class="page-eyebrow">GESTIÓN DE PERSONAS</div>
+    <div class="page-title">Recursos Humanos</div>
+  </div>
+  <div class="page-actions">
+    <button class="btn btn-primary">+ Nuevo Empleado</button>
+    <button class="btn">Exportar</button>
+  </div>
+</div>
+
+<div class="kpi-row">
+  <div class="kpi-cell">
+    <div class="kpi-lbl">Total Empleados</div>
+    <div class="kpi-val">347</div>
+    <div class="kpi-delta up">↑ 4 vs mes anterior</div>
+  </div>
+  <div class="kpi-cell">
+    <div class="kpi-lbl">Nuevos este Mes</div>
+    <div class="kpi-val">+4</div>
+    <div class="kpi-delta up">2 en proceso de inducción</div>
+  </div>
+  <div class="kpi-cell">
+    <div class="kpi-lbl">Ausencias Hoy</div>
+    <div class="kpi-val">3</div>
+    <div class="kpi-delta warn">⚠ 1 sin aviso previo</div>
+  </div>
+  <div class="kpi-cell">
+    <div class="kpi-lbl">Nómina Mensual</div>
+    <div class="kpi-val">$248,000</div>
+    <div class="kpi-delta up">↑ 1.6% vs mes anterior</div>
+  </div>
+</div>
+
+<app-section-panel num="01" title="Empleados — Vista General" link="#" linkLabel="Ver todos">
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <thead>
+        <tr>
+          <th>Nombre</th>
+          <th>Cargo</th>
+          <th>Departamento</th>
+          <th>Fecha Ingreso</th>
+          <th>Estado</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Camila Rojas Soto</td>
+          <td>Ejecutiva Comercial Sr.</td>
+          <td>Ventas</td>
+          <td class="muted-cell">12 Mar 2019</td>
+          <td><span class="pill pill-green">Activo</span></td>
+        </tr>
+        <tr>
+          <td>Diego Herrera López</td>
+          <td>Jefe de Compras</td>
+          <td>Abastecimiento</td>
+          <td class="muted-cell">08 Jul 2020</td>
+          <td><span class="pill pill-green">Activo</span></td>
+        </tr>
+        <tr>
+          <td>Valentina Muñoz Cid</td>
+          <td>Analista Contable</td>
+          <td>Finanzas</td>
+          <td class="muted-cell">03 Feb 2021</td>
+          <td><span class="pill pill-teal">Vacaciones</span></td>
+        </tr>
+        <tr>
+          <td>Sebastián Vega Araya</td>
+          <td>Operador de Producción</td>
+          <td>Producción</td>
+          <td class="muted-cell">15 Sep 2018</td>
+          <td><span class="pill pill-green">Activo</span></td>
+        </tr>
+        <tr>
+          <td>Andrea Pérez Mora</td>
+          <td>Coordinadora RRHH</td>
+          <td>Recursos Humanos</td>
+          <td class="muted-cell">22 Ene 2022</td>
+          <td><span class="pill pill-green">Activo</span></td>
+        </tr>
+        <tr>
+          <td>Roberto Fuentes Díaz</td>
+          <td>Jefe de Bodega</td>
+          <td>Inventario</td>
+          <td class="muted-cell">05 Nov 2017</td>
+          <td><span class="pill pill-amber">Licencia médica</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</app-section-panel>
+
+<div class="two-col">
+  <app-section-panel num="02" title="Distribución por Departamento">
+    <div class="card-body">
+      <div class="status-row">
+        <span class="status-name">Producción</span>
+        <div class="status-right">
+          <div class="mini-bar"><div class="mini-fill fill-blue" style="width:100%"></div></div>
+          <span class="pct pct-blue">112</span>
+        </div>
+      </div>
+      <div class="status-row">
+        <span class="status-name">Ventas y Comercial</span>
+        <div class="status-right">
+          <div class="mini-bar"><div class="mini-fill fill-green" style="width:68%"></div></div>
+          <span class="pct pct-green">76</span>
+        </div>
+      </div>
+      <div class="status-row">
+        <span class="status-name">Logística / Bodega</span>
+        <div class="status-right">
+          <div class="mini-bar"><div class="mini-fill fill-blue" style="width:48%"></div></div>
+          <span class="pct pct-blue">54</span>
+        </div>
+      </div>
+      <div class="status-row">
+        <span class="status-name">Administración y Finanzas</span>
+        <div class="status-right">
+          <div class="mini-bar"><div class="mini-fill fill-amber" style="width:40%"></div></div>
+          <span class="pct pct-amber">44</span>
+        </div>
+      </div>
+      <div class="status-row">
+        <span class="status-name">TI y Sistemas</span>
+        <div class="status-right">
+          <div class="mini-bar"><div class="mini-fill fill-teal" style="width:22%"></div></div>
+          <span class="pct" style="color:var(--teal)">24</span>
+        </div>
+      </div>
+      <div class="status-row">
+        <span class="status-name">RRHH y Legal</span>
+        <div class="status-right">
+          <div class="mini-bar"><div class="mini-fill fill-amber" style="width:18%"></div></div>
+          <span class="pct pct-amber">20</span>
+        </div>
+      </div>
+      <div class="status-row">
+        <span class="status-name">Otros</span>
+        <div class="status-right">
+          <div class="mini-bar"><div class="mini-fill fill-green" style="width:15%"></div></div>
+          <span class="pct pct-green">17</span>
+        </div>
+      </div>
+    </div>
+  </app-section-panel>
+
+  <app-section-panel num="03" title="Cumpleaños Próximos" link="#" linkLabel="Ver calendario">
+    <div class="card-body">
+      <div class="status-row">
+        <div>
+          <div class="status-name">Camila Rojas Soto</div>
+          <div style="font-size:var(--text-2xs);color:var(--muted)">Ventas — 20 Jun</div>
+        </div>
+        <span class="pill pill-teal">2 días</span>
+      </div>
+      <div class="status-row">
+        <div>
+          <div class="status-name">Marco Antonio Ruiz</div>
+          <div style="font-size:var(--text-2xs);color:var(--muted)">Producción — 24 Jun</div>
+        </div>
+        <span class="pill pill-blue">6 días</span>
+      </div>
+      <div class="status-row">
+        <div>
+          <div class="status-name">Patricia González</div>
+          <div style="font-size:var(--text-2xs);color:var(--muted)">Finanzas — 01 Jul</div>
+        </div>
+        <span class="pill pill-green">13 días</span>
+      </div>
+      <div class="status-row">
+        <div>
+          <div class="status-name">Luis Adrián Castillo</div>
+          <div style="font-size:var(--text-2xs);color:var(--muted)">TI — 08 Jul</div>
+        </div>
+        <span class="pill pill-green">20 días</span>
+      </div>
+      <div class="status-row">
+        <div>
+          <div class="status-name">Daniela Saavedra</div>
+          <div style="font-size:var(--text-2xs);color:var(--muted)">Compras — 15 Jul</div>
+        </div>
+        <span class="pill pill-green">27 días</span>
+      </div>
+    </div>
+  </app-section-panel>
+</div>

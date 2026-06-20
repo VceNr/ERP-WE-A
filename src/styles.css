@@ -1,42 +1,113 @@
-/* Estilos globales ERP */
+/* ============================================================
+   styles.css — Design System global ERP (tema crema / claro)
+   ============================================================ */
 
-/* ── Variables de diseño (aquí para que Angular no las encapsule) ── */
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&family=Archivo:wght@400;600;700&display=swap');
+
 :root {
-  --bg:          #04080f;
-  --bg-2:        #070c17;
-  --surface:     #0b1120;
-  --surface-2:   #0f1829;
-  --border:      #1e2d4a;
-  --border-soft: #121b2e;
-  --text:        #e8edf8;
-  --text-2:      #8fa3c4;
-  --muted:       #506075;
-  --blue:        #3b7ef8;
-  --blue-bright: #6fa3ff;
-  --blue-dim:    #0e2147;
-  --cyan:        #00d4ff;
-  --cyan-dim:    #002a3d;
-  --green:       #00e5a0;
-  --amber:       #f5a623;
-  --red:         #ff4d6a;
+  /* ── Paleta base ── */
+  --bg:          #ede5d3;
+  --surface:     #efedeb;
+  --surface-2:   #ece4d3;
+  --sidebar:     #f0e8d8;
+  --sidebar-sub: #e8dfca;
+  --border:      #e7e2d6;
+  --border-2:    #d8d2c2;
+  --text:        #2c2a24;
+  --text-2:      #746f63;
+  --muted:       #a8a191;
 
+  /* ── Colores de marca ── */
+  --blue:   #3f6fb0;
+  --green:  #3f8c63;
+  --amber:  #a6781f;
+  --red:    #b03a4a;
+  --teal:   #2f8080;
+  --purple: #6f5aa8;
+
+  /* ── Dims (fondos semitransparentes) ── */
+  --blue-dim:   rgba(63, 111, 176, 0.10);
+  --green-dim:  rgba(63, 140, 99,  0.10);
+  --amber-dim:  rgba(166, 120, 31, 0.10);
+  --red-dim:    rgba(176, 58,  74, 0.10);
+  --teal-dim:   rgba(47,  128, 128,0.10);
+  --purple-dim: rgba(111, 90,  168,0.10);
+
+  /* ── Aliases semánticos ── */
+  --surface-card:    var(--surface);
+  --surface-raised:  #f5f2ee;
+  --border-default:  var(--border);
+  --border-strong:   var(--border-2);
+  --text-body:       var(--text);
+  --text-secondary:  var(--text-2);
+  --text-faint:      var(--muted);
+  --on-brand:        #efedeb;
+
+  /* ── Estados ── */
+  --status-success: var(--green);
+  --status-warning: var(--amber);
+  --status-danger:  var(--red);
+  --status-info:    var(--blue);
+
+  /* ── Tipografía ── */
   --font-body:    'IBM Plex Sans', system-ui, sans-serif;
+  --font-sans:    'IBM Plex Sans', system-ui, sans-serif;
   --font-mono:    'IBM Plex Mono', monospace;
   --font-display: 'Archivo', system-ui, sans-serif;
+
+  --text-2xs:  0.625rem;
+  --text-xs:   0.6875rem;
+  --text-sm:   0.8125rem;
+  --text-md:   0.875rem;
+  --text-lg:   1rem;
+  --text-xl:   1.25rem;
+
+  --weight-semibold: 600;
+  --tracking-label:  0.08em;
+
+  /* ── Controles y formas ── */
+  --control-h:   30px;
+  --radius-xs:   2px;
+  --radius-sm:   4px;
+  --radius-pill: 999px;
+
+  /* ── Animación ── */
+  --dur-fast: 0.14s;
 }
 
+/* ── Reset base ── */
 *,
 *::before,
-*::after { box-sizing: border-box; margin: 0; padding: 0; }
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
 
 html, body {
   height: 100%;
   background: var(--bg);
   color: var(--text);
   font-family: var(--font-body);
+  font-size: 14px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 app-root {
   display: block;
   height: 100%;
+}
+
+/* ===== RESPONSIVE GLOBAL ===== */
+@media (max-width: 768px) {
+  .two-col   { grid-template-columns: 1fr !important; }
+  .three-col { grid-template-columns: 1fr !important; }
+  .kpi-row   { flex-wrap: wrap; }
+  .kpi-cell  { flex: 1 1 50%; min-width: 0; }
+}
+@media (max-width: 480px) {
+  .kpi-cell  { flex: 1 1 100%; }
+  .tbl-wrap  { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  .tbl       { min-width: 560px; }
 }
