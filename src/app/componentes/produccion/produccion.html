@@ -222,7 +222,12 @@
         <div class="modal-body">
           <label class="fld">
             <span>Producto</span>
-            <input formControlName="producto" placeholder="Nombre del producto" />
+            <select formControlName="producto">
+              <option value="">— Seleccionar producto —</option>
+              @for (p of productos; track p.sku) {
+                <option [value]="p.nombre">{{ p.sku }} — {{ p.nombre }}</option>
+              }
+            </select>
           </label>
           <div class="fld-row">
             <label class="fld">

@@ -336,16 +336,12 @@
         <div class="modal-body">
           <label class="fld">
             <span>Cliente</span>
-            @if (clientesLista.length > 0) {
-              <select formControlName="cliente">
-                <option value="">— Seleccionar cliente —</option>
-                @for (c of clientesLista; track c.id) {
-                  <option [value]="c.nombre">{{ c.nombre }}</option>
-                }
-              </select>
-            } @else {
-              <input formControlName="cliente" placeholder="Nombre del cliente" />
-            }
+            <select formControlName="cliente">
+              <option value="">— Seleccionar cliente —</option>
+              @for (c of clientesLista; track c.id) {
+                <option [value]="c.nombre">{{ c.nombre }}</option>
+              }
+            </select>
           </label>
           <label class="fld">
             <span>Monto</span>
@@ -354,16 +350,12 @@
           <div class="fld-row">
             <label class="fld">
               <span>Vendedor</span>
-              @if (vendedoresLista.length > 0) {
-                <select formControlName="vendedor">
-                  <option value="">— Seleccionar vendedor —</option>
-                  @for (v of vendedoresLista; track v.id) {
-                    <option [value]="v.nombre">{{ v.nombre }}</option>
-                  }
-                </select>
-              } @else {
-                <input formControlName="vendedor" placeholder="Nombre del vendedor" />
-              }
+              <select formControlName="vendedor">
+                <option value="">— Seleccionar vendedor —</option>
+                @for (v of vendedoresLista; track v.id) {
+                  <option [value]="v.nombre">{{ v.nombre }}</option>
+                }
+              </select>
             </label>
             <label class="fld">
               <span>Fecha</span>
@@ -404,16 +396,12 @@
         <div class="modal-body">
           <label class="fld">
             <span>Proveedor</span>
-            @if (proveedoresLista.length > 0) {
-              <select formControlName="proveedor">
-                <option value="">— Seleccionar proveedor —</option>
-                @for (p of proveedoresLista; track p.id) {
-                  <option [value]="p.nombre">{{ p.nombre }}</option>
-                }
-              </select>
-            } @else {
-              <input formControlName="proveedor" placeholder="Nombre del proveedor" />
-            }
+            <select formControlName="proveedor">
+              <option value="">— Seleccionar proveedor —</option>
+              @for (p of proveedoresLista; track p.id) {
+                <option [value]="p.nombre">{{ p.nombre }}</option>
+              }
+            </select>
           </label>
           <label class="fld">
             <span>Descripción</span>

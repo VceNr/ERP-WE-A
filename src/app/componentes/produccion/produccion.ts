@@ -4,7 +4,9 @@ import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angula
 import { forkJoin, catchError, of } from 'rxjs';
 import { SectionPanel } from '../section-panel/section-panel';
 import { ProduccionService } from '../../core/services/produccion.service';
+import { InventarioService } from '../../core/services/inventario.service';
 import { OrdenProduccion, LineaProduccion } from '../../core/models/produccion.model';
+import { Producto } from '../../core/models/inventario.model';
 
 @Component({
   selector: 'app-produccion',
@@ -15,6 +17,7 @@ import { OrdenProduccion, LineaProduccion } from '../../core/models/produccion.m
 })
 export class Produccion implements OnInit {
   private produccionService = inject(ProduccionService);
+  private inventarioService = inject(InventarioService);
   private fb = inject(FormBuilder);
 
   loading = true;
@@ -22,6 +25,7 @@ export class Produccion implements OnInit {
   kpis: any[] = [];
   ordenes: OrdenProduccion[] = [];
   lineas: LineaProduccion[] = [];
+  productos: Producto[] = [];
 
   modalAbierto = false;
   saving = false;
@@ -52,15 +56,17 @@ export class Produccion implements OnInit {
 
   ngOnInit() {
     forkJoin({
-      kpis:    this.produccionService.getKpis().pipe(catchError(() => of([]))),
-      ordenes: this.produccionService.getOrdenes().pipe(catchError(() => of([]))),
-      lineas:  this.produccionService.getLineas().pipe(catchError(() => of([]))),
+      kpis:      this.produccionService.getKpis().pipe(catchError(() => of([]))),
+      ordenes:   this.produccionService.getOrdenes().pipe(catchError(() => of([]))),
+      lineas:    this.produccionService.getLineas().pipe(catchError(() => of([]))),
+      productos: this.inventarioService.getProductos().pipe(catchError(() => of([]))),
     }).subscribe({
-      next: ({ kpis, ordenes, lineas }) => {
-        this.kpis    = kpis;
-        this.ordenes = ordenes;
-        this.lineas  = lineas;
-        this.loading = false;
+      next: ({ kpis, ordenes, lineas, productos }) => {
+        this.kpis      = kpis;
+        this.ordenes   = ordenes;
+        this.lineas    = lineas;
+        this.productos = productos;
+        this.loading   = false;
       },
       error: () => { this.error = true; this.loading = false; }
     });
