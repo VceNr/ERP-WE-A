@@ -4,10 +4,14 @@
     <div class="page-title">Clientes / CRM</div>
   </div>
   <div class="page-actions">
-    <button class="btn btn-primary">+ Nuevo Cliente</button>
+    <button class="btn btn-primary" (click)="abrirModal()">+ Nuevo Cliente</button>
     <button class="btn">Exportar</button>
   </div>
 </div>
+
+@if (loading) {
+  <div class="loading-bar">Cargando datos...</div>
+}
 
 <div class="kpi-row">
   <div class="kpi-cell">
@@ -40,60 +44,73 @@
           <th>Nombre</th>
           <th>RUT / ID</th>
           <th>Segmento</th>
-          <th>Último Pedido</th>
           <th>Deuda</th>
+          <th>Email</th>
           <th>Estado</th>
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <td>Constructora Andina S.A.</td>
-          <td class="mono">76.482.100-K</td>
-          <td><span class="pill pill-green">A</span></td>
-          <td class="muted-cell">18 Jun 2024</td>
-          <td class="mono">$0</td>
-          <td><span class="pill pill-green">Activo</span></td>
-        </tr>
-        <tr>
-          <td>Importadora Global Ltda.</td>
-          <td class="mono">76.031.248-9</td>
-          <td><span class="pill pill-green">A</span></td>
-          <td class="muted-cell">17 Jun 2024</td>
-          <td class="mono" style="color:var(--amber)">$38,750</td>
-          <td><span class="pill pill-green">Activo</span></td>
-        </tr>
-        <tr>
-          <td>Retail Moderno SpA</td>
-          <td class="mono">77.204.881-3</td>
-          <td><span class="pill pill-blue">B</span></td>
-          <td class="muted-cell">17 Jun 2024</td>
-          <td class="mono">$6,200</td>
-          <td><span class="pill pill-green">Activo</span></td>
-        </tr>
-        <tr>
-          <td>Minera Cordillera S.A.</td>
-          <td class="mono">76.882.104-1</td>
-          <td><span class="pill pill-green">A</span></td>
-          <td class="muted-cell">16 Jun 2024</td>
-          <td class="mono">$0</td>
-          <td><span class="pill pill-green">Activo</span></td>
-        </tr>
-        <tr>
-          <td>Agrícola Los Robles</td>
-          <td class="mono">78.112.334-7</td>
-          <td><span class="pill pill-amber">C</span></td>
-          <td class="muted-cell">02 May 2024</td>
-          <td class="mono" style="color:var(--red)">$4,160</td>
-          <td><span class="pill pill-amber">En revisión</span></td>
-        </tr>
-        <tr>
-          <td>Logística Sur Ltda.</td>
-          <td class="mono">79.008.220-4</td>
-          <td><span class="pill pill-blue">B</span></td>
-          <td class="muted-cell">14 Jun 2024</td>
-          <td class="mono">$7,600</td>
-          <td><span class="pill pill-green">Activo</span></td>
-        </tr>
+        @if (clientes.length > 0) {
+          @for (cliente of clientes; track cliente.id) {
+            <tr>
+              <td>{{ cliente.nombre }}</td>
+              <td class="mono">{{ cliente.id }}</td>
+              <td><span class="pill">{{ cliente.segmento }}</span></td>
+              <td class="mono">{{ cliente.deuda }}</td>
+              <td class="muted-cell">{{ cliente.email }}</td>
+              <td><span class="pill pill-green">Activo</span></td>
+            </tr>
+          }
+        } @else {
+          <tr>
+            <td>Constructora Andina S.A.</td>
+            <td class="mono">76.482.100-K</td>
+            <td><span class="pill pill-green">A</span></td>
+            <td class="muted-cell">18 Jun 2024</td>
+            <td class="mono">$0</td>
+            <td><span class="pill pill-green">Activo</span></td>
+          </tr>
+          <tr>
+            <td>Importadora Global Ltda.</td>
+            <td class="mono">76.031.248-9</td>
+            <td><span class="pill pill-green">A</span></td>
+            <td class="muted-cell">17 Jun 2024</td>
+            <td class="mono" style="color:var(--amber)">$38,750</td>
+            <td><span class="pill pill-green">Activo</span></td>
+          </tr>
+          <tr>
+            <td>Retail Moderno SpA</td>
+            <td class="mono">77.204.881-3</td>
+            <td><span class="pill pill-blue">B</span></td>
+            <td class="muted-cell">17 Jun 2024</td>
+            <td class="mono">$6,200</td>
+            <td><span class="pill pill-green">Activo</span></td>
+          </tr>
+          <tr>
+            <td>Minera Cordillera S.A.</td>
+            <td class="mono">76.882.104-1</td>
+            <td><span class="pill pill-green">A</span></td>
+            <td class="muted-cell">16 Jun 2024</td>
+            <td class="mono">$0</td>
+            <td><span class="pill pill-green">Activo</span></td>
+          </tr>
+          <tr>
+            <td>Agrícola Los Robles</td>
+            <td class="mono">78.112.334-7</td>
+            <td><span class="pill pill-amber">C</span></td>
+            <td class="muted-cell">02 May 2024</td>
+            <td class="mono" style="color:var(--red)">$4,160</td>
+            <td><span class="pill pill-amber">En revisión</span></td>
+          </tr>
+          <tr>
+            <td>Logística Sur Ltda.</td>
+            <td class="mono">79.008.220-4</td>
+            <td><span class="pill pill-blue">B</span></td>
+            <td class="muted-cell">14 Jun 2024</td>
+            <td class="mono">$7,600</td>
+            <td><span class="pill pill-green">Activo</span></td>
+          </tr>
+        }
       </tbody>
     </table>
   </div>
@@ -102,73 +119,161 @@
 <div class="two-col">
   <app-section-panel num="02" title="Segmentación por Tipo">
     <div class="card-body">
-      <div style="margin-bottom:0.75rem">
-        <div style="display:flex;justify-content:space-between;font-size:var(--text-xs);margin-bottom:0.3rem">
-          <span style="color:var(--text-2)">Segmento A — Enterprise</span>
-          <span class="mono" style="color:var(--green)">1,446 (30%)</span>
+      @if (segmentos.length > 0) {
+        @for (seg of segmentos; track seg.nombre) {
+          <div style="margin-bottom:0.75rem">
+            <div style="display:flex;justify-content:space-between;font-size:var(--text-xs);margin-bottom:0.3rem">
+              <span style="color:var(--text-2)">{{ seg.nombre }}</span>
+              <span class="mono" style="color:var(--blue)">{{ seg.total }} ({{ seg.porcentaje }}%)</span>
+            </div>
+            <div style="height:6px;background:var(--border);border-radius:999px;overflow:hidden">
+              <div [style.width.%]="seg.porcentaje" style="height:100%;background:var(--blue);border-radius:999px"></div>
+            </div>
+          </div>
+        }
+      } @else {
+        <div style="margin-bottom:0.75rem">
+          <div style="display:flex;justify-content:space-between;font-size:var(--text-xs);margin-bottom:0.3rem">
+            <span style="color:var(--text-2)">Segmento A — Enterprise</span>
+            <span class="mono" style="color:var(--green)">1,446 (30%)</span>
+          </div>
+          <div style="height:6px;background:var(--border);border-radius:999px;overflow:hidden">
+            <div style="width:30%;height:100%;background:var(--green);border-radius:999px"></div>
+          </div>
         </div>
-        <div style="height:6px;background:var(--border);border-radius:999px;overflow:hidden">
-          <div style="width:30%;height:100%;background:var(--green);border-radius:999px"></div>
+        <div style="margin-bottom:0.75rem">
+          <div style="display:flex;justify-content:space-between;font-size:var(--text-xs);margin-bottom:0.3rem">
+            <span style="color:var(--text-2)">Segmento B — Mediana empresa</span>
+            <span class="mono" style="color:var(--blue)">2,169 (45%)</span>
+          </div>
+          <div style="height:6px;background:var(--border);border-radius:999px;overflow:hidden">
+            <div style="width:45%;height:100%;background:var(--blue);border-radius:999px"></div>
+          </div>
         </div>
-      </div>
-      <div style="margin-bottom:0.75rem">
-        <div style="display:flex;justify-content:space-between;font-size:var(--text-xs);margin-bottom:0.3rem">
-          <span style="color:var(--text-2)">Segmento B — Mediana empresa</span>
-          <span class="mono" style="color:var(--blue)">2,169 (45%)</span>
+        <div>
+          <div style="display:flex;justify-content:space-between;font-size:var(--text-xs);margin-bottom:0.3rem">
+            <span style="color:var(--text-2)">Segmento C — Pequeña empresa</span>
+            <span class="mono" style="color:var(--amber)">1,205 (25%)</span>
+          </div>
+          <div style="height:6px;background:var(--border);border-radius:999px;overflow:hidden">
+            <div style="width:25%;height:100%;background:var(--amber);border-radius:999px"></div>
+          </div>
         </div>
-        <div style="height:6px;background:var(--border);border-radius:999px;overflow:hidden">
-          <div style="width:45%;height:100%;background:var(--blue);border-radius:999px"></div>
-        </div>
-      </div>
-      <div>
-        <div style="display:flex;justify-content:space-between;font-size:var(--text-xs);margin-bottom:0.3rem">
-          <span style="color:var(--text-2)">Segmento C — Pequeña empresa</span>
-          <span class="mono" style="color:var(--amber)">1,205 (25%)</span>
-        </div>
-        <div style="height:6px;background:var(--border);border-radius:999px;overflow:hidden">
-          <div style="width:25%;height:100%;background:var(--amber);border-radius:999px"></div>
-        </div>
-      </div>
+      }
     </div>
   </app-section-panel>
 
   <app-section-panel num="03" title="Actividad Reciente" link="#" linkLabel="Ver timeline">
     <div class="card-body">
-      <div class="status-row">
-        <div>
-          <div class="status-name">Nuevo cliente registrado</div>
-          <div style="font-size:var(--text-2xs);color:var(--muted)">Servicios Tecnológicos A&amp;B SpA</div>
+      @if (actividad.length > 0) {
+        @for (act of actividad; track $index) {
+          <div class="status-row">
+            <div>
+              <div class="status-name">{{ act.accion }}</div>
+              <div style="font-size:var(--text-2xs);color:var(--muted)">{{ act.cliente }}</div>
+            </div>
+            <span class="muted-cell">{{ act.tiempo }}</span>
+          </div>
+        }
+      } @else {
+        <div class="status-row">
+          <div>
+            <div class="status-name">Nuevo cliente registrado</div>
+            <div style="font-size:var(--text-2xs);color:var(--muted)">Servicios Tecnológicos A&amp;B SpA</div>
+          </div>
+          <span class="muted-cell">Hace 2h</span>
         </div>
-        <span class="muted-cell">Hace 2h</span>
-      </div>
-      <div class="status-row">
-        <div>
-          <div class="status-name">Pedido creado por cliente</div>
-          <div style="font-size:var(--text-2xs);color:var(--muted)">Constructora Andina S.A. — $12,400</div>
+        <div class="status-row">
+          <div>
+            <div class="status-name">Pedido creado por cliente</div>
+            <div style="font-size:var(--text-2xs);color:var(--muted)">Constructora Andina S.A. — $12,400</div>
+          </div>
+          <span class="muted-cell">Hace 4h</span>
         </div>
-        <span class="muted-cell">Hace 4h</span>
-      </div>
-      <div class="status-row">
-        <div>
-          <div class="status-name">Cuenta en revisión</div>
-          <div style="font-size:var(--text-2xs);color:var(--muted)">Agrícola Los Robles — deuda vencida</div>
+        <div class="status-row">
+          <div>
+            <div class="status-name">Cuenta en revisión</div>
+            <div style="font-size:var(--text-2xs);color:var(--muted)">Agrícola Los Robles — deuda vencida</div>
+          </div>
+          <span class="muted-cell">Ayer</span>
         </div>
-        <span class="muted-cell">Ayer</span>
-      </div>
-      <div class="status-row">
-        <div>
-          <div class="status-name">Seguimiento comercial</div>
-          <div style="font-size:var(--text-2xs);color:var(--muted)">Minera Cordillera — llamada programada</div>
+        <div class="status-row">
+          <div>
+            <div class="status-name">Seguimiento comercial</div>
+            <div style="font-size:var(--text-2xs);color:var(--muted)">Minera Cordillera — llamada programada</div>
+          </div>
+          <span class="muted-cell">Ayer</span>
         </div>
-        <span class="muted-cell">Ayer</span>
-      </div>
-      <div class="status-row">
-        <div>
-          <div class="status-name">NPS encuesta enviada</div>
-          <div style="font-size:var(--text-2xs);color:var(--muted)">Lote de 240 clientes segmento B</div>
+        <div class="status-row">
+          <div>
+            <div class="status-name">NPS encuesta enviada</div>
+            <div style="font-size:var(--text-2xs);color:var(--muted)">Lote de 240 clientes segmento B</div>
+          </div>
+          <span class="muted-cell">15 Jun</span>
         </div>
-        <span class="muted-cell">15 Jun</span>
-      </div>
+      }
     </div>
   </app-section-panel>
 </div>
+
+@if (modalAbierto) {
+  <div class="modal-overlay" (click)="cerrarModal()">
+    <div class="modal-box" (click)="$event.stopPropagation()">
+      <div class="modal-hdr">
+        <span class="modal-title">Nuevo Cliente</span>
+        <button class="modal-x" type="button" (click)="cerrarModal()">×</button>
+      </div>
+      <form [formGroup]="formCliente" (ngSubmit)="guardarCliente()">
+        <div class="modal-body">
+          <label class="fld">
+            <span>Nombre</span>
+            <input formControlName="nombre" placeholder="Razón social o nombre" />
+          </label>
+          <div class="fld-row">
+            <label class="fld">
+              <span>RUT</span>
+              <input formControlName="rut" placeholder="Ej: 76.482.100-K" />
+            </label>
+            <label class="fld">
+              <span>Segmento</span>
+              <select formControlName="segmento">
+                @if (segmentos.length > 0) {
+                  @for (s of segmentos; track s.nombre) {
+                    <option [value]="s.nombre">{{ s.nombre }}</option>
+                  }
+                } @else {
+                  <option>Premium</option>
+                  <option>Estándar</option>
+                  <option>Básico</option>
+                }
+              </select>
+            </label>
+          </div>
+          <label class="fld">
+            <span>Email</span>
+            <input formControlName="email" type="email" placeholder="correo@empresa.cl" />
+          </label>
+          <div class="fld-row">
+            <label class="fld">
+              <span>Teléfono</span>
+              <input formControlName="telefono" placeholder="+56 9 xxxx xxxx" />
+            </label>
+            <label class="fld">
+              <span>Dirección</span>
+              <input formControlName="direccion" placeholder="Dirección" />
+            </label>
+          </div>
+        </div>
+        @if (errorModal) {
+          <div class="modal-err">{{ errorModal }}</div>
+        }
+        <div class="modal-foot">
+          <button type="button" class="btn" (click)="cerrarModal()">Cancelar</button>
+          <button type="submit" class="btn btn-primary" [disabled]="saving || formCliente.invalid">
+            {{ saving ? 'Guardando…' : 'Guardar' }}
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+}

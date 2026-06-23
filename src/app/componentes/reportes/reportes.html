@@ -4,10 +4,14 @@
     <div class="page-title">Reportes</div>
   </div>
   <div class="page-actions">
-    <button class="btn btn-primary">Generar Reporte</button>
+    <button class="btn btn-primary" (click)="abrirModal()">Generar Reporte</button>
     <button class="btn">Programar</button>
   </div>
 </div>
+
+@if (loading) {
+  <div class="loading-bar">Cargando datos...</div>
+}
 
 <div class="kpi-row">
   <div class="kpi-cell">
@@ -39,68 +43,80 @@
         <tr>
           <th>Nombre del Reporte</th>
           <th>Módulo</th>
-          <th>Tipo</th>
+          <th>Formato</th>
           <th>Última Ejecución</th>
-          <th>Estado</th>
+          <th>Programado</th>
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <td>Resumen de Ventas Mensual</td>
-          <td><span class="pill pill-green">Ventas</span></td>
-          <td><span class="pill pill-teal">Automático</span></td>
-          <td class="muted-cell">18 Jun 2024 — 08:00</td>
-          <td><span class="pill pill-green">Listo</span></td>
-        </tr>
-        <tr>
-          <td>Balance General</td>
-          <td><span class="pill pill-blue">Contabilidad</span></td>
-          <td><span class="pill pill-amber">Manual</span></td>
-          <td class="muted-cell">14 Jun 2024 — 14:30</td>
-          <td><span class="pill pill-green">Listo</span></td>
-        </tr>
-        <tr>
-          <td>Estado de Inventario Crítico</td>
-          <td><span class="pill pill-amber">Inventario</span></td>
-          <td><span class="pill pill-teal">Automático</span></td>
-          <td class="muted-cell">18 Jun 2024 — 06:00</td>
-          <td><span class="pill pill-green">Listo</span></td>
-        </tr>
-        <tr>
-          <td>Rendimiento de Proveedores</td>
-          <td><span class="pill pill-blue">Compras</span></td>
-          <td><span class="pill pill-amber">Manual</span></td>
-          <td class="muted-cell">10 Jun 2024 — 11:15</td>
-          <td><span class="pill pill-green">Listo</span></td>
-        </tr>
-        <tr>
-          <td>Nómina y Remuneraciones Junio</td>
-          <td><span class="pill pill-teal">RRHH</span></td>
-          <td><span class="pill pill-teal">Automático</span></td>
-          <td class="muted-cell">18 Jun 2024 — 00:00</td>
-          <td><span class="pill pill-amber">Procesando</span></td>
-        </tr>
-        <tr>
-          <td>Flujo de Caja Proyectado</td>
-          <td><span class="pill pill-blue">Finanzas</span></td>
-          <td><span class="pill pill-amber">Manual</span></td>
-          <td class="muted-cell">07 Jun 2024 — 09:45</td>
-          <td><span class="pill pill-green">Listo</span></td>
-        </tr>
-        <tr>
-          <td>Avance de Proyectos Q2</td>
-          <td><span class="pill pill-teal">Proyectos</span></td>
-          <td><span class="pill pill-amber">Manual</span></td>
-          <td class="muted-cell">15 Jun 2024 — 16:00</td>
-          <td><span class="pill pill-green">Listo</span></td>
-        </tr>
-        <tr>
-          <td>Log de Auditoría Semanal</td>
-          <td><span class="pill pill-red">Auditoría</span></td>
-          <td><span class="pill pill-teal">Automático</span></td>
-          <td class="muted-cell">17 Jun 2024 — 23:59</td>
-          <td><span class="pill pill-green">Listo</span></td>
-        </tr>
+        @if (reportes.length > 0) {
+          @for (rep of reportes; track rep.id) {
+            <tr>
+              <td>{{ rep.nombre }}</td>
+              <td><span class="pill pill-blue">{{ rep.modulo }}</span></td>
+              <td><span class="pill pill-teal">{{ rep.formato }}</span></td>
+              <td class="muted-cell">{{ rep.ultima }}</td>
+              <td><span class="pill" [class.pill-green]="rep.programado" [class.pill-amber]="!rep.programado">{{ rep.programado ? 'Sí' : 'No' }}</span></td>
+            </tr>
+          }
+        } @else {
+          <tr>
+            <td>Resumen de Ventas Mensual</td>
+            <td><span class="pill pill-green">Ventas</span></td>
+            <td><span class="pill pill-teal">Automático</span></td>
+            <td class="muted-cell">18 Jun 2024 — 08:00</td>
+            <td><span class="pill pill-green">Listo</span></td>
+          </tr>
+          <tr>
+            <td>Balance General</td>
+            <td><span class="pill pill-blue">Contabilidad</span></td>
+            <td><span class="pill pill-amber">Manual</span></td>
+            <td class="muted-cell">14 Jun 2024 — 14:30</td>
+            <td><span class="pill pill-green">Listo</span></td>
+          </tr>
+          <tr>
+            <td>Estado de Inventario Crítico</td>
+            <td><span class="pill pill-amber">Inventario</span></td>
+            <td><span class="pill pill-teal">Automático</span></td>
+            <td class="muted-cell">18 Jun 2024 — 06:00</td>
+            <td><span class="pill pill-green">Listo</span></td>
+          </tr>
+          <tr>
+            <td>Rendimiento de Proveedores</td>
+            <td><span class="pill pill-blue">Compras</span></td>
+            <td><span class="pill pill-amber">Manual</span></td>
+            <td class="muted-cell">10 Jun 2024 — 11:15</td>
+            <td><span class="pill pill-green">Listo</span></td>
+          </tr>
+          <tr>
+            <td>Nómina y Remuneraciones Junio</td>
+            <td><span class="pill pill-teal">RRHH</span></td>
+            <td><span class="pill pill-teal">Automático</span></td>
+            <td class="muted-cell">18 Jun 2024 — 00:00</td>
+            <td><span class="pill pill-amber">Procesando</span></td>
+          </tr>
+          <tr>
+            <td>Flujo de Caja Proyectado</td>
+            <td><span class="pill pill-blue">Finanzas</span></td>
+            <td><span class="pill pill-amber">Manual</span></td>
+            <td class="muted-cell">07 Jun 2024 — 09:45</td>
+            <td><span class="pill pill-green">Listo</span></td>
+          </tr>
+          <tr>
+            <td>Avance de Proyectos Q2</td>
+            <td><span class="pill pill-teal">Proyectos</span></td>
+            <td><span class="pill pill-amber">Manual</span></td>
+            <td class="muted-cell">15 Jun 2024 — 16:00</td>
+            <td><span class="pill pill-green">Listo</span></td>
+          </tr>
+          <tr>
+            <td>Log de Auditoría Semanal</td>
+            <td><span class="pill pill-red">Auditoría</span></td>
+            <td><span class="pill pill-teal">Automático</span></td>
+            <td class="muted-cell">17 Jun 2024 — 23:59</td>
+            <td><span class="pill pill-green">Listo</span></td>
+          </tr>
+        }
       </tbody>
     </table>
   </div>
@@ -109,82 +125,156 @@
 <div class="two-col">
   <app-section-panel num="02" title="Reportes Recientes Descargados">
     <div class="card-body">
-      <div class="status-row">
-        <div style="display:flex;align-items:center;gap:0.6rem">
-          <div style="width:28px;height:28px;background:rgba(176,58,74,0.12);border-radius:3px;display:flex;align-items:center;justify-content:center;font-size:0.65rem;font-weight:700;color:var(--red)">PDF</div>
-          <div>
-            <div class="status-name">Balance General — Junio 2024</div>
-            <div style="font-size:var(--text-2xs);color:var(--muted)">Valentina Muñoz — 14 Jun 14:30</div>
+      @if (descargas.length > 0) {
+        @for (desc of descargas; track $index) {
+          <div class="status-row">
+            <div style="display:flex;align-items:center;gap:0.6rem">
+              <div style="width:28px;height:28px;background:rgba(63,111,176,0.12);border-radius:3px;display:flex;align-items:center;justify-content:center;font-size:0.65rem;font-weight:700;color:var(--blue)">{{ desc.formato }}</div>
+              <div>
+                <div class="status-name">{{ desc.nombre }}</div>
+                <div style="font-size:var(--text-2xs);color:var(--muted)">{{ desc.usuario }} — {{ desc.fecha }}</div>
+              </div>
+            </div>
+          </div>
+        }
+      } @else {
+        <div class="status-row">
+          <div style="display:flex;align-items:center;gap:0.6rem">
+            <div style="width:28px;height:28px;background:rgba(176,58,74,0.12);border-radius:3px;display:flex;align-items:center;justify-content:center;font-size:0.65rem;font-weight:700;color:var(--red)">PDF</div>
+            <div>
+              <div class="status-name">Balance General — Junio 2024</div>
+              <div style="font-size:var(--text-2xs);color:var(--muted)">Valentina Muñoz — 14 Jun 14:30</div>
+            </div>
           </div>
         </div>
-      </div>
-      <div class="status-row">
-        <div style="display:flex;align-items:center;gap:0.6rem">
-          <div style="width:28px;height:28px;background:rgba(63,140,99,0.12);border-radius:3px;display:flex;align-items:center;justify-content:center;font-size:0.65rem;font-weight:700;color:var(--green)">XLS</div>
-          <div>
-            <div class="status-name">Resumen de Ventas Mayo 2024</div>
-            <div style="font-size:var(--text-2xs);color:var(--muted)">Camila Rojas — 05 Jun 09:20</div>
+        <div class="status-row">
+          <div style="display:flex;align-items:center;gap:0.6rem">
+            <div style="width:28px;height:28px;background:rgba(63,140,99,0.12);border-radius:3px;display:flex;align-items:center;justify-content:center;font-size:0.65rem;font-weight:700;color:var(--green)">XLS</div>
+            <div>
+              <div class="status-name">Resumen de Ventas Mayo 2024</div>
+              <div style="font-size:var(--text-2xs);color:var(--muted)">Camila Rojas — 05 Jun 09:20</div>
+            </div>
           </div>
         </div>
-      </div>
-      <div class="status-row">
-        <div style="display:flex;align-items:center;gap:0.6rem">
-          <div style="width:28px;height:28px;background:rgba(63,111,176,0.12);border-radius:3px;display:flex;align-items:center;justify-content:center;font-size:0.65rem;font-weight:700;color:var(--blue)">CSV</div>
-          <div>
-            <div class="status-name">Inventario Crítico — 18 Jun</div>
-            <div style="font-size:var(--text-2xs);color:var(--muted)">Roberto Fuentes — 18 Jun 08:05</div>
+        <div class="status-row">
+          <div style="display:flex;align-items:center;gap:0.6rem">
+            <div style="width:28px;height:28px;background:rgba(63,111,176,0.12);border-radius:3px;display:flex;align-items:center;justify-content:center;font-size:0.65rem;font-weight:700;color:var(--blue)">CSV</div>
+            <div>
+              <div class="status-name">Inventario Crítico — 18 Jun</div>
+              <div style="font-size:var(--text-2xs);color:var(--muted)">Roberto Fuentes — 18 Jun 08:05</div>
+            </div>
           </div>
         </div>
-      </div>
-      <div class="status-row">
-        <div style="display:flex;align-items:center;gap:0.6rem">
-          <div style="width:28px;height:28px;background:rgba(176,58,74,0.12);border-radius:3px;display:flex;align-items:center;justify-content:center;font-size:0.65rem;font-weight:700;color:var(--red)">PDF</div>
-          <div>
-            <div class="status-name">Log de Auditoría — Semana 24</div>
-            <div style="font-size:var(--text-2xs);color:var(--muted)">Andrea Pérez — 17 Jun 23:59</div>
+        <div class="status-row">
+          <div style="display:flex;align-items:center;gap:0.6rem">
+            <div style="width:28px;height:28px;background:rgba(176,58,74,0.12);border-radius:3px;display:flex;align-items:center;justify-content:center;font-size:0.65rem;font-weight:700;color:var(--red)">PDF</div>
+            <div>
+              <div class="status-name">Log de Auditoría — Semana 24</div>
+              <div style="font-size:var(--text-2xs);color:var(--muted)">Andrea Pérez — 17 Jun 23:59</div>
+            </div>
           </div>
         </div>
-      </div>
+      }
     </div>
   </app-section-panel>
 
   <app-section-panel num="03" title="Reportes Programados" link="#" linkLabel="Gestionar">
     <div class="card-body">
-      <div class="status-row">
-        <div>
-          <div class="status-name">Ventas Diarias — Auto</div>
-          <div style="font-size:var(--text-2xs);color:var(--muted)">Todos los días a las 08:00</div>
+      @if (programados.length > 0) {
+        @for (prog of programados; track prog.id) {
+          <div class="status-row">
+            <div>
+              <div class="status-name">{{ prog.nombre }}</div>
+              <div style="font-size:var(--text-2xs);color:var(--muted)">{{ prog.modulo }} — {{ prog.ultima }}</div>
+            </div>
+            <span class="pill" [class.pill-green]="prog.programado" [class.pill-amber]="!prog.programado">{{ prog.programado ? 'Activo' : 'Pausado' }}</span>
+          </div>
+        }
+      } @else {
+        <div class="status-row">
+          <div>
+            <div class="status-name">Ventas Diarias — Auto</div>
+            <div style="font-size:var(--text-2xs);color:var(--muted)">Todos los días a las 08:00</div>
+          </div>
+          <span class="pill pill-green">Activo</span>
         </div>
-        <span class="pill pill-green">Activo</span>
-      </div>
-      <div class="status-row">
-        <div>
-          <div class="status-name">Stock Crítico — Auto</div>
-          <div style="font-size:var(--text-2xs);color:var(--muted)">Todos los días a las 06:00</div>
+        <div class="status-row">
+          <div>
+            <div class="status-name">Stock Crítico — Auto</div>
+            <div style="font-size:var(--text-2xs);color:var(--muted)">Todos los días a las 06:00</div>
+          </div>
+          <span class="pill pill-green">Activo</span>
         </div>
-        <span class="pill pill-green">Activo</span>
-      </div>
-      <div class="status-row">
-        <div>
-          <div class="status-name">Nómina Mensual — Auto</div>
-          <div style="font-size:var(--text-2xs);color:var(--muted)">Primer día del mes a las 00:00</div>
+        <div class="status-row">
+          <div>
+            <div class="status-name">Nómina Mensual — Auto</div>
+            <div style="font-size:var(--text-2xs);color:var(--muted)">Primer día del mes a las 00:00</div>
+          </div>
+          <span class="pill pill-green">Activo</span>
         </div>
-        <span class="pill pill-green">Activo</span>
-      </div>
-      <div class="status-row">
-        <div>
-          <div class="status-name">Log Auditoría Semanal — Auto</div>
-          <div style="font-size:var(--text-2xs);color:var(--muted)">Cada lunes a las 07:00</div>
+        <div class="status-row">
+          <div>
+            <div class="status-name">Log Auditoría Semanal — Auto</div>
+            <div style="font-size:var(--text-2xs);color:var(--muted)">Cada lunes a las 07:00</div>
+          </div>
+          <span class="pill pill-green">Activo</span>
         </div>
-        <span class="pill pill-green">Activo</span>
-      </div>
-      <div class="status-row">
-        <div>
-          <div class="status-name">Proveedores Q — Manual</div>
-          <div style="font-size:var(--text-2xs);color:var(--muted)">Trimestral — bajo demanda</div>
+        <div class="status-row">
+          <div>
+            <div class="status-name">Proveedores Q — Manual</div>
+            <div style="font-size:var(--text-2xs);color:var(--muted)">Trimestral — bajo demanda</div>
+          </div>
+          <span class="pill pill-amber">Pausado</span>
         </div>
-        <span class="pill pill-amber">Pausado</span>
-      </div>
+      }
     </div>
   </app-section-panel>
 </div>
+
+@if (modalAbierto) {
+  <div class="modal-overlay" (click)="cerrarModal()">
+    <div class="modal-box" (click)="$event.stopPropagation()">
+      <div class="modal-hdr">
+        <span class="modal-title">Generar Reporte</span>
+        <button class="modal-x" type="button" (click)="cerrarModal()">×</button>
+      </div>
+      <form [formGroup]="formReporte" (ngSubmit)="guardarReporte()">
+        <div class="modal-body">
+          <label class="fld">
+            <span>Nombre del Reporte</span>
+            <input formControlName="nombre" placeholder="Ej: Ventas Junio 2026" />
+          </label>
+          <div class="fld-row">
+            <label class="fld">
+              <span>Módulo</span>
+              <select formControlName="modulo">
+                <option>Ventas</option>
+                <option>Compras</option>
+                <option>Inventario</option>
+                <option>Finanzas</option>
+                <option>RRHH</option>
+              </select>
+            </label>
+            <label class="fld">
+              <span>Formato</span>
+              <select formControlName="formato">
+                <option>PDF</option>
+                <option>Excel</option>
+                <option>CSV</option>
+              </select>
+            </label>
+          </div>
+        </div>
+        @if (errorModal) {
+          <div class="modal-err">{{ errorModal }}</div>
+        }
+        <div class="modal-foot">
+          <button type="button" class="btn" (click)="cerrarModal()">Cancelar</button>
+          <button type="submit" class="btn btn-primary" [disabled]="saving || formReporte.invalid">
+            {{ saving ? 'Generando…' : 'Generar' }}
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+}

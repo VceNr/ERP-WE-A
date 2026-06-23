@@ -4,10 +4,14 @@
     <div class="page-title">Ventas</div>
   </div>
   <div class="page-actions">
-    <button class="btn btn-primary">+ Nueva Venta</button>
+    <button class="btn btn-primary" (click)="abrirModal()">+ Nueva Venta</button>
     <button class="btn">Exportar</button>
   </div>
 </div>
+
+@if (loading) {
+  <div class="loading-bar">Cargando datos...</div>
+}
 
 <div class="kpi-row">
   <div class="kpi-cell">
@@ -39,61 +43,66 @@
         <tr>
           <th>N° Orden</th>
           <th>Cliente</th>
-          <th>Producto</th>
           <th>Monto</th>
           <th>Estado</th>
           <th>Fecha</th>
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <td class="mono">#ORD-2024-0842</td>
-          <td>Constructora Andina S.A.</td>
-          <td>Cemento Portland x 200 sacos</td>
-          <td class="mono">$12,400</td>
-          <td><span class="pill pill-green">Completada</span></td>
-          <td class="muted-cell">18 Jun 2024</td>
-        </tr>
-        <tr>
-          <td class="mono">#ORD-2024-0841</td>
-          <td>Importadora Global Ltda.</td>
-          <td>Acero estructural 10mm x 50t</td>
-          <td class="mono">$38,750</td>
-          <td><span class="pill pill-amber">Pendiente</span></td>
-          <td class="muted-cell">17 Jun 2024</td>
-        </tr>
-        <tr>
-          <td class="mono">#ORD-2024-0840</td>
-          <td>Retail Moderno SpA</td>
-          <td>Luminarias LED industriales x 40</td>
-          <td class="mono">$6,200</td>
-          <td><span class="pill pill-blue">En preparación</span></td>
-          <td class="muted-cell">17 Jun 2024</td>
-        </tr>
-        <tr>
-          <td class="mono">#ORD-2024-0839</td>
-          <td>Minera Cordillera S.A.</td>
-          <td>Equipos de protección EPP x 120</td>
-          <td class="mono">$8,940</td>
-          <td><span class="pill pill-green">Completada</span></td>
-          <td class="muted-cell">16 Jun 2024</td>
-        </tr>
-        <tr>
-          <td class="mono">#ORD-2024-0838</td>
-          <td>Agrícola Los Robles</td>
-          <td>Fertilizante NPK x 80 sacos</td>
-          <td class="mono">$4,160</td>
-          <td><span class="pill pill-red">Cancelada</span></td>
-          <td class="muted-cell">15 Jun 2024</td>
-        </tr>
-        <tr>
-          <td class="mono">#ORD-2024-0837</td>
-          <td>Logística Sur Ltda.</td>
-          <td>Pallets plásticos reforzados x 200</td>
-          <td class="mono">$7,600</td>
-          <td><span class="pill pill-teal">Despachada</span></td>
-          <td class="muted-cell">14 Jun 2024</td>
-        </tr>
+        @if (ordenes.length > 0) {
+          @for (orden of ordenes; track orden.id) {
+            <tr>
+              <td class="mono">{{ orden.id }}</td>
+              <td>{{ orden.cliente }}</td>
+              <td class="mono">{{ orden.total }}</td>
+              <td><span class="pill">{{ orden.estado }}</span></td>
+              <td class="muted-cell">{{ orden.fecha }}</td>
+            </tr>
+          }
+        } @else {
+          <tr>
+            <td class="mono">#ORD-2024-0842</td>
+            <td>Constructora Andina S.A.</td>
+            <td class="mono">$12,400</td>
+            <td><span class="pill pill-green">Completada</span></td>
+            <td class="muted-cell">18 Jun 2024</td>
+          </tr>
+          <tr>
+            <td class="mono">#ORD-2024-0841</td>
+            <td>Importadora Global Ltda.</td>
+            <td class="mono">$38,750</td>
+            <td><span class="pill pill-amber">Pendiente</span></td>
+            <td class="muted-cell">17 Jun 2024</td>
+          </tr>
+          <tr>
+            <td class="mono">#ORD-2024-0840</td>
+            <td>Retail Moderno SpA</td>
+            <td class="mono">$6,200</td>
+            <td><span class="pill pill-blue">En preparación</span></td>
+            <td class="muted-cell">17 Jun 2024</td>
+          </tr>
+          <tr>
+            <td class="mono">#ORD-2024-0839</td>
+            <td>Minera Cordillera S.A.</td>
+            <td class="mono">$8,940</td>
+            <td><span class="pill pill-green">Completada</span></td>
+            <td class="muted-cell">16 Jun 2024</td>
+          </tr>
+          <tr>
+            <td class="mono">#ORD-2024-0838</td>
+            <td>Agrícola Los Robles</td>
+            <td class="mono">$4,160</td>
+            <td><span class="pill pill-red">Cancelada</span></td>
+            <td class="muted-cell">15 Jun 2024</td>
+          </tr>
+          <tr>
+            <td class="mono">#ORD-2024-0837</td>
+            <td>Logística Sur Ltda.</td>
+            <td class="mono">$7,600</td>
+            <td><span class="pill pill-teal">Despachada</span></td>
+            <td class="muted-cell">14 Jun 2024</td>
+          </tr>
+        }
       </tbody>
     </table>
   </div>
@@ -102,41 +111,53 @@
 <div class="two-col">
   <app-section-panel num="02" title="Top Vendedores — Junio" link="#" linkLabel="Detalle">
     <div class="card-body">
-      <div class="status-row">
-        <span class="status-name">Camila Rojas</span>
-        <div class="status-right">
-          <div class="mini-bar"><div class="mini-fill fill-green" style="width:92%"></div></div>
-          <span class="pct pct-green">$52,400</span>
+      @if (vendedores.length > 0) {
+        @for (v of vendedores; track v.id) {
+          <div class="status-row">
+            <span class="status-name">{{ v.nombre }}</span>
+            <div class="status-right">
+              <div class="mini-bar"><div class="mini-fill fill-blue" [style.width.%]="v.meta > 0 ? (v.ventas / v.meta * 100) : 0"></div></div>
+              <span class="pct pct-blue">{{ v.ventas }}</span>
+            </div>
+          </div>
+        }
+      } @else {
+        <div class="status-row">
+          <span class="status-name">Camila Rojas</span>
+          <div class="status-right">
+            <div class="mini-bar"><div class="mini-fill fill-green" style="width:92%"></div></div>
+            <span class="pct pct-green">$52,400</span>
+          </div>
         </div>
-      </div>
-      <div class="status-row">
-        <span class="status-name">Diego Herrera</span>
-        <div class="status-right">
-          <div class="mini-bar"><div class="mini-fill fill-blue" style="width:78%"></div></div>
-          <span class="pct pct-blue">$44,100</span>
+        <div class="status-row">
+          <span class="status-name">Diego Herrera</span>
+          <div class="status-right">
+            <div class="mini-bar"><div class="mini-fill fill-blue" style="width:78%"></div></div>
+            <span class="pct pct-blue">$44,100</span>
+          </div>
         </div>
-      </div>
-      <div class="status-row">
-        <span class="status-name">Valentina Muñoz</span>
-        <div class="status-right">
-          <div class="mini-bar"><div class="mini-fill fill-blue" style="width:64%"></div></div>
-          <span class="pct pct-blue">$36,800</span>
+        <div class="status-row">
+          <span class="status-name">Valentina Muñoz</span>
+          <div class="status-right">
+            <div class="mini-bar"><div class="mini-fill fill-blue" style="width:64%"></div></div>
+            <span class="pct pct-blue">$36,800</span>
+          </div>
         </div>
-      </div>
-      <div class="status-row">
-        <span class="status-name">Sebastián Vega</span>
-        <div class="status-right">
-          <div class="mini-bar"><div class="mini-fill fill-amber" style="width:48%"></div></div>
-          <span class="pct pct-amber">$27,200</span>
+        <div class="status-row">
+          <span class="status-name">Sebastián Vega</span>
+          <div class="status-right">
+            <div class="mini-bar"><div class="mini-fill fill-amber" style="width:48%"></div></div>
+            <span class="pct pct-amber">$27,200</span>
+          </div>
         </div>
-      </div>
-      <div class="status-row">
-        <span class="status-name">Andrea Pérez</span>
-        <div class="status-right">
-          <div class="mini-bar"><div class="mini-fill fill-amber" style="width:36%"></div></div>
-          <span class="pct pct-amber">$20,600</span>
+        <div class="status-row">
+          <span class="status-name">Andrea Pérez</span>
+          <div class="status-right">
+            <div class="mini-bar"><div class="mini-fill fill-amber" style="width:36%"></div></div>
+            <span class="pct pct-amber">$20,600</span>
+          </div>
         </div>
-      </div>
+      }
     </div>
   </app-section-panel>
 
@@ -151,33 +172,111 @@
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>Directo / Fuerza de ventas</td>
-            <td class="mono">$142,800</td>
-            <td><span class="pill pill-green">50.2%</span></td>
-          </tr>
-          <tr>
-            <td>E-commerce</td>
-            <td class="mono">$68,400</td>
-            <td><span class="pill pill-blue">24.0%</span></td>
-          </tr>
-          <tr>
-            <td>Distribuidores</td>
-            <td class="mono">$48,200</td>
-            <td><span class="pill pill-teal">16.9%</span></td>
-          </tr>
-          <tr>
-            <td>Televentas</td>
-            <td class="mono">$18,100</td>
-            <td><span class="pill pill-amber">6.4%</span></td>
-          </tr>
-          <tr>
-            <td>Otros</td>
-            <td class="mono">$7,000</td>
-            <td><span class="pill pill-amber">2.5%</span></td>
-          </tr>
+          @if (canales.length > 0) {
+            @for (canal of canales; track canal.canal) {
+              <tr>
+                <td>{{ canal.canal }}</td>
+                <td class="mono">{{ canal.monto }}</td>
+                <td><span class="pill pill-blue">{{ canal.porcentaje }}%</span></td>
+              </tr>
+            }
+          } @else {
+            <tr>
+              <td>Directo / Fuerza de ventas</td>
+              <td class="mono">$142,800</td>
+              <td><span class="pill pill-green">50.2%</span></td>
+            </tr>
+            <tr>
+              <td>E-commerce</td>
+              <td class="mono">$68,400</td>
+              <td><span class="pill pill-blue">24.0%</span></td>
+            </tr>
+            <tr>
+              <td>Distribuidores</td>
+              <td class="mono">$48,200</td>
+              <td><span class="pill pill-teal">16.9%</span></td>
+            </tr>
+            <tr>
+              <td>Televentas</td>
+              <td class="mono">$18,100</td>
+              <td><span class="pill pill-amber">6.4%</span></td>
+            </tr>
+            <tr>
+              <td>Otros</td>
+              <td class="mono">$7,000</td>
+              <td><span class="pill pill-amber">2.5%</span></td>
+            </tr>
+          }
         </tbody>
       </table>
     </div>
   </app-section-panel>
 </div>
+
+@if (modalAbierto) {
+  <div class="modal-overlay" (click)="cerrarModal()">
+    <div class="modal-box" (click)="$event.stopPropagation()">
+      <div class="modal-hdr">
+        <span class="modal-title">Nueva Venta</span>
+        <button class="modal-x" type="button" (click)="cerrarModal()">×</button>
+      </div>
+      <form [formGroup]="formVenta" (ngSubmit)="guardarVenta()">
+        <div class="modal-body">
+          <label class="fld">
+            <span>Cliente</span>
+            @if (clientesLista.length > 0) {
+              <select formControlName="cliente">
+                <option value="">— Seleccionar cliente —</option>
+                @for (c of clientesLista; track c.id) {
+                  <option [value]="c.nombre">{{ c.nombre }}</option>
+                }
+              </select>
+            } @else {
+              <input formControlName="cliente" placeholder="Nombre del cliente" />
+            }
+          </label>
+          <label class="fld">
+            <span>Monto</span>
+            <input formControlName="monto" type="number" placeholder="0" />
+          </label>
+          <div class="fld-row">
+            <label class="fld">
+              <span>Vendedor</span>
+              @if (vendedores.length > 0) {
+                <select formControlName="vendedor">
+                  <option value="">— Seleccionar vendedor —</option>
+                  @for (v of vendedores; track v.id) {
+                    <option [value]="v.nombre">{{ v.nombre }}</option>
+                  }
+                </select>
+              } @else {
+                <input formControlName="vendedor" placeholder="Nombre del vendedor" />
+              }
+            </label>
+            <label class="fld">
+              <span>Fecha</span>
+              <input formControlName="fecha" type="date" />
+            </label>
+          </div>
+          <label class="fld">
+            <span>Estado</span>
+            <select formControlName="estado">
+              <option>Pendiente</option>
+              <option>En preparación</option>
+              <option>Completada</option>
+            </select>
+          </label>
+        </div>
+        @if (errorModal) {
+          <div class="modal-err">{{ errorModal }}</div>
+        }
+        <div class="modal-foot">
+          <button type="button" class="btn" (click)="cerrarModal()">Cancelar</button>
+          <button type="submit" class="btn btn-primary" [disabled]="saving || formVenta.invalid">
+            {{ saving ? 'Guardando…' : 'Guardar' }}
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+}

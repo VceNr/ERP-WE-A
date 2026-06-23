@@ -9,6 +9,10 @@
   </div>
 </div>
 
+@if (loading) {
+  <div class="loading-bar">Cargando datos...</div>
+}
+
 <div class="kpi-row">
   <div class="kpi-cell">
     <div class="kpi-lbl">Eventos Hoy</div>
@@ -46,70 +50,83 @@
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <td class="mono">18 Jun 14:32:08</td>
-          <td>c.rojas</td>
-          <td>Editar registro — ORD-0842</td>
-          <td>Ventas</td>
-          <td class="mono">192.168.1.42</td>
-          <td><span class="pill pill-green">OK</span></td>
-        </tr>
-        <tr>
-          <td class="mono">18 Jun 14:28:45</td>
-          <td>d.herrera</td>
-          <td>Crear OC — OC-2024-0318</td>
-          <td>Compras</td>
-          <td class="mono">192.168.1.55</td>
-          <td><span class="pill pill-green">OK</span></td>
-        </tr>
-        <tr>
-          <td class="mono">18 Jun 14:15:12</td>
-          <td>admin</td>
-          <td>Acceso denegado — config. roles</td>
-          <td>Configuración</td>
-          <td class="mono">10.0.0.8</td>
-          <td><span class="pill pill-red">Error</span></td>
-        </tr>
-        <tr>
-          <td class="mono">18 Jun 13:58:30</td>
-          <td>v.munoz</td>
-          <td>Exportar reporte — Balance</td>
-          <td>Contabilidad</td>
-          <td class="mono">192.168.1.38</td>
-          <td><span class="pill pill-green">OK</span></td>
-        </tr>
-        <tr>
-          <td class="mono">18 Jun 13:44:02</td>
-          <td>r.fuentes</td>
-          <td>Ajuste de stock — ACR-8842</td>
-          <td>Inventario</td>
-          <td class="mono">192.168.1.22</td>
-          <td><span class="pill pill-amber">Advertencia</span></td>
-        </tr>
-        <tr>
-          <td class="mono">18 Jun 12:30:55</td>
-          <td>a.perez</td>
-          <td>Crear empleado — R.Fuentes Díaz</td>
-          <td>RRHH</td>
-          <td class="mono">192.168.1.48</td>
-          <td><span class="pill pill-green">OK</span></td>
-        </tr>
-        <tr>
-          <td class="mono">18 Jun 11:22:18</td>
-          <td>s.vega</td>
-          <td>Login fallido — 3er intento</td>
-          <td>Autenticación</td>
-          <td class="mono">192.168.1.91</td>
-          <td><span class="pill pill-red">Error</span></td>
-        </tr>
-        <tr>
-          <td class="mono">18 Jun 08:01:05</td>
-          <td>sistema</td>
-          <td>Backup automático completado</td>
-          <td>Sistema</td>
-          <td class="mono">127.0.0.1</td>
-          <td><span class="pill pill-green">OK</span></td>
-        </tr>
+        @if (logs.length > 0) {
+          @for (log of logs; track log.id) {
+            <tr>
+              <td class="mono">{{ log.fecha }}</td>
+              <td>{{ log.usuario }}</td>
+              <td>{{ log.accion }}</td>
+              <td>{{ log.modulo }}</td>
+              <td class="mono">{{ log.ip }}</td>
+              <td><span class="pill pill-green">OK</span></td>
+            </tr>
+          }
+        } @else {
+          <tr>
+            <td class="mono">18 Jun 14:32:08</td>
+            <td>c.rojas</td>
+            <td>Editar registro — ORD-0842</td>
+            <td>Ventas</td>
+            <td class="mono">192.168.1.42</td>
+            <td><span class="pill pill-green">OK</span></td>
+          </tr>
+          <tr>
+            <td class="mono">18 Jun 14:28:45</td>
+            <td>d.herrera</td>
+            <td>Crear OC — OC-2024-0318</td>
+            <td>Compras</td>
+            <td class="mono">192.168.1.55</td>
+            <td><span class="pill pill-green">OK</span></td>
+          </tr>
+          <tr>
+            <td class="mono">18 Jun 14:15:12</td>
+            <td>admin</td>
+            <td>Acceso denegado — config. roles</td>
+            <td>Configuración</td>
+            <td class="mono">10.0.0.8</td>
+            <td><span class="pill pill-red">Error</span></td>
+          </tr>
+          <tr>
+            <td class="mono">18 Jun 13:58:30</td>
+            <td>v.munoz</td>
+            <td>Exportar reporte — Balance</td>
+            <td>Contabilidad</td>
+            <td class="mono">192.168.1.38</td>
+            <td><span class="pill pill-green">OK</span></td>
+          </tr>
+          <tr>
+            <td class="mono">18 Jun 13:44:02</td>
+            <td>r.fuentes</td>
+            <td>Ajuste de stock — ACR-8842</td>
+            <td>Inventario</td>
+            <td class="mono">192.168.1.22</td>
+            <td><span class="pill pill-amber">Advertencia</span></td>
+          </tr>
+          <tr>
+            <td class="mono">18 Jun 12:30:55</td>
+            <td>a.perez</td>
+            <td>Crear empleado — R.Fuentes Díaz</td>
+            <td>RRHH</td>
+            <td class="mono">192.168.1.48</td>
+            <td><span class="pill pill-green">OK</span></td>
+          </tr>
+          <tr>
+            <td class="mono">18 Jun 11:22:18</td>
+            <td>s.vega</td>
+            <td>Login fallido — 3er intento</td>
+            <td>Autenticación</td>
+            <td class="mono">192.168.1.91</td>
+            <td><span class="pill pill-red">Error</span></td>
+          </tr>
+          <tr>
+            <td class="mono">18 Jun 08:01:05</td>
+            <td>sistema</td>
+            <td>Backup automático completado</td>
+            <td>Sistema</td>
+            <td class="mono">127.0.0.1</td>
+            <td><span class="pill pill-green">OK</span></td>
+          </tr>
+        }
       </tbody>
     </table>
   </div>
@@ -118,105 +135,131 @@
 <div class="two-col">
   <app-section-panel num="02" title="Alertas de Seguridad" link="#" linkLabel="Ver todas">
     <div class="card-body">
-      <div class="status-row">
-        <div style="display:flex;align-items:flex-start;gap:0.6rem">
-          <span class="pill pill-red" style="margin-top:1px;white-space:nowrap">ALTA</span>
-          <div>
-            <div class="status-name">Login fallido repetido — usuario s.vega</div>
-            <div style="font-size:var(--text-2xs);color:var(--muted)">3 intentos fallidos en 5 min — 18 Jun 11:22</div>
+      @if (alertas.length > 0) {
+        @for (alerta of alertas; track alerta.id) {
+          <div class="status-row">
+            <div style="display:flex;align-items:flex-start;gap:0.6rem">
+              <span class="pill pill-amber" style="margin-top:1px;white-space:nowrap">{{ alerta.severidad }}</span>
+              <div>
+                <div class="status-name">{{ alerta.tipo }}</div>
+                <div style="font-size:var(--text-2xs);color:var(--muted)">{{ alerta.descripcion }} — {{ alerta.fecha }}</div>
+              </div>
+            </div>
+          </div>
+        }
+      } @else {
+        <div class="status-row">
+          <div style="display:flex;align-items:flex-start;gap:0.6rem">
+            <span class="pill pill-red" style="margin-top:1px;white-space:nowrap">ALTA</span>
+            <div>
+              <div class="status-name">Login fallido repetido — usuario s.vega</div>
+              <div style="font-size:var(--text-2xs);color:var(--muted)">3 intentos fallidos en 5 min — 18 Jun 11:22</div>
+            </div>
           </div>
         </div>
-      </div>
-      <div class="status-row">
-        <div style="display:flex;align-items:flex-start;gap:0.6rem">
-          <span class="pill pill-red" style="margin-top:1px;white-space:nowrap">ALTA</span>
-          <div>
-            <div class="status-name">Acceso no autorizado a configuración</div>
-            <div style="font-size:var(--text-2xs);color:var(--muted)">IP 10.0.0.8 sin permiso — 18 Jun 14:15</div>
+        <div class="status-row">
+          <div style="display:flex;align-items:flex-start;gap:0.6rem">
+            <span class="pill pill-red" style="margin-top:1px;white-space:nowrap">ALTA</span>
+            <div>
+              <div class="status-name">Acceso no autorizado a configuración</div>
+              <div style="font-size:var(--text-2xs);color:var(--muted)">IP 10.0.0.8 sin permiso — 18 Jun 14:15</div>
+            </div>
           </div>
         </div>
-      </div>
-      <div class="status-row">
-        <div style="display:flex;align-items:flex-start;gap:0.6rem">
-          <span class="pill pill-amber" style="margin-top:1px;white-space:nowrap">MEDIA</span>
-          <div>
-            <div class="status-name">Ajuste de stock fuera de rango aceptable</div>
-            <div style="font-size:var(--text-2xs);color:var(--muted)">ACR-8842 ajustado a -12 — requiere aprobación</div>
+        <div class="status-row">
+          <div style="display:flex;align-items:flex-start;gap:0.6rem">
+            <span class="pill pill-amber" style="margin-top:1px;white-space:nowrap">MEDIA</span>
+            <div>
+              <div class="status-name">Ajuste de stock fuera de rango aceptable</div>
+              <div style="font-size:var(--text-2xs);color:var(--muted)">ACR-8842 ajustado a -12 — requiere aprobación</div>
+            </div>
           </div>
         </div>
-      </div>
-      <div class="status-row">
-        <div style="display:flex;align-items:flex-start;gap:0.6rem">
-          <span class="pill pill-amber" style="margin-top:1px;white-space:nowrap">MEDIA</span>
-          <div>
-            <div class="status-name">Exportación masiva de datos — Contabilidad</div>
-            <div style="font-size:var(--text-2xs);color:var(--muted)">v.munoz exportó 2,840 registros — 18 Jun 13:58</div>
+        <div class="status-row">
+          <div style="display:flex;align-items:flex-start;gap:0.6rem">
+            <span class="pill pill-amber" style="margin-top:1px;white-space:nowrap">MEDIA</span>
+            <div>
+              <div class="status-name">Exportación masiva de datos — Contabilidad</div>
+              <div style="font-size:var(--text-2xs);color:var(--muted)">v.munoz exportó 2,840 registros — 18 Jun 13:58</div>
+            </div>
           </div>
         </div>
-      </div>
-      <div class="status-row">
-        <div style="display:flex;align-items:flex-start;gap:0.6rem">
-          <span class="pill pill-green" style="margin-top:1px;white-space:nowrap">BAJA</span>
-          <div>
-            <div class="status-name">Sesión sin actividad — cierre automático</div>
-            <div style="font-size:var(--text-2xs);color:var(--muted)">Usuario j.martinez cerrado por inactividad 30 min</div>
+        <div class="status-row">
+          <div style="display:flex;align-items:flex-start;gap:0.6rem">
+            <span class="pill pill-green" style="margin-top:1px;white-space:nowrap">BAJA</span>
+            <div>
+              <div class="status-name">Sesión sin actividad — cierre automático</div>
+              <div style="font-size:var(--text-2xs);color:var(--muted)">Usuario j.martinez cerrado por inactividad 30 min</div>
+            </div>
           </div>
         </div>
-      </div>
+      }
     </div>
   </app-section-panel>
 
   <app-section-panel num="03" title="Actividad por Módulo — Hoy">
     <div class="card-body">
-      <div class="status-row">
-        <span class="status-name">Ventas</span>
-        <div class="status-right">
-          <div class="mini-bar"><div class="mini-fill fill-green" style="width:100%"></div></div>
-          <span class="pct pct-green">342</span>
+      @if (actividadModulos.length > 0) {
+        @for (act of actividadModulos; track act.modulo) {
+          <div class="status-row">
+            <span class="status-name">{{ act.modulo }}</span>
+            <div class="status-right">
+              <div class="mini-bar"><div class="mini-fill fill-blue" [style.width.%]="act.porcentaje"></div></div>
+              <span class="pct pct-blue">{{ act.eventos }}</span>
+            </div>
+          </div>
+        }
+      } @else {
+        <div class="status-row">
+          <span class="status-name">Ventas</span>
+          <div class="status-right">
+            <div class="mini-bar"><div class="mini-fill fill-green" style="width:100%"></div></div>
+            <span class="pct pct-green">342</span>
+          </div>
         </div>
-      </div>
-      <div class="status-row">
-        <span class="status-name">Inventario</span>
-        <div class="status-right">
-          <div class="mini-bar"><div class="mini-fill fill-blue" style="width:72%"></div></div>
-          <span class="pct pct-blue">246</span>
+        <div class="status-row">
+          <span class="status-name">Inventario</span>
+          <div class="status-right">
+            <div class="mini-bar"><div class="mini-fill fill-blue" style="width:72%"></div></div>
+            <span class="pct pct-blue">246</span>
+          </div>
         </div>
-      </div>
-      <div class="status-row">
-        <span class="status-name">Compras</span>
-        <div class="status-right">
-          <div class="mini-bar"><div class="mini-fill fill-blue" style="width:55%"></div></div>
-          <span class="pct pct-blue">188</span>
+        <div class="status-row">
+          <span class="status-name">Compras</span>
+          <div class="status-right">
+            <div class="mini-bar"><div class="mini-fill fill-blue" style="width:55%"></div></div>
+            <span class="pct pct-blue">188</span>
+          </div>
         </div>
-      </div>
-      <div class="status-row">
-        <span class="status-name">Contabilidad</span>
-        <div class="status-right">
-          <div class="mini-bar"><div class="mini-fill fill-amber" style="width:38%"></div></div>
-          <span class="pct pct-amber">130</span>
+        <div class="status-row">
+          <span class="status-name">Contabilidad</span>
+          <div class="status-right">
+            <div class="mini-bar"><div class="mini-fill fill-amber" style="width:38%"></div></div>
+            <span class="pct pct-amber">130</span>
+          </div>
         </div>
-      </div>
-      <div class="status-row">
-        <span class="status-name">RRHH</span>
-        <div class="status-right">
-          <div class="mini-bar"><div class="mini-fill fill-amber" style="width:28%"></div></div>
-          <span class="pct pct-amber">96</span>
+        <div class="status-row">
+          <span class="status-name">RRHH</span>
+          <div class="status-right">
+            <div class="mini-bar"><div class="mini-fill fill-amber" style="width:28%"></div></div>
+            <span class="pct pct-amber">96</span>
+          </div>
         </div>
-      </div>
-      <div class="status-row">
-        <span class="status-name">Sistema / Auth.</span>
-        <div class="status-right">
-          <div class="mini-bar"><div class="mini-fill fill-red" style="width:24%"></div></div>
-          <span class="pct pct-red">82</span>
+        <div class="status-row">
+          <span class="status-name">Sistema / Auth.</span>
+          <div class="status-right">
+            <div class="mini-bar"><div class="mini-fill fill-red" style="width:24%"></div></div>
+            <span class="pct pct-red">82</span>
+          </div>
         </div>
-      </div>
-      <div class="status-row">
-        <span class="status-name">Otros módulos</span>
-        <div class="status-right">
-          <div class="mini-bar"><div class="mini-fill fill-green" style="width:58%"></div></div>
-          <span class="pct pct-green">200</span>
+        <div class="status-row">
+          <span class="status-name">Otros módulos</span>
+          <div class="status-right">
+            <div class="mini-bar"><div class="mini-fill fill-green" style="width:58%"></div></div>
+            <span class="pct pct-green">200</span>
+          </div>
         </div>
-      </div>
+      }
     </div>
   </app-section-panel>
 </div>

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, output } from '@angular/core';
 
 @Component({
   selector: 'app-quick-actions',
@@ -7,4 +7,6 @@ import { Component } from '@angular/core';
   templateUrl: './quick-actions.html',
   styleUrl: './quick-actions.css',
 })
-export class QuickActions {}
+export class QuickActions {
+  accion = output<string>();
+}

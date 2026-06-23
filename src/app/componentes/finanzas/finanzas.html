@@ -4,10 +4,14 @@
     <div class="page-title">Finanzas</div>
   </div>
   <div class="page-actions">
-    <button class="btn btn-primary">Nueva Transacción</button>
+    <button class="btn btn-primary" (click)="abrirModal()">Nueva Transacción</button>
     <button class="btn">Informe</button>
   </div>
 </div>
+
+@if (loading) {
+  <div class="loading-bar">Cargando datos...</div>
+}
 
 <div class="kpi-row">
   <div class="kpi-cell">
@@ -45,48 +49,60 @@
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <td class="muted-cell">18 Jun 2024</td>
-          <td>Cobro factura #F-2024-0842 — Constructora Andina</td>
-          <td><span class="pill pill-green">Ingreso</span></td>
-          <td class="mono" style="color:var(--green)">+$12,400</td>
-          <td class="mono">BCI CTA CTE</td>
-        </tr>
-        <tr>
-          <td class="muted-cell">18 Jun 2024</td>
-          <td>Pago OC-2024-0314 — Combustibles Araucania</td>
-          <td><span class="pill pill-red">Gasto</span></td>
-          <td class="mono" style="color:var(--red)">-$11,200</td>
-          <td class="mono">Santander CTE</td>
-        </tr>
-        <tr>
-          <td class="muted-cell">17 Jun 2024</td>
-          <td>Cobro anticipado — Minera Cordillera S.A.</td>
-          <td><span class="pill pill-green">Ingreso</span></td>
-          <td class="mono" style="color:var(--green)">+$28,000</td>
-          <td class="mono">BCI CTA CTE</td>
-        </tr>
-        <tr>
-          <td class="muted-cell">17 Jun 2024</td>
-          <td>Nómina quincenal junio 2024</td>
-          <td><span class="pill pill-red">Gasto</span></td>
-          <td class="mono" style="color:var(--red)">-$48,400</td>
-          <td class="mono">Santander CTE</td>
-        </tr>
-        <tr>
-          <td class="muted-cell">16 Jun 2024</td>
-          <td>Pago arriendo instalaciones mes junio</td>
-          <td><span class="pill pill-red">Gasto</span></td>
-          <td class="mono" style="color:var(--red)">-$6,800</td>
-          <td class="mono">BCI CTA CTE</td>
-        </tr>
-        <tr>
-          <td class="muted-cell">15 Jun 2024</td>
-          <td>Transferencia — Logística Sur Ltda.</td>
-          <td><span class="pill pill-green">Ingreso</span></td>
-          <td class="mono" style="color:var(--green)">+$7,600</td>
-          <td class="mono">BCI CTA CTE</td>
-        </tr>
+        @if (movimientos.length > 0) {
+          @for (mov of movimientos; track mov.id) {
+            <tr>
+              <td class="muted-cell">{{ mov.fecha }}</td>
+              <td>{{ mov.concepto }}</td>
+              <td><span class="pill">{{ mov.tipo }}</span></td>
+              <td class="mono">{{ mov.monto }}</td>
+              <td class="mono">{{ mov.cuenta }}</td>
+            </tr>
+          }
+        } @else {
+          <tr>
+            <td class="muted-cell">18 Jun 2024</td>
+            <td>Cobro factura #F-2024-0842 — Constructora Andina</td>
+            <td><span class="pill pill-green">Ingreso</span></td>
+            <td class="mono" style="color:var(--green)">+$12,400</td>
+            <td class="mono">BCI CTA CTE</td>
+          </tr>
+          <tr>
+            <td class="muted-cell">18 Jun 2024</td>
+            <td>Pago OC-2024-0314 — Combustibles Araucania</td>
+            <td><span class="pill pill-red">Gasto</span></td>
+            <td class="mono" style="color:var(--red)">-$11,200</td>
+            <td class="mono">Santander CTE</td>
+          </tr>
+          <tr>
+            <td class="muted-cell">17 Jun 2024</td>
+            <td>Cobro anticipado — Minera Cordillera S.A.</td>
+            <td><span class="pill pill-green">Ingreso</span></td>
+            <td class="mono" style="color:var(--green)">+$28,000</td>
+            <td class="mono">BCI CTA CTE</td>
+          </tr>
+          <tr>
+            <td class="muted-cell">17 Jun 2024</td>
+            <td>Nómina quincenal junio 2024</td>
+            <td><span class="pill pill-red">Gasto</span></td>
+            <td class="mono" style="color:var(--red)">-$48,400</td>
+            <td class="mono">Santander CTE</td>
+          </tr>
+          <tr>
+            <td class="muted-cell">16 Jun 2024</td>
+            <td>Pago arriendo instalaciones mes junio</td>
+            <td><span class="pill pill-red">Gasto</span></td>
+            <td class="mono" style="color:var(--red)">-$6,800</td>
+            <td class="mono">BCI CTA CTE</td>
+          </tr>
+          <tr>
+            <td class="muted-cell">15 Jun 2024</td>
+            <td>Transferencia — Logística Sur Ltda.</td>
+            <td><span class="pill pill-green">Ingreso</span></td>
+            <td class="mono" style="color:var(--green)">+$7,600</td>
+            <td class="mono">BCI CTA CTE</td>
+          </tr>
+        }
       </tbody>
     </table>
   </div>
@@ -144,28 +160,95 @@
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>BCI</td>
-            <td class="muted-cell">Cta. Corriente</td>
-            <td class="mono" style="color:var(--green)">$182,400</td>
-          </tr>
-          <tr>
-            <td>Santander</td>
-            <td class="muted-cell">Cta. Corriente</td>
-            <td class="mono" style="color:var(--green)">$64,800</td>
-          </tr>
-          <tr>
-            <td>Banco Estado</td>
-            <td class="muted-cell">Ahorro empresa</td>
-            <td class="mono" style="color:var(--green)">$240,000</td>
-          </tr>
-          <tr>
-            <td>Itaú</td>
-            <td class="muted-cell">Línea de crédito</td>
-            <td class="mono" style="color:var(--amber)">-$18,200</td>
-          </tr>
+          @if (cuentas.length > 0) {
+            @for (cuenta of cuentas; track cuenta.id) {
+              <tr>
+                <td>{{ cuenta.banco }}</td>
+                <td class="muted-cell">{{ cuenta.tipo }}</td>
+                <td class="mono">{{ cuenta.saldo }}</td>
+              </tr>
+            }
+          } @else {
+            <tr>
+              <td>BCI</td>
+              <td class="muted-cell">Cta. Corriente</td>
+              <td class="mono" style="color:var(--green)">$182,400</td>
+            </tr>
+            <tr>
+              <td>Santander</td>
+              <td class="muted-cell">Cta. Corriente</td>
+              <td class="mono" style="color:var(--green)">$64,800</td>
+            </tr>
+            <tr>
+              <td>Banco Estado</td>
+              <td class="muted-cell">Ahorro empresa</td>
+              <td class="mono" style="color:var(--green)">$240,000</td>
+            </tr>
+            <tr>
+              <td>Itaú</td>
+              <td class="muted-cell">Línea de crédito</td>
+              <td class="mono" style="color:var(--amber)">-$18,200</td>
+            </tr>
+          }
         </tbody>
       </table>
     </div>
   </app-section-panel>
 </div>
+
+@if (modalAbierto) {
+  <div class="modal-overlay" (click)="cerrarModal()">
+    <div class="modal-box" (click)="$event.stopPropagation()">
+      <div class="modal-hdr">
+        <span class="modal-title">Nueva Transacción</span>
+        <button class="modal-x" type="button" (click)="cerrarModal()">×</button>
+      </div>
+      <form [formGroup]="formMovimiento" (ngSubmit)="guardarMovimiento()">
+        <div class="modal-body">
+          <label class="fld">
+            <span>Concepto</span>
+            <input formControlName="concepto" placeholder="Descripción del movimiento" />
+          </label>
+          <div class="fld-row">
+            <label class="fld">
+              <span>Tipo</span>
+              <select formControlName="tipo">
+                <option>Ingreso</option>
+                <option>Egreso</option>
+                <option>Transferencia</option>
+              </select>
+            </label>
+            <label class="fld">
+              <span>Monto</span>
+              <input formControlName="monto" type="number" placeholder="0" />
+            </label>
+          </div>
+          <div class="fld-row">
+            <label class="fld">
+              <span>Cuenta</span>
+              <select formControlName="cuenta">
+                <option value="">— Seleccionar cuenta —</option>
+                @for (c of cuentas; track c.id) {
+                  <option [value]="c.nombre">{{ c.banco }} — {{ c.nombre }}</option>
+                }
+              </select>
+            </label>
+            <label class="fld">
+              <span>Fecha</span>
+              <input formControlName="fecha" type="date" />
+            </label>
+          </div>
+        </div>
+        @if (errorModal) {
+          <div class="modal-err">{{ errorModal }}</div>
+        }
+        <div class="modal-foot">
+          <button type="button" class="btn" (click)="cerrarModal()">Cancelar</button>
+          <button type="submit" class="btn btn-primary" [disabled]="saving || formMovimiento.invalid">
+            {{ saving ? 'Guardando…' : 'Guardar' }}
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+}

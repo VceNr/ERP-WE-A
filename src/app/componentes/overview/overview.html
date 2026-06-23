@@ -4,49 +4,66 @@
 <app-overview-header></app-overview-header>
 
 <!-- 2. QUICK ACTIONS -->
-<app-quick-actions></app-quick-actions>
+<app-quick-actions (accion)="abrirModal($event)"></app-quick-actions>
+
+@if (loading) {
+  <div class="loading-bar">Cargando datos...</div>
+}
 
 <!-- 3. KPI STRIP -->
 <div class="kpi-strip">
-  <app-kpi-card
-    label="Ventas del Mes"
-    value="$284,500"
-    delta="12.4%"
-    deltaDir="up"
-    compare="vs mes anterior"
-    color="blue"
-    sparkPath="M0,22 C15,20 25,15 40,12 C55,9 65,7 80,5 C88,4 95,3 100,2"
-  ></app-kpi-card>
+  @if (kpis.length > 0) {
+    @for (kpi of kpis; track kpi.label) {
+      <app-kpi-card
+        [label]="kpi.label"
+        [value]="kpi.value"
+        [delta]="kpi.delta"
+        [deltaDir]="kpi.deltaDir"
+        [color]="$any(kpi.color)"
+        [sparkPath]="kpi.sparkPath || ''"
+      ></app-kpi-card>
+    }
+  } @else {
+    <app-kpi-card
+      label="Ventas del Mes"
+      value="$284,500"
+      delta="12.4%"
+      deltaDir="up"
+      compare="vs mes anterior"
+      color="blue"
+      sparkPath="M0,22 C15,20 25,15 40,12 C55,9 65,7 80,5 C88,4 95,3 100,2"
+    ></app-kpi-card>
 
-  <app-kpi-card
-    label="Órdenes Activas"
-    value="1,284"
-    delta="8.1%"
-    deltaDir="up"
-    compare="vs semana pasada"
-    color="green"
-    sparkPath="M0,20 C10,18 25,14 38,16 C50,18 60,10 75,8 C85,6 93,5 100,4"
-  ></app-kpi-card>
+    <app-kpi-card
+      label="Órdenes Activas"
+      value="1,284"
+      delta="8.1%"
+      deltaDir="up"
+      compare="vs semana pasada"
+      color="green"
+      sparkPath="M0,20 C10,18 25,14 38,16 C50,18 60,10 75,8 C85,6 93,5 100,4"
+    ></app-kpi-card>
 
-  <app-kpi-card
-    label="Stock Crítico"
-    value="23"
-    delta="+3 Items"
-    deltaDir="down"
-    compare="requieren reposición"
-    color="amber"
-    sparkPath="M0,10 C15,8 25,12 40,16 C50,18 60,14 75,18 C85,20 93,18 100,20"
-  ></app-kpi-card>
+    <app-kpi-card
+      label="Stock Crítico"
+      value="23"
+      delta="+3 Items"
+      deltaDir="down"
+      compare="requieren reposición"
+      color="amber"
+      sparkPath="M0,10 C15,8 25,12 40,16 C50,18 60,14 75,18 C85,20 93,18 100,20"
+    ></app-kpi-card>
 
-  <app-kpi-card
-    label="Clientes Activos"
-    value="4,820"
-    delta="2.3%"
-    deltaDir="up"
-    compare="este trimestre"
-    color="teal"
-    sparkPath="M0,20 C10,18 25,14 38,16 C50,18 60,10 75,8 C85,6 93,5 100,4"
-  ></app-kpi-card>
+    <app-kpi-card
+      label="Clientes Activos"
+      value="4,820"
+      delta="2.3%"
+      deltaDir="up"
+      compare="este trimestre"
+      color="teal"
+      sparkPath="M0,20 C10,18 25,14 38,16 C50,18 60,10 75,8 C85,6 93,5 100,4"
+    ></app-kpi-card>
+  }
 </div>
 
 <!-- 4. GASTOS CARD -->
@@ -81,41 +98,53 @@
       </tr>
     </thead>
     <tbody>
-      <tr>
-        <td class="mono">#ORD-8821</td>
-        <td>Distribuidora Norte SA</td>
-        <td class="mono">$14,200</td>
-        <td><span class="pill pill-green">Completada</span></td>
-        <td class="muted-cell">14 Jun</td>
-      </tr>
-      <tr>
-        <td class="mono">#ORD-8820</td>
-        <td>Tech Solutions Corp</td>
-        <td class="mono">$8,750</td>
-        <td><span class="pill pill-blue">En proceso</span></td>
-        <td class="muted-cell">14 Jun</td>
-      </tr>
-      <tr>
-        <td class="mono">#ORD-8819</td>
-        <td>Comercial Pérez Hnos</td>
-        <td class="mono">$3,100</td>
-        <td><span class="pill pill-amber">Pendiente</span></td>
-        <td class="muted-cell">13 Jun</td>
-      </tr>
-      <tr>
-        <td class="mono">#ORD-8818</td>
-        <td>Importaciones Global</td>
-        <td class="mono">$22,400</td>
-        <td><span class="pill pill-green">Completada</span></td>
-        <td class="muted-cell">13 Jun</td>
-      </tr>
-      <tr>
-        <td class="mono">#ORD-8817</td>
-        <td>Logística Express SA</td>
-        <td class="mono">$6,900</td>
-        <td><span class="pill pill-red">Cancelada</span></td>
-        <td class="muted-cell">12 Jun</td>
-      </tr>
+      @if (recentOrders.length > 0) {
+        @for (order of recentOrders; track order.id) {
+          <tr>
+            <td class="mono">{{ order.id }}</td>
+            <td>{{ order.cliente }}</td>
+            <td class="mono">{{ order.monto }}</td>
+            <td><span class="pill">{{ order.estado }}</span></td>
+            <td class="muted-cell">{{ order.fecha }}</td>
+          </tr>
+        }
+      } @else {
+        <tr>
+          <td class="mono">#ORD-8821</td>
+          <td>Distribuidora Norte SA</td>
+          <td class="mono">$14,200</td>
+          <td><span class="pill pill-green">Completada</span></td>
+          <td class="muted-cell">14 Jun</td>
+        </tr>
+        <tr>
+          <td class="mono">#ORD-8820</td>
+          <td>Tech Solutions Corp</td>
+          <td class="mono">$8,750</td>
+          <td><span class="pill pill-blue">En proceso</span></td>
+          <td class="muted-cell">14 Jun</td>
+        </tr>
+        <tr>
+          <td class="mono">#ORD-8819</td>
+          <td>Comercial Pérez Hnos</td>
+          <td class="mono">$3,100</td>
+          <td><span class="pill pill-amber">Pendiente</span></td>
+          <td class="muted-cell">13 Jun</td>
+        </tr>
+        <tr>
+          <td class="mono">#ORD-8818</td>
+          <td>Importaciones Global</td>
+          <td class="mono">$22,400</td>
+          <td><span class="pill pill-green">Completada</span></td>
+          <td class="muted-cell">13 Jun</td>
+        </tr>
+        <tr>
+          <td class="mono">#ORD-8817</td>
+          <td>Logística Express SA</td>
+          <td class="mono">$6,900</td>
+          <td><span class="pill pill-red">Cancelada</span></td>
+          <td class="muted-cell">12 Jun</td>
+        </tr>
+      }
     </tbody>
   </table>
 </app-section-panel>
@@ -145,43 +174,55 @@
   </div>
 </app-section-panel>
 
-<app-section-panel num="03" title="ALERTAS" [badge]="5">
+<app-section-panel num="03" title="ALERTAS" [badge]="alerts.length > 0 ? alerts.length : 5">
   <ul class="alert-list">
-    <li class="alert-item alert-warn">
-      <span class="alert-dot"></span>
-      <div class="alert-body">
-        <span class="alert-msg">3 productos bajo stock mínimo</span>
-        <span class="alert-time">Hace 10 min</span>
-      </div>
-    </li>
-    <li class="alert-item alert-info">
-      <span class="alert-dot"></span>
-      <div class="alert-body">
-        <span class="alert-msg">Factura #4490 vence mañana</span>
-        <span class="alert-time">Hace 45 min</span>
-      </div>
-    </li>
-    <li class="alert-item alert-danger">
-      <span class="alert-dot"></span>
-      <div class="alert-body">
-        <span class="alert-msg">Pago vencido — Cliente Distribuidora Norte</span>
-        <span class="alert-time">Hace 2 h</span>
-      </div>
-    </li>
-    <li class="alert-item alert-success">
-      <span class="alert-dot"></span>
-      <div class="alert-body">
-        <span class="alert-msg">Backup diario completado</span>
-        <span class="alert-time">Hace 3 h</span>
-      </div>
-    </li>
-    <li class="alert-item alert-info">
-      <span class="alert-dot"></span>
-      <div class="alert-body">
-        <span class="alert-msg">Nuevo usuario registrado: jlopez</span>
-        <span class="alert-time">Ayer</span>
-      </div>
-    </li>
+    @if (alerts.length > 0) {
+      @for (alert of alerts; track alert.id) {
+        <li class="alert-item alert-info">
+          <span class="alert-dot"></span>
+          <div class="alert-body">
+            <span class="alert-msg">{{ alert.mensaje }}</span>
+            <span class="alert-time">{{ alert.fecha }}</span>
+          </div>
+        </li>
+      }
+    } @else {
+      <li class="alert-item alert-warn">
+        <span class="alert-dot"></span>
+        <div class="alert-body">
+          <span class="alert-msg">3 productos bajo stock mínimo</span>
+          <span class="alert-time">Hace 10 min</span>
+        </div>
+      </li>
+      <li class="alert-item alert-info">
+        <span class="alert-dot"></span>
+        <div class="alert-body">
+          <span class="alert-msg">Factura #4490 vence mañana</span>
+          <span class="alert-time">Hace 45 min</span>
+        </div>
+      </li>
+      <li class="alert-item alert-danger">
+        <span class="alert-dot"></span>
+        <div class="alert-body">
+          <span class="alert-msg">Pago vencido — Cliente Distribuidora Norte</span>
+          <span class="alert-time">Hace 2 h</span>
+        </div>
+      </li>
+      <li class="alert-item alert-success">
+        <span class="alert-dot"></span>
+        <div class="alert-body">
+          <span class="alert-msg">Backup diario completado</span>
+          <span class="alert-time">Hace 3 h</span>
+        </div>
+      </li>
+      <li class="alert-item alert-info">
+        <span class="alert-dot"></span>
+        <div class="alert-body">
+          <span class="alert-msg">Nuevo usuario registrado: jlopez</span>
+          <span class="alert-time">Ayer</span>
+        </div>
+      </li>
+    }
   </ul>
 </app-section-panel>
 
@@ -283,3 +324,301 @@
   </div>
   <span class="ov-footer-uptime">UPTIME <strong>99.98%</strong></span>
 </div>
+
+@if (modalActivo === 'nueva-venta') {
+  <div class="modal-overlay" (click)="cerrarModal()">
+    <div class="modal-box" (click)="$event.stopPropagation()">
+      <div class="modal-hdr">
+        <span class="modal-title">Nueva Venta</span>
+        <button class="modal-x" type="button" (click)="cerrarModal()">×</button>
+      </div>
+      <form [formGroup]="formVenta" (ngSubmit)="guardarVenta()">
+        <div class="modal-body">
+          <label class="fld">
+            <span>Cliente</span>
+            @if (clientesLista.length > 0) {
+              <select formControlName="cliente">
+                <option value="">— Seleccionar cliente —</option>
+                @for (c of clientesLista; track c.id) {
+                  <option [value]="c.nombre">{{ c.nombre }}</option>
+                }
+              </select>
+            } @else {
+              <input formControlName="cliente" placeholder="Nombre del cliente" />
+            }
+          </label>
+          <label class="fld">
+            <span>Monto</span>
+            <input formControlName="monto" type="number" placeholder="0" />
+          </label>
+          <div class="fld-row">
+            <label class="fld">
+              <span>Vendedor</span>
+              @if (vendedoresLista.length > 0) {
+                <select formControlName="vendedor">
+                  <option value="">— Seleccionar vendedor —</option>
+                  @for (v of vendedoresLista; track v.id) {
+                    <option [value]="v.nombre">{{ v.nombre }}</option>
+                  }
+                </select>
+              } @else {
+                <input formControlName="vendedor" placeholder="Nombre del vendedor" />
+              }
+            </label>
+            <label class="fld">
+              <span>Fecha</span>
+              <input formControlName="fecha" type="date" />
+            </label>
+          </div>
+          <label class="fld">
+            <span>Estado</span>
+            <select formControlName="estado">
+              <option>Pendiente</option>
+              <option>En preparación</option>
+              <option>Completada</option>
+            </select>
+          </label>
+        </div>
+        @if (errorModal) {
+          <div class="modal-err">{{ errorModal }}</div>
+        }
+        <div class="modal-foot">
+          <button type="button" class="btn" (click)="cerrarModal()">Cancelar</button>
+          <button type="submit" class="btn btn-primary" [disabled]="saving || formVenta.invalid">
+            {{ saving ? 'Guardando…' : 'Guardar' }}
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+}
+
+@if (modalActivo === 'nueva-orden') {
+  <div class="modal-overlay" (click)="cerrarModal()">
+    <div class="modal-box" (click)="$event.stopPropagation()">
+      <div class="modal-hdr">
+        <span class="modal-title">Nueva Orden de Compra</span>
+        <button class="modal-x" type="button" (click)="cerrarModal()">×</button>
+      </div>
+      <form [formGroup]="formOrdenCompra" (ngSubmit)="guardarOrdenCompra()">
+        <div class="modal-body">
+          <label class="fld">
+            <span>Proveedor</span>
+            @if (proveedoresLista.length > 0) {
+              <select formControlName="proveedor">
+                <option value="">— Seleccionar proveedor —</option>
+                @for (p of proveedoresLista; track p.id) {
+                  <option [value]="p.nombre">{{ p.nombre }}</option>
+                }
+              </select>
+            } @else {
+              <input formControlName="proveedor" placeholder="Nombre del proveedor" />
+            }
+          </label>
+          <label class="fld">
+            <span>Descripción</span>
+            <input formControlName="descripcion" placeholder="Descripción de la orden" />
+          </label>
+          <div class="fld-row">
+            <label class="fld">
+              <span>Monto</span>
+              <input formControlName="monto" type="number" placeholder="0" />
+            </label>
+            <label class="fld">
+              <span>Fecha Entrega</span>
+              <input formControlName="fecha_entrega" type="date" />
+            </label>
+          </div>
+          <label class="fld">
+            <span>Estado</span>
+            <select formControlName="estado">
+              <option>Pendiente</option>
+              <option>Aprobada</option>
+              <option>Recibida</option>
+            </select>
+          </label>
+        </div>
+        @if (errorModal) {
+          <div class="modal-err">{{ errorModal }}</div>
+        }
+        <div class="modal-foot">
+          <button type="button" class="btn" (click)="cerrarModal()">Cancelar</button>
+          <button type="submit" class="btn btn-primary" [disabled]="saving || formOrdenCompra.invalid">
+            {{ saving ? 'Guardando…' : 'Guardar' }}
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+}
+
+@if (modalActivo === 'ajuste-stock') {
+  <div class="modal-overlay" (click)="cerrarModal()">
+    <div class="modal-box" (click)="$event.stopPropagation()">
+      <div class="modal-hdr">
+        <span class="modal-title">Ajuste de Stock</span>
+        <button class="modal-x" type="button" (click)="cerrarModal()">×</button>
+      </div>
+      <form [formGroup]="formAjusteStock" (ngSubmit)="guardarAjusteStock()">
+        <div class="modal-body">
+          <label class="fld">
+            <span>Producto</span>
+            <select formControlName="sku" (change)="seleccionarProductoOverview($event)">
+              <option value="">— Seleccionar producto —</option>
+              @for (p of productosLista; track p.sku) {
+                <option [value]="p.sku">{{ p.sku }} — {{ p.nombre }}</option>
+              }
+            </select>
+          </label>
+          <div class="fld-row">
+            <label class="fld">
+              <span>Tipo</span>
+              <select formControlName="tipo">
+                <option>Entrada</option>
+                <option>Salida</option>
+                <option>Ajuste</option>
+              </select>
+            </label>
+          </div>
+          <label class="fld">
+            <span>Cantidad</span>
+            <input formControlName="cantidad" type="number" placeholder="0" />
+          </label>
+          <label class="fld">
+            <span>Nota</span>
+            <textarea formControlName="nota" placeholder="Observaciones opcionales"></textarea>
+          </label>
+        </div>
+        @if (errorModal) {
+          <div class="modal-err">{{ errorModal }}</div>
+        }
+        <div class="modal-foot">
+          <button type="button" class="btn" (click)="cerrarModal()">Cancelar</button>
+          <button type="submit" class="btn btn-primary" [disabled]="saving || formAjusteStock.invalid">
+            {{ saving ? 'Guardando…' : 'Guardar' }}
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+}
+
+@if (modalActivo === 'nuevo-cliente') {
+  <div class="modal-overlay" (click)="cerrarModal()">
+    <div class="modal-box" (click)="$event.stopPropagation()">
+      <div class="modal-hdr">
+        <span class="modal-title">Nuevo Cliente</span>
+        <button class="modal-x" type="button" (click)="cerrarModal()">×</button>
+      </div>
+      <form [formGroup]="formCliente" (ngSubmit)="guardarCliente()">
+        <div class="modal-body">
+          <label class="fld">
+            <span>Nombre</span>
+            <input formControlName="nombre" placeholder="Razón social o nombre" />
+          </label>
+          <div class="fld-row">
+            <label class="fld">
+              <span>RUT</span>
+              <input formControlName="rut" placeholder="Ej: 76.482.100-K" />
+            </label>
+            <label class="fld">
+              <span>Segmento</span>
+              <select formControlName="segmento">
+                <option>Premium</option>
+                <option>Estándar</option>
+                <option>Básico</option>
+              </select>
+            </label>
+          </div>
+          <label class="fld">
+            <span>Email</span>
+            <input formControlName="email" type="email" placeholder="correo@empresa.cl" />
+          </label>
+          <div class="fld-row">
+            <label class="fld">
+              <span>Teléfono</span>
+              <input formControlName="telefono" placeholder="+56 9 xxxx xxxx" />
+            </label>
+            <label class="fld">
+              <span>Dirección</span>
+              <input formControlName="direccion" placeholder="Dirección" />
+            </label>
+          </div>
+        </div>
+        @if (errorModal) {
+          <div class="modal-err">{{ errorModal }}</div>
+        }
+        <div class="modal-foot">
+          <button type="button" class="btn" (click)="cerrarModal()">Cancelar</button>
+          <button type="submit" class="btn btn-primary" [disabled]="saving || formCliente.invalid">
+            {{ saving ? 'Guardando…' : 'Guardar' }}
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+}
+
+@if (modalActivo === 'nueva-factura') {
+  <div class="modal-overlay" (click)="cerrarModal()">
+    <div class="modal-box" (click)="$event.stopPropagation()">
+      <div class="modal-hdr">
+        <span class="modal-title">Nueva Factura / Asiento</span>
+        <button class="modal-x" type="button" (click)="cerrarModal()">×</button>
+      </div>
+      <form [formGroup]="formFactura" (ngSubmit)="guardarFactura()">
+        <div class="modal-body">
+          <div class="fld-row">
+            <label class="fld">
+              <span>Nº Factura</span>
+              <input formControlName="numero" placeholder="Ej: F-2026-0128" />
+            </label>
+            <label class="fld">
+              <span>Fecha</span>
+              <input formControlName="fecha" type="date" />
+            </label>
+          </div>
+          <label class="fld">
+            <span>Cuenta</span>
+            <select formControlName="cuenta">
+              <option value="">— Seleccionar cuenta —</option>
+              <option>Caja</option>
+              <option>Banco</option>
+              <option>Cuentas por cobrar</option>
+              <option>Inventario</option>
+              <option>Activo fijo</option>
+              <option>Cuentas por pagar</option>
+              <option>Capital</option>
+              <option>Ingresos por ventas</option>
+              <option>Costo de ventas</option>
+              <option>Gastos operacionales</option>
+            </select>
+          </label>
+          <label class="fld">
+            <span>Descripción</span>
+            <textarea formControlName="descripcion" placeholder="Descripción del asiento"></textarea>
+          </label>
+          <div class="fld-row">
+            <label class="fld">
+              <span>Debe</span>
+              <input formControlName="debe" type="number" placeholder="0" />
+            </label>
+            <label class="fld">
+              <span>Haber</span>
+              <input formControlName="haber" type="number" placeholder="0" />
+            </label>
+          </div>
+        </div>
+        @if (errorModal) {
+          <div class="modal-err">{{ errorModal }}</div>
+        }
+        <div class="modal-foot">
+          <button type="button" class="btn" (click)="cerrarModal()">Cancelar</button>
+          <button type="submit" class="btn btn-primary" [disabled]="saving || formFactura.invalid">
+            {{ saving ? 'Guardando…' : 'Guardar' }}
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+}

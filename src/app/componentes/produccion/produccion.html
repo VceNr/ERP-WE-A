@@ -4,10 +4,14 @@
     <div class="page-title">Producción</div>
   </div>
   <div class="page-actions">
-    <button class="btn btn-primary">+ Nueva Orden</button>
+    <button class="btn btn-primary" (click)="abrirModal()">+ Nueva Orden</button>
     <button class="btn">Programar</button>
   </div>
 </div>
+
+@if (loading) {
+  <div class="loading-bar">Cargando datos...</div>
+}
 
 <div class="kpi-row">
   <div class="kpi-cell">
@@ -41,101 +45,113 @@
           <th>Producto</th>
           <th>Cantidad</th>
           <th>Progreso</th>
-          <th>Línea</th>
           <th>Estado</th>
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <td class="mono">OP-2024-0184</td>
-          <td>Perfil aluminio extruido 6063-T5</td>
-          <td class="mono">2,500 u.</td>
-          <td>
-            <div style="display:flex;align-items:center;gap:0.5rem">
-              <div style="width:80px;height:4px;background:var(--border);border-radius:999px;overflow:hidden">
-                <div style="width:78%;height:100%;background:var(--green);border-radius:999px"></div>
+        @if (ordenes.length > 0) {
+          @for (orden of ordenes; track orden.id) {
+            <tr>
+              <td class="mono">{{ orden.id }}</td>
+              <td>{{ orden.producto }}</td>
+              <td class="mono">{{ orden.cantidad }}</td>
+              <td>
+                <div style="display:flex;align-items:center;gap:0.5rem">
+                  <div style="width:80px;height:4px;background:var(--border);border-radius:999px;overflow:hidden">
+                    <div [style.width.%]="$any(orden).eficiencia || 0" style="height:100%;background:var(--blue);border-radius:999px"></div>
+                  </div>
+                  <span class="mono" style="font-size:var(--text-2xs);color:var(--blue)">{{ $any(orden).eficiencia || 0 }}%</span>
+                </div>
+              </td>
+              <td><span class="pill">{{ orden.estado }}</span></td>
+            </tr>
+          }
+        } @else {
+          <tr>
+            <td class="mono">OP-2024-0184</td>
+            <td>Perfil aluminio extruido 6063-T5</td>
+            <td class="mono">2,500 u.</td>
+            <td>
+              <div style="display:flex;align-items:center;gap:0.5rem">
+                <div style="width:80px;height:4px;background:var(--border);border-radius:999px;overflow:hidden">
+                  <div style="width:78%;height:100%;background:var(--green);border-radius:999px"></div>
+                </div>
+                <span class="mono" style="font-size:var(--text-2xs);color:var(--green)">78%</span>
               </div>
-              <span class="mono" style="font-size:var(--text-2xs);color:var(--green)">78%</span>
-            </div>
-          </td>
-          <td><span class="pill pill-blue">Línea A</span></td>
-          <td><span class="pill pill-green">En proceso</span></td>
-        </tr>
-        <tr>
-          <td class="mono">OP-2024-0183</td>
-          <td>Carcasa metálica estampada 2mm</td>
-          <td class="mono">800 u.</td>
-          <td>
-            <div style="display:flex;align-items:center;gap:0.5rem">
-              <div style="width:80px;height:4px;background:var(--border);border-radius:999px;overflow:hidden">
-                <div style="width:45%;height:100%;background:var(--blue);border-radius:999px"></div>
+            </td>
+            <td><span class="pill pill-green">En proceso</span></td>
+          </tr>
+          <tr>
+            <td class="mono">OP-2024-0183</td>
+            <td>Carcasa metálica estampada 2mm</td>
+            <td class="mono">800 u.</td>
+            <td>
+              <div style="display:flex;align-items:center;gap:0.5rem">
+                <div style="width:80px;height:4px;background:var(--border);border-radius:999px;overflow:hidden">
+                  <div style="width:45%;height:100%;background:var(--blue);border-radius:999px"></div>
+                </div>
+                <span class="mono" style="font-size:var(--text-2xs);color:var(--blue)">45%</span>
               </div>
-              <span class="mono" style="font-size:var(--text-2xs);color:var(--blue)">45%</span>
-            </div>
-          </td>
-          <td><span class="pill pill-amber">Línea C</span></td>
-          <td><span class="pill pill-green">En proceso</span></td>
-        </tr>
-        <tr>
-          <td class="mono">OP-2024-0182</td>
-          <td>Tubo rectangular 40x20mm galvanizado</td>
-          <td class="mono">5,000 u.</td>
-          <td>
-            <div style="display:flex;align-items:center;gap:0.5rem">
-              <div style="width:80px;height:4px;background:var(--border);border-radius:999px;overflow:hidden">
-                <div style="width:100%;height:100%;background:var(--green);border-radius:999px"></div>
+            </td>
+            <td><span class="pill pill-green">En proceso</span></td>
+          </tr>
+          <tr>
+            <td class="mono">OP-2024-0182</td>
+            <td>Tubo rectangular 40x20mm galvanizado</td>
+            <td class="mono">5,000 u.</td>
+            <td>
+              <div style="display:flex;align-items:center;gap:0.5rem">
+                <div style="width:80px;height:4px;background:var(--border);border-radius:999px;overflow:hidden">
+                  <div style="width:100%;height:100%;background:var(--green);border-radius:999px"></div>
+                </div>
+                <span class="mono" style="font-size:var(--text-2xs);color:var(--green)">100%</span>
               </div>
-              <span class="mono" style="font-size:var(--text-2xs);color:var(--green)">100%</span>
-            </div>
-          </td>
-          <td><span class="pill pill-blue">Línea A</span></td>
-          <td><span class="pill pill-teal">Completada</span></td>
-        </tr>
-        <tr>
-          <td class="mono">OP-2024-0181</td>
-          <td>Panel sandwich lana de roca 80mm</td>
-          <td class="mono">320 u.</td>
-          <td>
-            <div style="display:flex;align-items:center;gap:0.5rem">
-              <div style="width:80px;height:4px;background:var(--border);border-radius:999px;overflow:hidden">
-                <div style="width:0%;height:100%;background:var(--muted);border-radius:999px"></div>
+            </td>
+            <td><span class="pill pill-teal">Completada</span></td>
+          </tr>
+          <tr>
+            <td class="mono">OP-2024-0181</td>
+            <td>Panel sandwich lana de roca 80mm</td>
+            <td class="mono">320 u.</td>
+            <td>
+              <div style="display:flex;align-items:center;gap:0.5rem">
+                <div style="width:80px;height:4px;background:var(--border);border-radius:999px;overflow:hidden">
+                  <div style="width:0%;height:100%;background:var(--muted);border-radius:999px"></div>
+                </div>
+                <span class="mono" style="font-size:var(--text-2xs);color:var(--muted)">0%</span>
               </div>
-              <span class="mono" style="font-size:var(--text-2xs);color:var(--muted)">0%</span>
-            </div>
-          </td>
-          <td><span class="pill pill-red">Línea B</span></td>
-          <td><span class="pill pill-amber">Programada</span></td>
-        </tr>
-        <tr>
-          <td class="mono">OP-2024-0180</td>
-          <td>Revestimiento PVC para piso industrial</td>
-          <td class="mono">1,200 m²</td>
-          <td>
-            <div style="display:flex;align-items:center;gap:0.5rem">
-              <div style="width:80px;height:4px;background:var(--border);border-radius:999px;overflow:hidden">
-                <div style="width:62%;height:100%;background:var(--blue);border-radius:999px"></div>
+            </td>
+            <td><span class="pill pill-amber">Programada</span></td>
+          </tr>
+          <tr>
+            <td class="mono">OP-2024-0180</td>
+            <td>Revestimiento PVC para piso industrial</td>
+            <td class="mono">1,200 m²</td>
+            <td>
+              <div style="display:flex;align-items:center;gap:0.5rem">
+                <div style="width:80px;height:4px;background:var(--border);border-radius:999px;overflow:hidden">
+                  <div style="width:62%;height:100%;background:var(--blue);border-radius:999px"></div>
+                </div>
+                <span class="mono" style="font-size:var(--text-2xs);color:var(--blue)">62%</span>
               </div>
-              <span class="mono" style="font-size:var(--text-2xs);color:var(--blue)">62%</span>
-            </div>
-          </td>
-          <td><span class="pill pill-teal">Línea D</span></td>
-          <td><span class="pill pill-green">En proceso</span></td>
-        </tr>
-        <tr>
-          <td class="mono">OP-2024-0179</td>
-          <td>Gabinete eléctrico IP66 acero inox.</td>
-          <td class="mono">150 u.</td>
-          <td>
-            <div style="display:flex;align-items:center;gap:0.5rem">
-              <div style="width:80px;height:4px;background:var(--border);border-radius:999px;overflow:hidden">
-                <div style="width:91%;height:100%;background:var(--green);border-radius:999px"></div>
+            </td>
+            <td><span class="pill pill-green">En proceso</span></td>
+          </tr>
+          <tr>
+            <td class="mono">OP-2024-0179</td>
+            <td>Gabinete eléctrico IP66 acero inox.</td>
+            <td class="mono">150 u.</td>
+            <td>
+              <div style="display:flex;align-items:center;gap:0.5rem">
+                <div style="width:80px;height:4px;background:var(--border);border-radius:999px;overflow:hidden">
+                  <div style="width:91%;height:100%;background:var(--green);border-radius:999px"></div>
+                </div>
+                <span class="mono" style="font-size:var(--text-2xs);color:var(--green)">91%</span>
               </div>
-              <span class="mono" style="font-size:var(--text-2xs);color:var(--green)">91%</span>
-            </div>
-          </td>
-          <td><span class="pill pill-amber">Línea C</span></td>
-          <td><span class="pill pill-green">En proceso</span></td>
-        </tr>
+            </td>
+            <td><span class="pill pill-green">En proceso</span></td>
+          </tr>
+        }
       </tbody>
     </table>
   </div>
@@ -143,39 +159,107 @@
 
 <app-section-panel num="02" title="Estado de Líneas de Producción">
   <div class="card-body">
-    <div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:1rem">
-      <div style="text-align:center;padding:0.75rem;border:1px solid var(--border);border-radius:4px;background:var(--bg)">
-        <div style="font-family:var(--font-mono);font-size:var(--text-2xs);color:var(--muted);letter-spacing:var(--tracking-label);text-transform:uppercase;margin-bottom:0.4rem">Línea A</div>
-        <div style="font-size:1.2rem;font-weight:700;color:var(--green);margin-bottom:0.3rem">94%</div>
-        <div style="height:4px;background:var(--border);border-radius:999px;overflow:hidden;margin-bottom:0.4rem">
-          <div style="width:94%;height:100%;background:var(--green);border-radius:999px"></div>
-        </div>
-        <span class="pill pill-green">Operativa</span>
+    @if (lineas.length > 0) {
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:1rem">
+        @for (linea of lineas; track linea.id) {
+          <div style="text-align:center;padding:0.75rem;border:1px solid var(--border);border-radius:4px;background:var(--bg)">
+            <div style="font-family:var(--font-mono);font-size:var(--text-2xs);color:var(--muted);letter-spacing:var(--tracking-label);text-transform:uppercase;margin-bottom:0.4rem">{{ linea.nombre }}</div>
+            <div style="font-size:1.2rem;font-weight:700;color:var(--green);margin-bottom:0.3rem">{{ linea.eficiencia }}%</div>
+            <div style="height:4px;background:var(--border);border-radius:999px;overflow:hidden;margin-bottom:0.4rem">
+              <div [style.width.%]="linea.eficiencia" style="height:100%;background:var(--green);border-radius:999px"></div>
+            </div>
+            <span class="pill pill-green">{{ linea.estado }}</span>
+          </div>
+        }
       </div>
-      <div style="text-align:center;padding:0.75rem;border:1px solid var(--border);border-radius:4px;background:var(--bg)">
-        <div style="font-family:var(--font-mono);font-size:var(--text-2xs);color:var(--muted);letter-spacing:var(--tracking-label);text-transform:uppercase;margin-bottom:0.4rem">Línea B</div>
-        <div style="font-size:1.2rem;font-weight:700;color:var(--red);margin-bottom:0.3rem">0%</div>
-        <div style="height:4px;background:var(--border);border-radius:999px;overflow:hidden;margin-bottom:0.4rem">
-          <div style="width:0%;height:100%;background:var(--red);border-radius:999px"></div>
+    } @else {
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:1rem">
+        <div style="text-align:center;padding:0.75rem;border:1px solid var(--border);border-radius:4px;background:var(--bg)">
+          <div style="font-family:var(--font-mono);font-size:var(--text-2xs);color:var(--muted);letter-spacing:var(--tracking-label);text-transform:uppercase;margin-bottom:0.4rem">Línea A</div>
+          <div style="font-size:1.2rem;font-weight:700;color:var(--green);margin-bottom:0.3rem">94%</div>
+          <div style="height:4px;background:var(--border);border-radius:999px;overflow:hidden;margin-bottom:0.4rem">
+            <div style="width:94%;height:100%;background:var(--green);border-radius:999px"></div>
+          </div>
+          <span class="pill pill-green">Operativa</span>
         </div>
-        <span class="pill pill-red">Mantenimiento</span>
-      </div>
-      <div style="text-align:center;padding:0.75rem;border:1px solid var(--border);border-radius:4px;background:var(--bg)">
-        <div style="font-family:var(--font-mono);font-size:var(--text-2xs);color:var(--muted);letter-spacing:var(--tracking-label);text-transform:uppercase;margin-bottom:0.4rem">Línea C</div>
-        <div style="font-size:1.2rem;font-weight:700;color:var(--amber);margin-bottom:0.3rem">81%</div>
-        <div style="height:4px;background:var(--border);border-radius:999px;overflow:hidden;margin-bottom:0.4rem">
-          <div style="width:81%;height:100%;background:var(--amber);border-radius:999px"></div>
+        <div style="text-align:center;padding:0.75rem;border:1px solid var(--border);border-radius:4px;background:var(--bg)">
+          <div style="font-family:var(--font-mono);font-size:var(--text-2xs);color:var(--muted);letter-spacing:var(--tracking-label);text-transform:uppercase;margin-bottom:0.4rem">Línea B</div>
+          <div style="font-size:1.2rem;font-weight:700;color:var(--red);margin-bottom:0.3rem">0%</div>
+          <div style="height:4px;background:var(--border);border-radius:999px;overflow:hidden;margin-bottom:0.4rem">
+            <div style="width:0%;height:100%;background:var(--red);border-radius:999px"></div>
+          </div>
+          <span class="pill pill-red">Mantenimiento</span>
         </div>
-        <span class="pill pill-amber">Parcial</span>
-      </div>
-      <div style="text-align:center;padding:0.75rem;border:1px solid var(--border);border-radius:4px;background:var(--bg)">
-        <div style="font-family:var(--font-mono);font-size:var(--text-2xs);color:var(--muted);letter-spacing:var(--tracking-label);text-transform:uppercase;margin-bottom:0.4rem">Línea D</div>
-        <div style="font-size:1.2rem;font-weight:700;color:var(--green);margin-bottom:0.3rem">88%</div>
-        <div style="height:4px;background:var(--border);border-radius:999px;overflow:hidden;margin-bottom:0.4rem">
-          <div style="width:88%;height:100%;background:var(--green);border-radius:999px"></div>
+        <div style="text-align:center;padding:0.75rem;border:1px solid var(--border);border-radius:4px;background:var(--bg)">
+          <div style="font-family:var(--font-mono);font-size:var(--text-2xs);color:var(--muted);letter-spacing:var(--tracking-label);text-transform:uppercase;margin-bottom:0.4rem">Línea C</div>
+          <div style="font-size:1.2rem;font-weight:700;color:var(--amber);margin-bottom:0.3rem">81%</div>
+          <div style="height:4px;background:var(--border);border-radius:999px;overflow:hidden;margin-bottom:0.4rem">
+            <div style="width:81%;height:100%;background:var(--amber);border-radius:999px"></div>
+          </div>
+          <span class="pill pill-amber">Parcial</span>
         </div>
-        <span class="pill pill-green">Operativa</span>
+        <div style="text-align:center;padding:0.75rem;border:1px solid var(--border);border-radius:4px;background:var(--bg)">
+          <div style="font-family:var(--font-mono);font-size:var(--text-2xs);color:var(--muted);letter-spacing:var(--tracking-label);text-transform:uppercase;margin-bottom:0.4rem">Línea D</div>
+          <div style="font-size:1.2rem;font-weight:700;color:var(--green);margin-bottom:0.3rem">88%</div>
+          <div style="height:4px;background:var(--border);border-radius:999px;overflow:hidden;margin-bottom:0.4rem">
+            <div style="width:88%;height:100%;background:var(--green);border-radius:999px"></div>
+          </div>
+          <span class="pill pill-green">Operativa</span>
+        </div>
       </div>
-    </div>
+    }
   </div>
 </app-section-panel>
+
+@if (modalAbierto) {
+  <div class="modal-overlay" (click)="cerrarModal()">
+    <div class="modal-box" (click)="$event.stopPropagation()">
+      <div class="modal-hdr">
+        <span class="modal-title">Nueva Orden de Producción</span>
+        <button class="modal-x" type="button" (click)="cerrarModal()">×</button>
+      </div>
+      <form [formGroup]="formOrdenProd" (ngSubmit)="guardarOrdenProd()">
+        <div class="modal-body">
+          <label class="fld">
+            <span>Producto</span>
+            <input formControlName="producto" placeholder="Nombre del producto" />
+          </label>
+          <div class="fld-row">
+            <label class="fld">
+              <span>Cantidad</span>
+              <input formControlName="cantidad" type="number" placeholder="0" />
+            </label>
+            <label class="fld">
+              <span>Línea de Producción</span>
+              <select formControlName="linea_produccion">
+                <option value="">— Seleccionar línea —</option>
+                @for (l of lineas; track l.id) {
+                  <option [value]="l.nombre">{{ l.nombre }}</option>
+                }
+              </select>
+            </label>
+          </div>
+          <div class="fld-row">
+            <label class="fld">
+              <span>Fecha Inicio</span>
+              <input formControlName="fecha_inicio" type="date" />
+            </label>
+            <label class="fld">
+              <span>Fecha Fin</span>
+              <input formControlName="fecha_fin" type="date" />
+            </label>
+          </div>
+        </div>
+        @if (errorModal) {
+          <div class="modal-err">{{ errorModal }}</div>
+        }
+        <div class="modal-foot">
+          <button type="button" class="btn" (click)="cerrarModal()">Cancelar</button>
+          <button type="submit" class="btn btn-primary" [disabled]="saving || formOrdenProd.invalid">
+            {{ saving ? 'Guardando…' : 'Guardar' }}
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+}

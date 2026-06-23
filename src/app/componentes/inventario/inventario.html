@@ -4,10 +4,14 @@
     <div class="page-title">Inventario</div>
   </div>
   <div class="page-actions">
-    <button class="btn btn-primary">Ajuste de Stock</button>
+    <button class="btn btn-primary" (click)="abrirModal()">Ajuste de Stock</button>
     <button class="btn">Exportar</button>
   </div>
 </div>
+
+@if (loading) {
+  <div class="loading-bar">Cargando datos...</div>
+}
 
 <div class="kpi-row">
   <div class="kpi-cell">
@@ -46,62 +50,75 @@
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <td class="mono">ACR-8842</td>
-          <td>Acero galvanizado 3mm — Rollo 25kg</td>
-          <td class="mono" style="color:var(--red)">3</td>
-          <td class="mono">20</td>
-          <td>Metales</td>
-          <td><span class="pill pill-red">Crítico</span></td>
-        </tr>
-        <tr>
-          <td class="mono">LUB-0421</td>
-          <td>Aceite lubricante industrial 20W-50 — 200L</td>
-          <td class="mono" style="color:var(--red)">1</td>
-          <td class="mono">10</td>
-          <td>Lubricantes</td>
-          <td><span class="pill pill-red">Crítico</span></td>
-        </tr>
-        <tr>
-          <td class="mono">EMP-1130</td>
-          <td>Empaque polietileno 40x60 — Bolsa x 1000</td>
-          <td class="mono" style="color:var(--amber)">8</td>
-          <td class="mono">15</td>
-          <td>Embalajes</td>
-          <td><span class="pill pill-amber">Bajo</span></td>
-        </tr>
-        <tr>
-          <td class="mono">ELE-2204</td>
-          <td>Cable eléctrico THW 12AWG — Rollo 100m</td>
-          <td class="mono" style="color:var(--amber)">12</td>
-          <td class="mono">25</td>
-          <td>Eléctrico</td>
-          <td><span class="pill pill-amber">Bajo</span></td>
-        </tr>
-        <tr>
-          <td class="mono">EPP-0882</td>
-          <td>Casco seguridad industrial ABS — Unidad</td>
-          <td class="mono" style="color:var(--red)">5</td>
-          <td class="mono">50</td>
-          <td>Seguridad</td>
-          <td><span class="pill pill-red">Crítico</span></td>
-        </tr>
-        <tr>
-          <td class="mono">QUI-3310</td>
-          <td>Solvente dieléctrico 1L — Caja x 12</td>
-          <td class="mono" style="color:var(--amber)">7</td>
-          <td class="mono">12</td>
-          <td>Químicos</td>
-          <td><span class="pill pill-amber">Bajo</span></td>
-        </tr>
-        <tr>
-          <td class="mono">FER-0019</td>
-          <td>Tornillo hexagonal M10 — Caja x 500</td>
-          <td class="mono" style="color:var(--green)">48</td>
-          <td class="mono">30</td>
-          <td>Ferretería</td>
-          <td><span class="pill pill-green">Normal</span></td>
-        </tr>
+        @if (stockCritico.length > 0) {
+          @for (prod of stockCritico; track prod.sku) {
+            <tr>
+              <td class="mono">{{ prod.sku }}</td>
+              <td>{{ prod.nombre }}</td>
+              <td class="mono">{{ prod.stock }}</td>
+              <td class="mono">{{ prod.stockMinimo }}</td>
+              <td>{{ prod.categoria }}</td>
+              <td><span class="pill">{{ prod.stock <= prod.stockMinimo ? 'Crítico' : 'Bajo' }}</span></td>
+            </tr>
+          }
+        } @else {
+          <tr>
+            <td class="mono">ACR-8842</td>
+            <td>Acero galvanizado 3mm — Rollo 25kg</td>
+            <td class="mono" style="color:var(--red)">3</td>
+            <td class="mono">20</td>
+            <td>Metales</td>
+            <td><span class="pill pill-red">Crítico</span></td>
+          </tr>
+          <tr>
+            <td class="mono">LUB-0421</td>
+            <td>Aceite lubricante industrial 20W-50 — 200L</td>
+            <td class="mono" style="color:var(--red)">1</td>
+            <td class="mono">10</td>
+            <td>Lubricantes</td>
+            <td><span class="pill pill-red">Crítico</span></td>
+          </tr>
+          <tr>
+            <td class="mono">EMP-1130</td>
+            <td>Empaque polietileno 40x60 — Bolsa x 1000</td>
+            <td class="mono" style="color:var(--amber)">8</td>
+            <td class="mono">15</td>
+            <td>Embalajes</td>
+            <td><span class="pill pill-amber">Bajo</span></td>
+          </tr>
+          <tr>
+            <td class="mono">ELE-2204</td>
+            <td>Cable eléctrico THW 12AWG — Rollo 100m</td>
+            <td class="mono" style="color:var(--amber)">12</td>
+            <td class="mono">25</td>
+            <td>Eléctrico</td>
+            <td><span class="pill pill-amber">Bajo</span></td>
+          </tr>
+          <tr>
+            <td class="mono">EPP-0882</td>
+            <td>Casco seguridad industrial ABS — Unidad</td>
+            <td class="mono" style="color:var(--red)">5</td>
+            <td class="mono">50</td>
+            <td>Seguridad</td>
+            <td><span class="pill pill-red">Crítico</span></td>
+          </tr>
+          <tr>
+            <td class="mono">QUI-3310</td>
+            <td>Solvente dieléctrico 1L — Caja x 12</td>
+            <td class="mono" style="color:var(--amber)">7</td>
+            <td class="mono">12</td>
+            <td>Químicos</td>
+            <td><span class="pill pill-amber">Bajo</span></td>
+          </tr>
+          <tr>
+            <td class="mono">FER-0019</td>
+            <td>Tornillo hexagonal M10 — Caja x 500</td>
+            <td class="mono" style="color:var(--green)">48</td>
+            <td class="mono">30</td>
+            <td>Ferretería</td>
+            <td><span class="pill pill-green">Normal</span></td>
+          </tr>
+        }
       </tbody>
     </table>
   </div>
@@ -120,36 +137,47 @@
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td><span class="pill pill-green">Entrada</span></td>
-            <td>Acero galvanizado 3mm</td>
-            <td class="mono">+40</td>
-            <td class="muted-cell">18 Jun</td>
-          </tr>
-          <tr>
-            <td><span class="pill pill-red">Salida</span></td>
-            <td>Cable THW 12AWG</td>
-            <td class="mono">-8</td>
-            <td class="muted-cell">18 Jun</td>
-          </tr>
-          <tr>
-            <td><span class="pill pill-green">Entrada</span></td>
-            <td>EPP Cascos industriales</td>
-            <td class="mono">+100</td>
-            <td class="muted-cell">17 Jun</td>
-          </tr>
-          <tr>
-            <td><span class="pill pill-red">Salida</span></td>
-            <td>Aceite lubricante 20W-50</td>
-            <td class="mono">-9</td>
-            <td class="muted-cell">17 Jun</td>
-          </tr>
-          <tr>
-            <td><span class="pill pill-amber">Ajuste</span></td>
-            <td>Tornillo hexagonal M10</td>
-            <td class="mono">-12</td>
-            <td class="muted-cell">16 Jun</td>
-          </tr>
+          @if (movimientos.length > 0) {
+            @for (mov of movimientos; track mov.id) {
+              <tr>
+                <td><span class="pill">{{ mov.tipo }}</span></td>
+                <td>{{ mov.sku }}</td>
+                <td class="mono">{{ mov.cantidad }}</td>
+                <td class="muted-cell">{{ mov.fecha }}</td>
+              </tr>
+            }
+          } @else {
+            <tr>
+              <td><span class="pill pill-green">Entrada</span></td>
+              <td>Acero galvanizado 3mm</td>
+              <td class="mono">+40</td>
+              <td class="muted-cell">18 Jun</td>
+            </tr>
+            <tr>
+              <td><span class="pill pill-red">Salida</span></td>
+              <td>Cable THW 12AWG</td>
+              <td class="mono">-8</td>
+              <td class="muted-cell">18 Jun</td>
+            </tr>
+            <tr>
+              <td><span class="pill pill-green">Entrada</span></td>
+              <td>EPP Cascos industriales</td>
+              <td class="mono">+100</td>
+              <td class="muted-cell">17 Jun</td>
+            </tr>
+            <tr>
+              <td><span class="pill pill-red">Salida</span></td>
+              <td>Aceite lubricante 20W-50</td>
+              <td class="mono">-9</td>
+              <td class="muted-cell">17 Jun</td>
+            </tr>
+            <tr>
+              <td><span class="pill pill-amber">Ajuste</span></td>
+              <td>Tornillo hexagonal M10</td>
+              <td class="mono">-12</td>
+              <td class="muted-cell">16 Jun</td>
+            </tr>
+          }
         </tbody>
       </table>
     </div>
@@ -157,48 +185,111 @@
 
   <app-section-panel num="03" title="Stock por Categoría">
     <div class="card-body">
-      <div class="status-row">
-        <span class="status-name">Metales y Aceros</span>
-        <div class="status-right">
-          <div class="mini-bar"><div class="mini-fill fill-blue" style="width:82%"></div></div>
-          <span class="pct pct-blue">28%</span>
+      @if (categorias.length > 0) {
+        @for (cat of categorias; track cat.nombre) {
+          <div class="status-row">
+            <span class="status-name">{{ cat.nombre }}</span>
+            <div class="status-right">
+              <div class="mini-bar"><div class="mini-fill fill-blue" [style.width.%]="cat.porcentaje"></div></div>
+              <span class="pct pct-blue">{{ cat.porcentaje }}%</span>
+            </div>
+          </div>
+        }
+      } @else {
+        <div class="status-row">
+          <span class="status-name">Metales y Aceros</span>
+          <div class="status-right">
+            <div class="mini-bar"><div class="mini-fill fill-blue" style="width:82%"></div></div>
+            <span class="pct pct-blue">28%</span>
+          </div>
         </div>
-      </div>
-      <div class="status-row">
-        <span class="status-name">Eléctrico</span>
-        <div class="status-right">
-          <div class="mini-bar"><div class="mini-fill fill-blue" style="width:54%"></div></div>
-          <span class="pct pct-blue">18%</span>
+        <div class="status-row">
+          <span class="status-name">Eléctrico</span>
+          <div class="status-right">
+            <div class="mini-bar"><div class="mini-fill fill-blue" style="width:54%"></div></div>
+            <span class="pct pct-blue">18%</span>
+          </div>
         </div>
-      </div>
-      <div class="status-row">
-        <span class="status-name">Embalajes</span>
-        <div class="status-right">
-          <div class="mini-bar"><div class="mini-fill fill-green" style="width:45%"></div></div>
-          <span class="pct pct-green">15%</span>
+        <div class="status-row">
+          <span class="status-name">Embalajes</span>
+          <div class="status-right">
+            <div class="mini-bar"><div class="mini-fill fill-green" style="width:45%"></div></div>
+            <span class="pct pct-green">15%</span>
+          </div>
         </div>
-      </div>
-      <div class="status-row">
-        <span class="status-name">Seguridad EPP</span>
-        <div class="status-right">
-          <div class="mini-bar"><div class="mini-fill fill-amber" style="width:35%"></div></div>
-          <span class="pct pct-amber">12%</span>
+        <div class="status-row">
+          <span class="status-name">Seguridad EPP</span>
+          <div class="status-right">
+            <div class="mini-bar"><div class="mini-fill fill-amber" style="width:35%"></div></div>
+            <span class="pct pct-amber">12%</span>
+          </div>
         </div>
-      </div>
-      <div class="status-row">
-        <span class="status-name">Ferretería</span>
-        <div class="status-right">
-          <div class="mini-bar"><div class="mini-fill fill-amber" style="width:28%"></div></div>
-          <span class="pct pct-amber">9%</span>
+        <div class="status-row">
+          <span class="status-name">Ferretería</span>
+          <div class="status-right">
+            <div class="mini-bar"><div class="mini-fill fill-amber" style="width:28%"></div></div>
+            <span class="pct pct-amber">9%</span>
+          </div>
         </div>
-      </div>
-      <div class="status-row">
-        <span class="status-name">Otros</span>
-        <div class="status-right">
-          <div class="mini-bar"><div class="mini-fill fill-green" style="width:52%"></div></div>
-          <span class="pct pct-green">18%</span>
+        <div class="status-row">
+          <span class="status-name">Otros</span>
+          <div class="status-right">
+            <div class="mini-bar"><div class="mini-fill fill-green" style="width:52%"></div></div>
+            <span class="pct pct-green">18%</span>
+          </div>
         </div>
-      </div>
+      }
     </div>
   </app-section-panel>
 </div>
+
+@if (modalAbierto) {
+  <div class="modal-overlay" (click)="cerrarModal()">
+    <div class="modal-box" (click)="$event.stopPropagation()">
+      <div class="modal-hdr">
+        <span class="modal-title">Ajuste de Stock</span>
+        <button class="modal-x" type="button" (click)="cerrarModal()">×</button>
+      </div>
+      <form [formGroup]="formAjuste" (ngSubmit)="guardarAjuste()">
+        <div class="modal-body">
+          <label class="fld">
+            <span>Producto</span>
+            <select formControlName="sku" (change)="seleccionarProducto($event)">
+              <option value="">— Seleccionar producto —</option>
+              @for (p of productos; track p.sku) {
+                <option [value]="p.sku">{{ p.sku }} — {{ p.nombre }}</option>
+              }
+            </select>
+          </label>
+          <div class="fld-row">
+            <label class="fld">
+              <span>Tipo</span>
+              <select formControlName="tipo">
+                <option>Entrada</option>
+                <option>Salida</option>
+                <option>Ajuste</option>
+              </select>
+            </label>
+          </div>
+          <label class="fld">
+            <span>Cantidad</span>
+            <input formControlName="cantidad" type="number" placeholder="0" />
+          </label>
+          <label class="fld">
+            <span>Nota</span>
+            <textarea formControlName="nota" placeholder="Observaciones opcionales"></textarea>
+          </label>
+        </div>
+        @if (errorModal) {
+          <div class="modal-err">{{ errorModal }}</div>
+        }
+        <div class="modal-foot">
+          <button type="button" class="btn" (click)="cerrarModal()">Cancelar</button>
+          <button type="submit" class="btn btn-primary" [disabled]="saving || formAjuste.invalid">
+            {{ saving ? 'Guardando…' : 'Guardar' }}
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+}

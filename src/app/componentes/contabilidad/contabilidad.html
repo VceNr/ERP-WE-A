@@ -4,10 +4,14 @@
     <div class="page-title">Contabilidad</div>
   </div>
   <div class="page-actions">
-    <button class="btn btn-primary">Nuevo Asiento</button>
+    <button class="btn btn-primary" (click)="abrirModal()">Nuevo Asiento</button>
     <button class="btn">Cierre Mes</button>
   </div>
 </div>
+
+@if (loading) {
+  <div class="loading-bar">Cargando datos...</div>
+}
 
 <div class="kpi-row">
   <div class="kpi-cell">
@@ -46,54 +50,67 @@
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <td class="mono">F-2024-0127</td>
-          <td>Constructora Andina S.A.</td>
-          <td><span class="pill pill-green">Venta</span></td>
-          <td class="mono">$12,400</td>
-          <td><span class="pill pill-green">Pagada</span></td>
-          <td class="muted-cell">25 Jun 2024</td>
-        </tr>
-        <tr>
-          <td class="mono">F-2024-0126</td>
-          <td>Importadora Global Ltda.</td>
-          <td><span class="pill pill-green">Venta</span></td>
-          <td class="mono">$38,750</td>
-          <td><span class="pill pill-amber">Pendiente</span></td>
-          <td class="muted-cell">28 Jun 2024</td>
-        </tr>
-        <tr>
-          <td class="mono">FC-2024-0318</td>
-          <td>Aceros del Pacífico S.A.</td>
-          <td><span class="pill pill-blue">Compra</span></td>
-          <td class="mono">$24,600</td>
-          <td><span class="pill pill-amber">Pendiente</span></td>
-          <td class="muted-cell">22 Jun 2024</td>
-        </tr>
-        <tr>
-          <td class="mono">F-2024-0125</td>
-          <td>Retail Moderno SpA</td>
-          <td><span class="pill pill-green">Venta</span></td>
-          <td class="mono">$6,200</td>
-          <td><span class="pill pill-green">Pagada</span></td>
-          <td class="muted-cell">20 Jun 2024</td>
-        </tr>
-        <tr>
-          <td class="mono">FC-2024-0314</td>
-          <td>Combustibles Araucania</td>
-          <td><span class="pill pill-blue">Compra</span></td>
-          <td class="mono">$11,200</td>
-          <td><span class="pill pill-red">Vencida</span></td>
-          <td class="muted-cell">10 Jun 2024</td>
-        </tr>
-        <tr>
-          <td class="mono">F-2024-0124</td>
-          <td>Minera Cordillera S.A.</td>
-          <td><span class="pill pill-green">Venta</span></td>
-          <td class="mono">$8,940</td>
-          <td><span class="pill pill-green">Pagada</span></td>
-          <td class="muted-cell">18 Jun 2024</td>
-        </tr>
+        @if (facturas.length > 0) {
+          @for (factura of facturas; track factura.id) {
+            <tr>
+              <td class="mono">{{ factura.numero }}</td>
+              <td>{{ factura.cliente }}</td>
+              <td><span class="pill">{{ factura.id }}</span></td>
+              <td class="mono">{{ factura.total }}</td>
+              <td><span class="pill">{{ factura.estado }}</span></td>
+              <td class="muted-cell">{{ factura.fecha }}</td>
+            </tr>
+          }
+        } @else {
+          <tr>
+            <td class="mono">F-2024-0127</td>
+            <td>Constructora Andina S.A.</td>
+            <td><span class="pill pill-green">Venta</span></td>
+            <td class="mono">$12,400</td>
+            <td><span class="pill pill-green">Pagada</span></td>
+            <td class="muted-cell">25 Jun 2024</td>
+          </tr>
+          <tr>
+            <td class="mono">F-2024-0126</td>
+            <td>Importadora Global Ltda.</td>
+            <td><span class="pill pill-green">Venta</span></td>
+            <td class="mono">$38,750</td>
+            <td><span class="pill pill-amber">Pendiente</span></td>
+            <td class="muted-cell">28 Jun 2024</td>
+          </tr>
+          <tr>
+            <td class="mono">FC-2024-0318</td>
+            <td>Aceros del Pacífico S.A.</td>
+            <td><span class="pill pill-blue">Compra</span></td>
+            <td class="mono">$24,600</td>
+            <td><span class="pill pill-amber">Pendiente</span></td>
+            <td class="muted-cell">22 Jun 2024</td>
+          </tr>
+          <tr>
+            <td class="mono">F-2024-0125</td>
+            <td>Retail Moderno SpA</td>
+            <td><span class="pill pill-green">Venta</span></td>
+            <td class="mono">$6,200</td>
+            <td><span class="pill pill-green">Pagada</span></td>
+            <td class="muted-cell">20 Jun 2024</td>
+          </tr>
+          <tr>
+            <td class="mono">FC-2024-0314</td>
+            <td>Combustibles Araucania</td>
+            <td><span class="pill pill-blue">Compra</span></td>
+            <td class="mono">$11,200</td>
+            <td><span class="pill pill-red">Vencida</span></td>
+            <td class="muted-cell">10 Jun 2024</td>
+          </tr>
+          <tr>
+            <td class="mono">F-2024-0124</td>
+            <td>Minera Cordillera S.A.</td>
+            <td><span class="pill pill-green">Venta</span></td>
+            <td class="mono">$8,940</td>
+            <td><span class="pill pill-green">Pagada</span></td>
+            <td class="muted-cell">18 Jun 2024</td>
+          </tr>
+        }
       </tbody>
     </table>
   </div>
@@ -161,38 +178,113 @@
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td class="mono">AST-0284</td>
-            <td>Caja / Ingresos venta</td>
-            <td class="mono" style="color:var(--green)">$12,400</td>
-            <td class="mono">—</td>
-          </tr>
-          <tr>
-            <td class="mono">AST-0283</td>
-            <td>Prov. — Combustibles</td>
-            <td class="mono">—</td>
-            <td class="mono" style="color:var(--red)">$11,200</td>
-          </tr>
-          <tr>
-            <td class="mono">AST-0282</td>
-            <td>Clientes / Cobros</td>
-            <td class="mono" style="color:var(--green)">$28,000</td>
-            <td class="mono">—</td>
-          </tr>
-          <tr>
-            <td class="mono">AST-0281</td>
-            <td>Remuneraciones</td>
-            <td class="mono">—</td>
-            <td class="mono" style="color:var(--red)">$48,400</td>
-          </tr>
-          <tr>
-            <td class="mono">AST-0280</td>
-            <td>Arriendo oficinas</td>
-            <td class="mono">—</td>
-            <td class="mono" style="color:var(--red)">$6,800</td>
-          </tr>
+          @if (asientos.length > 0) {
+            @for (asiento of asientos; track asiento.id) {
+              <tr>
+                <td class="mono">{{ asiento.id }}</td>
+                <td>{{ asiento.descripcion }}</td>
+                <td class="mono">{{ asiento.debe }}</td>
+                <td class="mono">{{ asiento.haber }}</td>
+              </tr>
+            }
+          } @else {
+            <tr>
+              <td class="mono">AST-0284</td>
+              <td>Caja / Ingresos venta</td>
+              <td class="mono" style="color:var(--green)">$12,400</td>
+              <td class="mono">—</td>
+            </tr>
+            <tr>
+              <td class="mono">AST-0283</td>
+              <td>Prov. — Combustibles</td>
+              <td class="mono">—</td>
+              <td class="mono" style="color:var(--red)">$11,200</td>
+            </tr>
+            <tr>
+              <td class="mono">AST-0282</td>
+              <td>Clientes / Cobros</td>
+              <td class="mono" style="color:var(--green)">$28,000</td>
+              <td class="mono">—</td>
+            </tr>
+            <tr>
+              <td class="mono">AST-0281</td>
+              <td>Remuneraciones</td>
+              <td class="mono">—</td>
+              <td class="mono" style="color:var(--red)">$48,400</td>
+            </tr>
+            <tr>
+              <td class="mono">AST-0280</td>
+              <td>Arriendo oficinas</td>
+              <td class="mono">—</td>
+              <td class="mono" style="color:var(--red)">$6,800</td>
+            </tr>
+          }
         </tbody>
       </table>
     </div>
   </app-section-panel>
 </div>
+
+@if (modalAbierto) {
+  <div class="modal-overlay" (click)="cerrarModal()">
+    <div class="modal-box" (click)="$event.stopPropagation()">
+      <div class="modal-hdr">
+        <span class="modal-title">Nuevo Asiento Contable</span>
+        <button class="modal-x" type="button" (click)="cerrarModal()">×</button>
+      </div>
+      <form [formGroup]="formAsiento" (ngSubmit)="guardarAsiento()">
+        <div class="modal-body">
+          <div class="fld-row">
+            <label class="fld">
+              <span>N° Asiento</span>
+              <input formControlName="numero" placeholder="Ej: AST-0285" />
+            </label>
+            <label class="fld">
+              <span>Fecha</span>
+              <input formControlName="fecha" type="date" />
+            </label>
+          </div>
+          <label class="fld">
+            <span>Cuenta</span>
+            <select formControlName="cuenta">
+              <option value="">— Seleccionar cuenta —</option>
+              <option>Caja</option>
+              <option>Banco</option>
+              <option>Cuentas por cobrar</option>
+              <option>Inventario</option>
+              <option>Activo fijo</option>
+              <option>Cuentas por pagar</option>
+              <option>Capital</option>
+              <option>Ingresos por ventas</option>
+              <option>Costo de ventas</option>
+              <option>Gastos operacionales</option>
+            </select>
+          </label>
+          <label class="fld">
+            <span>Descripción</span>
+            <textarea formControlName="descripcion" placeholder="Descripción del asiento"></textarea>
+          </label>
+          <div class="fld-row">
+            <label class="fld">
+              <span>Debe</span>
+              <input formControlName="debe" type="number" placeholder="0" />
+            </label>
+            <label class="fld">
+              <span>Haber</span>
+              <input formControlName="haber" type="number" placeholder="0" />
+            </label>
+          </div>
+        </div>
+        @if (errorModal) {
+          <div class="modal-err">{{ errorModal }}</div>
+        }
+        <div class="modal-foot">
+          <button type="button" class="btn" (click)="cerrarModal()">Cancelar</button>
+          <button type="submit" class="btn btn-primary" [disabled]="saving || formAsiento.invalid">
+            {{ saving ? 'Guardando…' : 'Guardar' }}
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+}
