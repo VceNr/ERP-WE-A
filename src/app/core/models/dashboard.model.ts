@@ -31,6 +31,12 @@ export interface Alert {
   fecha: string;
 }
 
+export interface SystemStatus {
+  modulo: string;
+  estado: string;
+  uptime: string;
+}
+
 export interface RecentActivity {
   usuario: string;
   accion: string;
