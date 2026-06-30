@@ -1,2 +1,2 @@
-export interface Producto { sku: string; nombre: string; categoria: string; stock: number; stockMinimo: number; precio: number; }
-export interface MovimientoInventario { id: string; sku: string; tipo: string; cantidad: number; fecha: string; usuario: string; }
+export interface Producto { id: number; sku: string; nombre: string; categoria: string; stock_actual: number; stock_minimo: number; precio: number; estado: string; }
+export interface MovimientoInventario { id: number; tipo: string; producto_id: number; cantidad: number; nota: string; usuario: string; fecha: string; }

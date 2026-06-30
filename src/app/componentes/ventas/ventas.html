@@ -13,205 +13,108 @@
   <div class="loading-bar">Cargando datos...</div>
 }
 
-<div class="kpi-row">
-  <div class="kpi-cell">
-    <div class="kpi-lbl">Ventas del Mes</div>
-    <div class="kpi-val">$284,500</div>
-    <div class="kpi-delta up">↑ 12.4% vs mes anterior</div>
-  </div>
-  <div class="kpi-cell">
-    <div class="kpi-lbl">Órdenes Pendientes</div>
-    <div class="kpi-val">48</div>
-    <div class="kpi-delta warn">⚠ 6 vencen hoy</div>
-  </div>
-  <div class="kpi-cell">
-    <div class="kpi-lbl">Ticket Promedio</div>
-    <div class="kpi-val">$2,222</div>
-    <div class="kpi-delta up">↑ 3.1% vs mes anterior</div>
-  </div>
-  <div class="kpi-cell">
-    <div class="kpi-lbl">Tasa de Cierre</div>
-    <div class="kpi-val">68%</div>
-    <div class="kpi-delta up">↑ 2pp este mes</div>
-  </div>
-</div>
-
-<app-section-panel num="01" title="Últimas Órdenes" link="#" linkLabel="Ver todas">
-  <div class="tbl-wrap">
-    <table class="tbl">
-      <thead>
-        <tr>
-          <th>N° Orden</th>
-          <th>Cliente</th>
-          <th>Monto</th>
-          <th>Estado</th>
-          <th>Fecha</th>
-        </tr>
-      </thead>
-      <tbody>
-        @if (ordenes.length > 0) {
-          @for (orden of ordenes; track orden.id) {
-            <tr>
-              <td class="mono">{{ orden.id }}</td>
-              <td>{{ orden.cliente }}</td>
-              <td class="mono">{{ orden.total }}</td>
-              <td><span class="pill">{{ orden.estado }}</span></td>
-              <td class="muted-cell">{{ orden.fecha }}</td>
-            </tr>
-          }
-        } @else {
-          <tr>
-            <td class="mono">#ORD-2024-0842</td>
-            <td>Constructora Andina S.A.</td>
-            <td class="mono">$12,400</td>
-            <td><span class="pill pill-green">Completada</span></td>
-            <td class="muted-cell">18 Jun 2024</td>
-          </tr>
-          <tr>
-            <td class="mono">#ORD-2024-0841</td>
-            <td>Importadora Global Ltda.</td>
-            <td class="mono">$38,750</td>
-            <td><span class="pill pill-amber">Pendiente</span></td>
-            <td class="muted-cell">17 Jun 2024</td>
-          </tr>
-          <tr>
-            <td class="mono">#ORD-2024-0840</td>
-            <td>Retail Moderno SpA</td>
-            <td class="mono">$6,200</td>
-            <td><span class="pill pill-blue">En preparación</span></td>
-            <td class="muted-cell">17 Jun 2024</td>
-          </tr>
-          <tr>
-            <td class="mono">#ORD-2024-0839</td>
-            <td>Minera Cordillera S.A.</td>
-            <td class="mono">$8,940</td>
-            <td><span class="pill pill-green">Completada</span></td>
-            <td class="muted-cell">16 Jun 2024</td>
-          </tr>
-          <tr>
-            <td class="mono">#ORD-2024-0838</td>
-            <td>Agrícola Los Robles</td>
-            <td class="mono">$4,160</td>
-            <td><span class="pill pill-red">Cancelada</span></td>
-            <td class="muted-cell">15 Jun 2024</td>
-          </tr>
-          <tr>
-            <td class="mono">#ORD-2024-0837</td>
-            <td>Logística Sur Ltda.</td>
-            <td class="mono">$7,600</td>
-            <td><span class="pill pill-teal">Despachada</span></td>
-            <td class="muted-cell">14 Jun 2024</td>
-          </tr>
-        }
-      </tbody>
-    </table>
-  </div>
-</app-section-panel>
-
-<div class="two-col">
-  <app-section-panel num="02" title="Top Vendedores — Junio" link="#" linkLabel="Detalle">
-    <div class="card-body">
-      @if (vendedores.length > 0) {
-        @for (v of vendedores; track v.id) {
-          <div class="status-row">
-            <span class="status-name">{{ v.nombre }}</span>
-            <div class="status-right">
-              <div class="mini-bar"><div class="mini-fill fill-blue" [style.width.%]="v.meta > 0 ? (v.ventas / v.meta * 100) : 0"></div></div>
-              <span class="pct pct-blue">{{ v.ventas }}</span>
-            </div>
-          </div>
-        }
-      } @else {
-        <div class="status-row">
-          <span class="status-name">Camila Rojas</span>
-          <div class="status-right">
-            <div class="mini-bar"><div class="mini-fill fill-green" style="width:92%"></div></div>
-            <span class="pct pct-green">$52,400</span>
-          </div>
-        </div>
-        <div class="status-row">
-          <span class="status-name">Diego Herrera</span>
-          <div class="status-right">
-            <div class="mini-bar"><div class="mini-fill fill-blue" style="width:78%"></div></div>
-            <span class="pct pct-blue">$44,100</span>
-          </div>
-        </div>
-        <div class="status-row">
-          <span class="status-name">Valentina Muñoz</span>
-          <div class="status-right">
-            <div class="mini-bar"><div class="mini-fill fill-blue" style="width:64%"></div></div>
-            <span class="pct pct-blue">$36,800</span>
-          </div>
-        </div>
-        <div class="status-row">
-          <span class="status-name">Sebastián Vega</span>
-          <div class="status-right">
-            <div class="mini-bar"><div class="mini-fill fill-amber" style="width:48%"></div></div>
-            <span class="pct pct-amber">$27,200</span>
-          </div>
-        </div>
-        <div class="status-row">
-          <span class="status-name">Andrea Pérez</span>
-          <div class="status-right">
-            <div class="mini-bar"><div class="mini-fill fill-amber" style="width:36%"></div></div>
-            <span class="pct pct-amber">$20,600</span>
-          </div>
-        </div>
-      }
+@if (!loading) {
+  <div class="kpi-row">
+    <div class="kpi-cell">
+      <div class="kpi-lbl">Ventas del Mes</div>
+      <div class="kpi-val">{{ kpis?.ventas_mes | number }}</div>
+      <div class="kpi-delta up">↑ total acumulado</div>
     </div>
-  </app-section-panel>
+    <div class="kpi-cell">
+      <div class="kpi-lbl">Órdenes Pendientes</div>
+      <div class="kpi-val">{{ kpis?.ordenes_activas ?? 0 }}</div>
+      <div class="kpi-delta warn">⚠ en proceso</div>
+    </div>
+    <div class="kpi-cell">
+      <div class="kpi-lbl">Ticket Promedio</div>
+      <div class="kpi-val">{{ kpis?.ticket_promedio | number }}</div>
+      <div class="kpi-delta up">↑ por orden</div>
+    </div>
+    <div class="kpi-cell">
+      <div class="kpi-lbl">Clientes Nuevos</div>
+      <div class="kpi-val">{{ kpis?.clientes_nuevos ?? 0 }}</div>
+      <div class="kpi-delta up">↑ este mes</div>
+    </div>
+  </div>
 
-  <app-section-panel num="03" title="Canales de Venta">
+  <app-section-panel num="01" title="Últimas Órdenes" link="#" linkLabel="Ver todas">
     <div class="tbl-wrap">
       <table class="tbl">
         <thead>
           <tr>
-            <th>Canal</th>
-            <th>Ventas</th>
-            <th>%</th>
+            <th>N° Orden</th>
+            <th>Cliente</th>
+            <th>Monto</th>
+            <th>Estado</th>
+            <th>Fecha</th>
           </tr>
         </thead>
         <tbody>
-          @if (canales.length > 0) {
-            @for (canal of canales; track canal.canal) {
+          @if (ordenes.length > 0) {
+            @for (orden of ordenes; track orden.id) {
               <tr>
-                <td>{{ canal.canal }}</td>
-                <td class="mono">{{ canal.monto }}</td>
-                <td><span class="pill pill-blue">{{ canal.porcentaje }}%</span></td>
+                <td class="mono">{{ orden.numero }}</td>
+                <td>{{ orden.cliente || '—' }}</td>
+                <td class="mono">{{ orden.monto | number:'1.0-0' }}</td>
+                <td><span class="pill">{{ orden.estado }}</span></td>
+                <td class="muted-cell">{{ orden.fecha }}</td>
               </tr>
             }
           } @else {
-            <tr>
-              <td>Directo / Fuerza de ventas</td>
-              <td class="mono">$142,800</td>
-              <td><span class="pill pill-green">50.2%</span></td>
-            </tr>
-            <tr>
-              <td>E-commerce</td>
-              <td class="mono">$68,400</td>
-              <td><span class="pill pill-blue">24.0%</span></td>
-            </tr>
-            <tr>
-              <td>Distribuidores</td>
-              <td class="mono">$48,200</td>
-              <td><span class="pill pill-teal">16.9%</span></td>
-            </tr>
-            <tr>
-              <td>Televentas</td>
-              <td class="mono">$18,100</td>
-              <td><span class="pill pill-amber">6.4%</span></td>
-            </tr>
-            <tr>
-              <td>Otros</td>
-              <td class="mono">$7,000</td>
-              <td><span class="pill pill-amber">2.5%</span></td>
-            </tr>
+            <tr><td colspan="5" class="muted-cell">Sin órdenes registradas</td></tr>
           }
         </tbody>
       </table>
     </div>
   </app-section-panel>
-</div>
+
+  <div class="two-col">
+    <app-section-panel num="02" title="Top Vendedores" link="#" linkLabel="Detalle">
+      <div class="card-body">
+        @if (vendedores.length > 0) {
+          @for (v of vendedores; track v.id) {
+            <div class="status-row">
+              <span class="status-name">{{ v.nombre }}</span>
+              <div class="status-right">
+                <div class="mini-bar"><div class="mini-fill fill-blue" [style.width.%]="v.porcentaje_cumplimiento > 100 ? 100 : v.porcentaje_cumplimiento"></div></div>
+                <span class="pct pct-blue">{{ v.porcentaje_cumplimiento | number:'1.0-0' }}%</span>
+              </div>
+            </div>
+          }
+        } @else {
+          <p class="muted-cell">Sin vendedores registrados</p>
+        }
+      </div>
+    </app-section-panel>
+
+    <app-section-panel num="03" title="Canales de Venta">
+      <div class="tbl-wrap">
+        <table class="tbl">
+          <thead>
+            <tr>
+              <th>Canal</th>
+              <th>Monto</th>
+              <th>%</th>
+            </tr>
+          </thead>
+          <tbody>
+            @if (canales.length > 0) {
+              @for (canal of canales; track canal.nombre) {
+                <tr>
+                  <td>{{ canal.nombre }}</td>
+                  <td class="mono">{{ canal.monto | number }}</td>
+                  <td><span class="pill pill-blue">{{ canal.porcentaje }}%</span></td>
+                </tr>
+              }
+            } @else {
+              <tr><td colspan="3" class="muted-cell">Sin datos de canales</td></tr>
+            }
+          </tbody>
+        </table>
+      </div>
+    </app-section-panel>
+  </div>
+}
 
 @if (modalAbierto) {
   <div class="modal-overlay" (click)="cerrarModal()">

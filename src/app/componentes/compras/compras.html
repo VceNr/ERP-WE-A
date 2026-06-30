@@ -13,217 +13,102 @@
   <div class="loading-bar">Cargando datos...</div>
 }
 
-<div class="kpi-row">
-  <div class="kpi-cell">
-    <div class="kpi-lbl">Órdenes Activas</div>
-    <div class="kpi-val">23</div>
-    <div class="kpi-delta up">↑ 4 nuevas esta semana</div>
+@if (!loading) {
+  <div class="kpi-row">
+    <div class="kpi-cell">
+      <div class="kpi-lbl">Órdenes Pendientes</div>
+      <div class="kpi-val">{{ kpis?.ordenes_pendientes ?? 0 }}</div>
+      <div class="kpi-delta warn">⚠ en proceso</div>
+    </div>
+    <div class="kpi-cell">
+      <div class="kpi-lbl">Gasto del Mes</div>
+      <div class="kpi-val">{{ kpis?.gasto_mes | number:'1.0-0' }}</div>
+      <div class="kpi-delta up">↑ total acumulado</div>
+    </div>
+    <div class="kpi-cell">
+      <div class="kpi-lbl">Proveedores Activos</div>
+      <div class="kpi-val">{{ kpis?.proveedores_activos ?? 0 }}</div>
+      <div class="kpi-delta up">↑ activos</div>
+    </div>
+    <div class="kpi-cell">
+      <div class="kpi-lbl">Ahorro Negociación</div>
+      <div class="kpi-val">{{ kpis?.ahorro_negociacion | number:'1.0-0' }}</div>
+      <div class="kpi-delta up">↑ este período</div>
+    </div>
   </div>
-  <div class="kpi-cell">
-    <div class="kpi-lbl">Gasto del Mes</div>
-    <div class="kpi-val">$148,200</div>
-    <div class="kpi-delta warn">↑ 8.2% vs meta</div>
-  </div>
-  <div class="kpi-cell">
-    <div class="kpi-lbl">Proveedores Activos</div>
-    <div class="kpi-val">34</div>
-    <div class="kpi-delta up">↑ 2 nuevos este mes</div>
-  </div>
-  <div class="kpi-cell">
-    <div class="kpi-lbl">Pendiente Recepción</div>
-    <div class="kpi-val">7</div>
-    <div class="kpi-delta warn">⚠ 2 vencen esta semana</div>
-  </div>
-</div>
 
-<app-section-panel num="01" title="Órdenes de Compra" link="#" linkLabel="Ver todas">
-  <div class="tbl-wrap">
-    <table class="tbl">
-      <thead>
-        <tr>
-          <th>N° OC</th>
-          <th>Proveedor</th>
-          <th>Monto</th>
-          <th>Estado</th>
-          <th>Fecha</th>
-        </tr>
-      </thead>
-      <tbody>
-        @if (ordenes.length > 0) {
-          @for (orden of ordenes; track orden.id) {
-            <tr>
-              <td class="mono">{{ orden.id }}</td>
-              <td>{{ orden.proveedor }}</td>
-              <td class="mono">{{ orden.total }}</td>
-              <td><span class="pill">{{ orden.estado }}</span></td>
-              <td class="muted-cell">{{ orden.fecha }}</td>
-            </tr>
+  <app-section-panel num="01" title="Órdenes de Compra" link="#" linkLabel="Ver todas">
+    <div class="tbl-wrap">
+      <table class="tbl">
+        <thead>
+          <tr>
+            <th>N° OC</th>
+            <th>Proveedor</th>
+            <th>Monto</th>
+            <th>Estado</th>
+            <th>Fecha Entrega</th>
+          </tr>
+        </thead>
+        <tbody>
+          @if (ordenes.length > 0) {
+            @for (orden of ordenes; track orden.id) {
+              <tr>
+                <td class="mono">{{ orden.numero }}</td>
+                <td>{{ orden.proveedor }}</td>
+                <td class="mono">{{ orden.monto | number:'1.0-0' }}</td>
+                <td><span class="pill">{{ orden.estado }}</span></td>
+                <td class="muted-cell">{{ orden.fecha_entrega }}</td>
+              </tr>
+            }
+          } @else {
+            <tr><td colspan="5" class="muted-cell">Sin órdenes registradas</td></tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  </app-section-panel>
+
+  <div class="two-col">
+    <app-section-panel num="02" title="Proveedores Frecuentes" link="#" linkLabel="Gestionar">
+      <div class="card-body">
+        @if (proveedores.length > 0) {
+          @for (prov of proveedores; track prov.id) {
+            <div class="status-row">
+              <div>
+                <div class="status-name">{{ prov.nombre }}</div>
+                <div style="font-size:var(--text-2xs);color:var(--muted)">{{ prov.categoria }}</div>
+              </div>
+              <div class="status-right">
+                <span class="mono" style="color:var(--text-2)">{{ prov.total_ordenes }} OC</span>
+                <span class="pill pill-green">{{ prov.estado ?? 'Activo' }}</span>
+              </div>
+            </div>
           }
         } @else {
-          <tr>
-            <td class="mono">#OC-2024-0318</td>
-            <td>Aceros del Pacífico S.A.</td>
-            <td class="mono">$24,600</td>
-            <td><span class="pill pill-teal">En tránsito</span></td>
-            <td class="muted-cell">22 Jun 2024</td>
-          </tr>
-          <tr>
-            <td class="mono">#OC-2024-0317</td>
-            <td>Distribuidora Química Norte</td>
-            <td class="mono">$8,340</td>
-            <td><span class="pill pill-green">Aprobada</span></td>
-            <td class="muted-cell">25 Jun 2024</td>
-          </tr>
-          <tr>
-            <td class="mono">#OC-2024-0316</td>
-            <td>TechSupply Ltda.</td>
-            <td class="mono">$18,000</td>
-            <td><span class="pill pill-amber">Pendiente</span></td>
-            <td class="muted-cell">28 Jun 2024</td>
-          </tr>
-          <tr>
-            <td class="mono">#OC-2024-0315</td>
-            <td>Embalajes y Logística Sur</td>
-            <td class="mono">$3,750</td>
-            <td><span class="pill pill-green">Aprobada</span></td>
-            <td class="muted-cell">20 Jun 2024</td>
-          </tr>
-          <tr>
-            <td class="mono">#OC-2024-0314</td>
-            <td>Combustibles Araucania</td>
-            <td class="mono">$11,200</td>
-            <td><span class="pill pill-teal">En tránsito</span></td>
-            <td class="muted-cell">19 Jun 2024</td>
-          </tr>
+          <p class="muted-cell">Sin proveedores registrados</p>
         }
-      </tbody>
-    </table>
+      </div>
+    </app-section-panel>
+
+    <app-section-panel num="03" title="Gasto por Categoría">
+      <div class="card-body">
+        @if (gastoCategorias.length > 0) {
+          @for (cat of gastoCategorias; track cat.categoria) {
+            <div class="status-row">
+              <span class="status-name">{{ cat.categoria }}</span>
+              <div class="status-right">
+                <div class="mini-bar"><div class="mini-fill fill-blue" [style.width.%]="50"></div></div>
+                <span class="pct pct-blue">{{ cat.monto | number:'1.0-0' }}</span>
+              </div>
+            </div>
+          }
+        } @else {
+          <p class="muted-cell">Sin datos de gasto por categoría</p>
+        }
+      </div>
+    </app-section-panel>
   </div>
-</app-section-panel>
-
-<div class="two-col">
-  <app-section-panel num="02" title="Proveedores Frecuentes" link="#" linkLabel="Gestionar">
-    <div class="card-body">
-      @if (proveedores.length > 0) {
-        @for (prov of proveedores; track prov.id) {
-          <div class="status-row">
-            <div>
-              <div class="status-name">{{ prov.nombre }}</div>
-              <div style="font-size:var(--text-2xs);color:var(--muted)">{{ prov.categoria }}</div>
-            </div>
-            <div class="status-right">
-              <span class="mono" style="color:var(--text-2)">{{ prov.contacto }}</span>
-              <span class="pill pill-green">Activo</span>
-            </div>
-          </div>
-        }
-      } @else {
-        <div class="status-row">
-          <div>
-            <div class="status-name">Aceros del Pacífico S.A.</div>
-            <div style="font-size:var(--text-2xs);color:var(--muted)">Materiales / Metales</div>
-          </div>
-          <div class="status-right">
-            <span class="mono" style="color:var(--text-2)">8 OC</span>
-            <span class="pill pill-green">Activo</span>
-          </div>
-        </div>
-        <div class="status-row">
-          <div>
-            <div class="status-name">Distribuidora Química Norte</div>
-            <div style="font-size:var(--text-2xs);color:var(--muted)">Insumos / Químicos</div>
-          </div>
-          <div class="status-right">
-            <span class="mono" style="color:var(--text-2)">5 OC</span>
-            <span class="pill pill-green">Activo</span>
-          </div>
-        </div>
-        <div class="status-row">
-          <div>
-            <div class="status-name">TechSupply Ltda.</div>
-            <div style="font-size:var(--text-2xs);color:var(--muted)">Tecnología / TI</div>
-          </div>
-          <div class="status-right">
-            <span class="mono" style="color:var(--text-2)">4 OC</span>
-            <span class="pill pill-blue">Activo</span>
-          </div>
-        </div>
-        <div class="status-row">
-          <div>
-            <div class="status-name">Combustibles Araucania</div>
-            <div style="font-size:var(--text-2xs);color:var(--muted)">Energía / Combustibles</div>
-          </div>
-          <div class="status-right">
-            <span class="mono" style="color:var(--text-2)">3 OC</span>
-            <span class="pill pill-amber">Revisión</span>
-          </div>
-        </div>
-        <div class="status-row">
-          <div>
-            <div class="status-name">Embalajes y Logística Sur</div>
-            <div style="font-size:var(--text-2xs);color:var(--muted)">Embalajes / Packaging</div>
-          </div>
-          <div class="status-right">
-            <span class="mono" style="color:var(--text-2)">3 OC</span>
-            <span class="pill pill-green">Activo</span>
-          </div>
-        </div>
-      }
-    </div>
-  </app-section-panel>
-
-  <app-section-panel num="03" title="Gasto por Categoría">
-    <div class="card-body">
-      @if (gastoCategorias.length > 0) {
-        @for (cat of gastoCategorias; track cat.nombre) {
-          <div class="status-row">
-            <span class="status-name">{{ cat.nombre }}</span>
-            <div class="status-right">
-              <div class="mini-bar"><div class="mini-fill fill-blue" [style.width.%]="cat.porcentaje"></div></div>
-              <span class="pct pct-blue">{{ cat.porcentaje }}%</span>
-            </div>
-          </div>
-        }
-      } @else {
-        <div class="status-row">
-          <span class="status-name">Materiales y Metales</span>
-          <div class="status-right">
-            <div class="mini-bar"><div class="mini-fill fill-blue" style="width:85%"></div></div>
-            <span class="pct pct-blue">38%</span>
-          </div>
-        </div>
-        <div class="status-row">
-          <span class="status-name">Tecnología y TI</span>
-          <div class="status-right">
-            <div class="mini-bar"><div class="mini-fill fill-blue" style="width:55%"></div></div>
-            <span class="pct pct-blue">24%</span>
-          </div>
-        </div>
-        <div class="status-row">
-          <span class="status-name">Energía / Combustibles</span>
-          <div class="status-right">
-            <div class="mini-bar"><div class="mini-fill fill-amber" style="width:38%"></div></div>
-            <span class="pct pct-amber">17%</span>
-          </div>
-        </div>
-        <div class="status-row">
-          <span class="status-name">Insumos Químicos</span>
-          <div class="status-right">
-            <div class="mini-bar"><div class="mini-fill fill-amber" style="width:28%"></div></div>
-            <span class="pct pct-amber">12%</span>
-          </div>
-        </div>
-        <div class="status-row">
-          <span class="status-name">Embalajes</span>
-          <div class="status-right">
-            <div class="mini-bar"><div class="mini-fill fill-green" style="width:18%"></div></div>
-            <span class="pct pct-green">9%</span>
-          </div>
-        </div>
-      }
-    </div>
-  </app-section-panel>
-</div>
+}
 
 @if (modalAbierto) {
   <div class="modal-overlay" (click)="cerrarModal()">

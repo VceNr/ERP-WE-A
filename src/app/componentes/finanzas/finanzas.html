@@ -13,188 +13,139 @@
   <div class="loading-bar">Cargando datos...</div>
 }
 
-<div class="kpi-row">
-  <div class="kpi-cell">
-    <div class="kpi-lbl">Ingresos del Mes</div>
-    <div class="kpi-val">$284,500</div>
-    <div class="kpi-delta up">↑ 12.4% vs mes anterior</div>
-  </div>
-  <div class="kpi-cell">
-    <div class="kpi-lbl">Gastos del Mes</div>
-    <div class="kpi-val">$91,200</div>
-    <div class="kpi-delta warn">↑ 3.8% vs meta</div>
-  </div>
-  <div class="kpi-cell">
-    <div class="kpi-lbl">Utilidad Neta</div>
-    <div class="kpi-val">$193,300</div>
-    <div class="kpi-delta up">↑ 8.4% vs mes anterior</div>
-  </div>
-  <div class="kpi-cell">
-    <div class="kpi-lbl">Cuentas por Cobrar</div>
-    <div class="kpi-val">$42,800</div>
-    <div class="kpi-delta warn">⚠ $8,200 vencidas</div>
-  </div>
-</div>
-
-<app-section-panel num="01" title="Movimientos Recientes" link="#" linkLabel="Ver libro">
-  <div class="tbl-wrap">
-    <table class="tbl">
-      <thead>
-        <tr>
-          <th>Fecha</th>
-          <th>Concepto</th>
-          <th>Tipo</th>
-          <th>Monto</th>
-          <th>Cuenta</th>
-        </tr>
-      </thead>
-      <tbody>
-        @if (movimientos.length > 0) {
-          @for (mov of movimientos; track mov.id) {
-            <tr>
-              <td class="muted-cell">{{ mov.fecha }}</td>
-              <td>{{ mov.concepto }}</td>
-              <td><span class="pill">{{ mov.tipo }}</span></td>
-              <td class="mono">{{ mov.monto }}</td>
-              <td class="mono">{{ mov.cuenta }}</td>
-            </tr>
-          }
-        } @else {
-          <tr>
-            <td class="muted-cell">18 Jun 2024</td>
-            <td>Cobro factura #F-2024-0842 — Constructora Andina</td>
-            <td><span class="pill pill-green">Ingreso</span></td>
-            <td class="mono" style="color:var(--green)">+$12,400</td>
-            <td class="mono">BCI CTA CTE</td>
-          </tr>
-          <tr>
-            <td class="muted-cell">18 Jun 2024</td>
-            <td>Pago OC-2024-0314 — Combustibles Araucania</td>
-            <td><span class="pill pill-red">Gasto</span></td>
-            <td class="mono" style="color:var(--red)">-$11,200</td>
-            <td class="mono">Santander CTE</td>
-          </tr>
-          <tr>
-            <td class="muted-cell">17 Jun 2024</td>
-            <td>Cobro anticipado — Minera Cordillera S.A.</td>
-            <td><span class="pill pill-green">Ingreso</span></td>
-            <td class="mono" style="color:var(--green)">+$28,000</td>
-            <td class="mono">BCI CTA CTE</td>
-          </tr>
-          <tr>
-            <td class="muted-cell">17 Jun 2024</td>
-            <td>Nómina quincenal junio 2024</td>
-            <td><span class="pill pill-red">Gasto</span></td>
-            <td class="mono" style="color:var(--red)">-$48,400</td>
-            <td class="mono">Santander CTE</td>
-          </tr>
-          <tr>
-            <td class="muted-cell">16 Jun 2024</td>
-            <td>Pago arriendo instalaciones mes junio</td>
-            <td><span class="pill pill-red">Gasto</span></td>
-            <td class="mono" style="color:var(--red)">-$6,800</td>
-            <td class="mono">BCI CTA CTE</td>
-          </tr>
-          <tr>
-            <td class="muted-cell">15 Jun 2024</td>
-            <td>Transferencia — Logística Sur Ltda.</td>
-            <td><span class="pill pill-green">Ingreso</span></td>
-            <td class="mono" style="color:var(--green)">+$7,600</td>
-            <td class="mono">BCI CTA CTE</td>
-          </tr>
-        }
-      </tbody>
-    </table>
-  </div>
-</app-section-panel>
-
-<div class="two-col">
-  <app-section-panel num="02" title="Resumen Financiero — Junio">
-    <div class="card-body">
-      <div class="status-row">
-        <span class="status-name">Ingresos totales</span>
-        <div class="status-right">
-          <div class="mini-bar"><div class="mini-fill fill-green" style="width:100%"></div></div>
-          <span class="pct pct-green">100%</span>
-        </div>
-      </div>
-      <div class="status-row">
-        <span class="status-name">Gastos operativos</span>
-        <div class="status-right">
-          <div class="mini-bar"><div class="mini-fill fill-amber" style="width:32%"></div></div>
-          <span class="pct pct-amber">32%</span>
-        </div>
-      </div>
-      <div class="status-row">
-        <span class="status-name">Utilidad bruta</span>
-        <div class="status-right">
-          <div class="mini-bar"><div class="mini-fill fill-blue" style="width:68%"></div></div>
-          <span class="pct pct-blue">68%</span>
-        </div>
-      </div>
-      <div class="status-row">
-        <span class="status-name">Impuestos (est.)</span>
-        <div class="status-right">
-          <div class="mini-bar"><div class="mini-fill fill-amber" style="width:20%"></div></div>
-          <span class="pct pct-amber">20%</span>
-        </div>
-      </div>
-      <div class="status-row">
-        <span class="status-name">Utilidad neta</span>
-        <div class="status-right">
-          <div class="mini-bar"><div class="mini-fill fill-green" style="width:48%"></div></div>
-          <span class="pct pct-green">48%</span>
-        </div>
-      </div>
+@if (!loading) {
+  <div class="kpi-row">
+    <div class="kpi-cell">
+      <div class="kpi-lbl">Ingresos del Mes</div>
+      <div class="kpi-val">{{ kpis?.ingresos_mes | number:'1.0-0' }}</div>
+      <div class="kpi-delta up">↑ total ingresos</div>
     </div>
-  </app-section-panel>
+    <div class="kpi-cell">
+      <div class="kpi-lbl">Gastos del Mes</div>
+      <div class="kpi-val">{{ kpis?.gastos_mes | number:'1.0-0' }}</div>
+      <div class="kpi-delta warn">↑ total gastos</div>
+    </div>
+    <div class="kpi-cell">
+      <div class="kpi-lbl">Utilidad Neta</div>
+      <div class="kpi-val">{{ kpis?.utilidad_mes | number:'1.0-0' }}</div>
+      <div class="kpi-delta up">↑ utilidad período</div>
+    </div>
+    <div class="kpi-cell">
+      <div class="kpi-lbl">Cuentas por Cobrar</div>
+      <div class="kpi-val">{{ kpis?.cuentas_por_cobrar | number:'1.0-0' }}</div>
+      <div class="kpi-delta warn">⚠ pendiente cobro</div>
+    </div>
+  </div>
 
-  <app-section-panel num="03" title="Cuentas Bancarias">
+  <app-section-panel num="01" title="Movimientos Recientes" link="#" linkLabel="Ver libro">
     <div class="tbl-wrap">
       <table class="tbl">
         <thead>
           <tr>
-            <th>Banco</th>
+            <th>Fecha</th>
+            <th>Concepto</th>
             <th>Tipo</th>
-            <th>Saldo</th>
+            <th>Monto</th>
+            <th>Cuenta</th>
           </tr>
         </thead>
         <tbody>
-          @if (cuentas.length > 0) {
-            @for (cuenta of cuentas; track cuenta.id) {
+          @if (movimientos.length > 0) {
+            @for (mov of movimientos; track mov.id) {
               <tr>
-                <td>{{ cuenta.banco }}</td>
-                <td class="muted-cell">{{ cuenta.tipo }}</td>
-                <td class="mono">{{ cuenta.saldo }}</td>
+                <td class="muted-cell">{{ mov.fecha }}</td>
+                <td>{{ mov.concepto }}</td>
+                <td><span class="pill">{{ mov.tipo }}</span></td>
+                <td class="mono">{{ mov.monto | number:'1.0-0' }}</td>
+                <td class="mono">{{ mov.cuenta }}</td>
               </tr>
             }
           } @else {
-            <tr>
-              <td>BCI</td>
-              <td class="muted-cell">Cta. Corriente</td>
-              <td class="mono" style="color:var(--green)">$182,400</td>
-            </tr>
-            <tr>
-              <td>Santander</td>
-              <td class="muted-cell">Cta. Corriente</td>
-              <td class="mono" style="color:var(--green)">$64,800</td>
-            </tr>
-            <tr>
-              <td>Banco Estado</td>
-              <td class="muted-cell">Ahorro empresa</td>
-              <td class="mono" style="color:var(--green)">$240,000</td>
-            </tr>
-            <tr>
-              <td>Itaú</td>
-              <td class="muted-cell">Línea de crédito</td>
-              <td class="mono" style="color:var(--amber)">-$18,200</td>
-            </tr>
+            <tr><td colspan="5" class="muted-cell">Sin movimientos registrados</td></tr>
           }
         </tbody>
       </table>
     </div>
   </app-section-panel>
-</div>
+
+  <div class="two-col">
+    <app-section-panel num="02" title="Resumen Financiero">
+      <div class="card-body">
+        <div class="status-row">
+          <span class="status-name">Ingresos totales</span>
+          <div class="status-right">
+            <div class="mini-bar"><div class="mini-fill fill-green" style="width:100%"></div></div>
+            <span class="pct pct-green">100%</span>
+          </div>
+        </div>
+        <div class="status-row">
+          <span class="status-name">Gastos operativos</span>
+          <div class="status-right">
+            <div class="mini-bar">
+              <div class="mini-fill fill-amber"
+                [style.width.%]="kpis?.ingresos_mes ? (kpis.gastos_mes / kpis.ingresos_mes * 100) : 0">
+              </div>
+            </div>
+            <span class="pct pct-amber">
+              {{ kpis?.ingresos_mes ? (kpis.gastos_mes / kpis.ingresos_mes * 100 | number:'1.0-0') : 0 }}%
+            </span>
+          </div>
+        </div>
+        <div class="status-row">
+          <span class="status-name">Utilidad neta</span>
+          <div class="status-right">
+            <div class="mini-bar">
+              <div class="mini-fill fill-blue"
+                [style.width.%]="kpis?.ingresos_mes ? (kpis.utilidad_mes / kpis.ingresos_mes * 100) : 0">
+              </div>
+            </div>
+            <span class="pct pct-blue">
+              {{ kpis?.ingresos_mes ? (kpis.utilidad_mes / kpis.ingresos_mes * 100 | number:'1.0-0') : 0 }}%
+            </span>
+          </div>
+        </div>
+        <div class="status-row">
+          <span class="status-name">Cuentas por cobrar</span>
+          <div class="status-right">
+            <div class="mini-bar">
+              <div class="mini-fill fill-amber"
+                [style.width.%]="kpis?.ingresos_mes ? (kpis.cuentas_por_cobrar / kpis.ingresos_mes * 100) : 0">
+              </div>
+            </div>
+            <span class="pct pct-amber">{{ kpis?.cuentas_por_cobrar | number:'1.0-0' }}</span>
+          </div>
+        </div>
+      </div>
+    </app-section-panel>
+
+    <app-section-panel num="03" title="Cuentas Bancarias">
+      <div class="tbl-wrap">
+        <table class="tbl">
+          <thead>
+            <tr>
+              <th>Banco</th>
+              <th>Tipo</th>
+              <th>Saldo</th>
+            </tr>
+          </thead>
+          <tbody>
+            @if (cuentas.length > 0) {
+              @for (cuenta of cuentas; track cuenta.id) {
+                <tr>
+                  <td>{{ cuenta.banco }}</td>
+                  <td class="muted-cell">{{ cuenta.tipo }}</td>
+                  <td class="mono">{{ cuenta.saldo | number:'1.0-0' }}</td>
+                </tr>
+              }
+            } @else {
+              <tr><td colspan="3" class="muted-cell">Sin cuentas bancarias registradas</td></tr>
+            }
+          </tbody>
+        </table>
+      </div>
+    </app-section-panel>
+  </div>
+}
 
 @if (modalAbierto) {
   <div class="modal-overlay" (click)="cerrarModal()">
@@ -229,7 +180,7 @@
               <select formControlName="cuenta">
                 <option value="">— Seleccionar cuenta —</option>
                 @for (c of cuentas; track c.id) {
-                  <option [value]="c.nombre">{{ c.banco }} — {{ c.nombre }}</option>
+                  <option [value]="c.numero_cuenta">{{ c.banco }} — {{ c.numero_cuenta }}</option>
                 }
               </select>
             </label>

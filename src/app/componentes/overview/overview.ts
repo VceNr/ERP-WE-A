@@ -1,5 +1,5 @@
 import { Component, OnInit, inject } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, DecimalPipe } from '@angular/common';
 import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { forkJoin } from 'rxjs';
 import { catchError, of } from 'rxjs';
@@ -18,7 +18,7 @@ import { ContabilidadService } from '../../core/services/contabilidad.service';
 @Component({
   selector: 'app-overview',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, OverviewHeader, QuickActions, KpiCard, SectionPanel],
+  imports: [CommonModule, DecimalPipe, ReactiveFormsModule, OverviewHeader, QuickActions, KpiCard, SectionPanel],
   templateUrl: './overview.html',
   styleUrl: './overview.css',
 })

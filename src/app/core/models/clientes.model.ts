@@ -1,1 +1,1 @@
-export interface Cliente { id: string; nombre: string; email: string; telefono: string; segmento: string; deuda: number; }
+export interface Cliente { id: number; nombre: string; rut: string; segmento: string; ultima_orden: string; deuda: number; estado: string; email: string; telefono: string; direccion: string; }

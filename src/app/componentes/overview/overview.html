@@ -11,8 +11,8 @@
 }
 
 <!-- 3. KPI STRIP -->
-<div class="kpi-strip">
-  @if (kpis.length > 0) {
+@if (!loading) {
+  <div class="kpi-strip">
     @for (kpi of kpis; track kpi.label) {
       <app-kpi-card
         [label]="kpi.label"
@@ -23,66 +23,30 @@
         [sparkPath]="kpi.sparkPath || ''"
       ></app-kpi-card>
     }
-  } @else {
-    <app-kpi-card
-      label="Ventas del Mes"
-      value="$284,500"
-      delta="12.4%"
-      deltaDir="up"
-      compare="vs mes anterior"
-      color="blue"
-      sparkPath="M0,22 C15,20 25,15 40,12 C55,9 65,7 80,5 C88,4 95,3 100,2"
-    ></app-kpi-card>
+  </div>
 
-    <app-kpi-card
-      label="Órdenes Activas"
-      value="1,284"
-      delta="8.1%"
-      deltaDir="up"
-      compare="vs semana pasada"
-      color="green"
-      sparkPath="M0,20 C10,18 25,14 38,16 C50,18 60,10 75,8 C85,6 93,5 100,4"
-    ></app-kpi-card>
-
-    <app-kpi-card
-      label="Stock Crítico"
-      value="23"
-      delta="+3 Items"
-      deltaDir="down"
-      compare="requieren reposición"
-      color="amber"
-      sparkPath="M0,10 C15,8 25,12 40,16 C50,18 60,14 75,18 C85,20 93,18 100,20"
-    ></app-kpi-card>
-
-    <app-kpi-card
-      label="Clientes Activos"
-      value="4,820"
-      delta="2.3%"
-      deltaDir="up"
-      compare="este trimestre"
-      color="teal"
-      sparkPath="M0,20 C10,18 25,14 38,16 C50,18 60,10 75,8 C85,6 93,5 100,4"
-    ></app-kpi-card>
-  }
-</div>
-
-<!-- 4. GASTOS CARD -->
-<div class="gastos-card">
-  <div class="gastos-left">
-    <span class="gastos-label">Gastos Operativos</span>
-    <span class="gastos-value">$91,200</span>
-    <div class="gastos-delta down">
-      <span>&#8595;</span> 5.7% <span class="gastos-compare">vs mes anterior</span>
+  <!-- 4. GASTOS CARD -->
+  @if (financialSummary) {
+    <div class="gastos-card">
+      <div class="gastos-left">
+        <span class="gastos-label">Gastos Operativos</span>
+        <span class="gastos-value">{{ formatCurrency(financialSummary.gastos) }}</span>
+        <div class="gastos-delta down">
+          <span>&#8595;</span>
+          {{ financialSummary.ingresos > 0 ? ((financialSummary.gastos / financialSummary.ingresos) * 100 | number:'1.1-1') : '0' }}%
+          <span class="gastos-compare">del total de ingresos</span>
+        </div>
+      </div>
+      <div class="gastos-spark">
+        <svg viewBox="0 0 100 28" preserveAspectRatio="none" aria-hidden="true">
+          <path d="M0,6 C15,8 25,10 40,14 C55,17 65,20 80,22 C90,23 95,24 100,25"
+                fill="none" stroke="var(--red)" stroke-width="1.5"
+                stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
     </div>
-  </div>
-  <div class="gastos-spark">
-    <svg viewBox="0 0 100 28" preserveAspectRatio="none" aria-hidden="true">
-      <path d="M0,6 C15,8 25,10 40,14 C55,17 65,20 80,22 C90,23 95,24 100,25"
-            fill="none" stroke="var(--red)" stroke-width="1.5"
-            stroke-linecap="round" stroke-linejoin="round"/>
-    </svg>
-  </div>
-</div>
+  }
+}
 
 <!-- 5. SECCIONES COLAPSABLES -->
 

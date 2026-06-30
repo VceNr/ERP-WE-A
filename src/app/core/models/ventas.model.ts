@@ -1,3 +1,3 @@
-export interface OrdenVenta { id: string; cliente: string; fecha: string; total: number; estado: string; vendedor: string; }
-export interface Vendedor { id: string; nombre: string; ventas: number; meta: number; }
-export interface CanalVenta { canal: string; porcentaje: number; monto: number; }
+export interface OrdenVenta { id: number; numero: string; cliente: string; cliente_id: number; vendedor: string; monto: number; estado: string; fecha: string; created_at: string; }
+export interface Vendedor { id: number; nombre: string; ventas_total: number; meta: number; porcentaje_cumplimiento: number; activo: boolean; }
+export interface CanalVenta { nombre: string; porcentaje: number; monto: number; }
