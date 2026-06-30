@@ -1,5 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { RouterOutlet, RouterLink, RouterLinkActive } from '@angular/router';
+import { HttpClient } from '@angular/common/http';
+import { catchError, of } from 'rxjs';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-dashboard',
@@ -7,7 +10,9 @@ import { RouterOutlet, RouterLink, RouterLinkActive } from '@angular/router';
   templateUrl: './dashboard.html',
   styleUrl: './dashboard.css',
 })
-export class Dashboard {
+export class Dashboard implements OnInit {
+  private http = inject(HttpClient);
+
   open: Record<string, boolean> = {
     principal: true,
     gestion:   false,
@@ -21,5 +26,9 @@ export class Dashboard {
 
   toggle(section: string) {
     this.open[section] = !this.open[section];
+  }
+
+  ngOnInit() {
+    this.http.get(`${environment.apiUrl}/dashboard/kpis`).pipe(catchError(() => of(null))).subscribe();
   }
 }
