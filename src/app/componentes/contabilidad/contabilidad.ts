@@ -19,7 +19,7 @@ export class Contabilidad implements OnInit {
 
   loading = true;
   error = false;
-  kpis: any[] = [];
+  kpis: any = null;
   facturas: Factura[] = [];
   asientos: AsientoContable[] = [];
 

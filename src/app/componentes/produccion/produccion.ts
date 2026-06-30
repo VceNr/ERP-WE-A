@@ -22,7 +22,7 @@ export class Produccion implements OnInit {
 
   loading = true;
   error = false;
-  kpis: any[] = [];
+  kpis: any = null;
   ordenes: OrdenProduccion[] = [];
   lineas: LineaProduccion[] = [];
   productos: Producto[] = [];

@@ -19,7 +19,7 @@ export class Finanzas implements OnInit {
 
   loading = true;
   error = false;
-  kpis: any[] = [];
+  kpis: any = null;
   movimientos: MovimientoFinanciero[] = [];
   cuentas: CuentaBancaria[] = [];
 

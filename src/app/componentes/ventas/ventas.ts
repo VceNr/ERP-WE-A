@@ -21,7 +21,7 @@ export class Ventas implements OnInit {
 
   loading = true;
   error = false;
-  kpis: any[] = [];
+  kpis: any = null;
   ordenes: OrdenVenta[] = [];
   vendedores: Vendedor[] = [];
   canales: CanalVenta[] = [];

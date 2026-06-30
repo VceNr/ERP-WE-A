@@ -21,7 +21,7 @@ export class Proyectos implements OnInit {
 
   loading = true;
   error = false;
-  kpis: any[] = [];
+  kpis: any = null;
   proyectos: Proyecto[] = [];
   tareas: any[] = [];
   clientesLista: any[] = [];

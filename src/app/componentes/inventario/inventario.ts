@@ -19,7 +19,7 @@ export class Inventario implements OnInit {
 
   loading = true;
   error = false;
-  kpis: any[] = [];
+  kpis: any = null;
   productos: Producto[] = [];
   stockCritico: Producto[] = [];
   movimientos: MovimientoInventario[] = [];

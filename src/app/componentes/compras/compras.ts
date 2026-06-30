@@ -19,7 +19,7 @@ export class Compras implements OnInit {
 
   loading = true;
   error = false;
-  kpis: any[] = [];
+  kpis: any = null;
   ordenes: OrdenCompra[] = [];
   proveedores: Proveedor[] = [];
   gastoCategorias: any[] = [];

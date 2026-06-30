@@ -19,7 +19,7 @@ export class Rrhh implements OnInit {
 
   loading = true;
   error = false;
-  kpis: any[] = [];
+  kpis: any = null;
   empleados: Empleado[] = [];
   departamentos: Departamento[] = [];
   cumpleanios: any[] = [];

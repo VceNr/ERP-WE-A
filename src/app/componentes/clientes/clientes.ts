@@ -19,7 +19,7 @@ export class Clientes implements OnInit {
 
   loading = true;
   error = false;
-  kpis: any[] = [];
+  kpis: any = null;
   clientes: Cliente[] = [];
   segmentos: any[] = [];
   actividad: any[] = [];

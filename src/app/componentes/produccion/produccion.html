@@ -13,203 +13,89 @@
   <div class="loading-bar">Cargando datos...</div>
 }
 
-<div class="kpi-row">
-  <div class="kpi-cell">
-    <div class="kpi-lbl">Órdenes Activas</div>
-    <div class="kpi-val">18</div>
-    <div class="kpi-delta up">↑ 3 nuevas hoy</div>
+@if (!loading) {
+  <div class="kpi-row">
+    <div class="kpi-cell">
+      <div class="kpi-lbl">Órdenes Activas</div>
+      <div class="kpi-val">{{ kpis?.ordenes_activas ?? 0 }}</div>
+      <div class="kpi-delta up">↑ en proceso</div>
+    </div>
+    <div class="kpi-cell">
+      <div class="kpi-lbl">Eficiencia Global</div>
+      <div class="kpi-val">{{ kpis?.eficiencia_promedio | number:'1.0-1' }}%</div>
+      <div class="kpi-delta up">↑ promedio líneas</div>
+    </div>
+    <div class="kpi-cell">
+      <div class="kpi-lbl">Unidades Hoy</div>
+      <div class="kpi-val">{{ kpis?.unidades_hoy | number }}</div>
+      <div class="kpi-delta up">↑ producidas hoy</div>
+    </div>
+    <div class="kpi-cell">
+      <div class="kpi-lbl">Paros Hoy</div>
+      <div class="kpi-val">{{ kpis?.paros_hoy ?? 0 }}</div>
+      <div class="kpi-delta warn">⚠ interrupciones</div>
+    </div>
   </div>
-  <div class="kpi-cell">
-    <div class="kpi-lbl">Eficiencia Global</div>
-    <div class="kpi-val">87%</div>
-    <div class="kpi-delta up">↑ 2pp vs semana anterior</div>
-  </div>
-  <div class="kpi-cell">
-    <div class="kpi-lbl">Unidades Hoy</div>
-    <div class="kpi-val">1,240</div>
-    <div class="kpi-delta up">↑ 4.8% vs promedio</div>
-  </div>
-  <div class="kpi-cell">
-    <div class="kpi-lbl">Tiempo de Paro</div>
-    <div class="kpi-val">2.3h</div>
-    <div class="kpi-delta warn">⚠ Línea B — mantenimiento</div>
-  </div>
-</div>
 
-<app-section-panel num="01" title="Órdenes de Producción Activas" link="#" linkLabel="Ver todas">
-  <div class="tbl-wrap">
-    <table class="tbl">
-      <thead>
-        <tr>
-          <th>N° OP</th>
-          <th>Producto</th>
-          <th>Cantidad</th>
-          <th>Progreso</th>
-          <th>Estado</th>
-        </tr>
-      </thead>
-      <tbody>
-        @if (ordenes.length > 0) {
-          @for (orden of ordenes; track orden.id) {
-            <tr>
-              <td class="mono">{{ orden.id }}</td>
-              <td>{{ orden.producto }}</td>
-              <td class="mono">{{ orden.cantidad }}</td>
-              <td>
-                <div style="display:flex;align-items:center;gap:0.5rem">
-                  <div style="width:80px;height:4px;background:var(--border);border-radius:999px;overflow:hidden">
-                    <div [style.width.%]="$any(orden).eficiencia || 0" style="height:100%;background:var(--blue);border-radius:999px"></div>
+  <app-section-panel num="01" title="Órdenes de Producción Activas" link="#" linkLabel="Ver todas">
+    <div class="tbl-wrap">
+      <table class="tbl">
+        <thead>
+          <tr>
+            <th>N° OP</th>
+            <th>Producto</th>
+            <th>Cantidad</th>
+            <th>Progreso</th>
+            <th>Estado</th>
+          </tr>
+        </thead>
+        <tbody>
+          @if (ordenes.length > 0) {
+            @for (orden of ordenes; track orden.id) {
+              <tr>
+                <td class="mono">{{ orden.numero ?? orden.id }}</td>
+                <td>{{ orden.producto }}</td>
+                <td class="mono">{{ orden.cantidad }}</td>
+                <td>
+                  <div style="display:flex;align-items:center;gap:0.5rem">
+                    <div style="width:80px;height:4px;background:var(--border);border-radius:999px;overflow:hidden">
+                      <div [style.width.%]="$any(orden).progreso || 0" style="height:100%;background:var(--blue);border-radius:999px"></div>
+                    </div>
+                    <span class="mono" style="font-size:var(--text-2xs);color:var(--blue)">{{ $any(orden).progreso || 0 }}%</span>
                   </div>
-                  <span class="mono" style="font-size:var(--text-2xs);color:var(--blue)">{{ $any(orden).eficiencia || 0 }}%</span>
-                </div>
-              </td>
-              <td><span class="pill">{{ orden.estado }}</span></td>
-            </tr>
+                </td>
+                <td><span class="pill">{{ orden.estado }}</span></td>
+              </tr>
+            }
+          } @else {
+            <tr><td colspan="5" class="muted-cell">Sin órdenes de producción activas</td></tr>
           }
-        } @else {
-          <tr>
-            <td class="mono">OP-2024-0184</td>
-            <td>Perfil aluminio extruido 6063-T5</td>
-            <td class="mono">2,500 u.</td>
-            <td>
-              <div style="display:flex;align-items:center;gap:0.5rem">
-                <div style="width:80px;height:4px;background:var(--border);border-radius:999px;overflow:hidden">
-                  <div style="width:78%;height:100%;background:var(--green);border-radius:999px"></div>
-                </div>
-                <span class="mono" style="font-size:var(--text-2xs);color:var(--green)">78%</span>
-              </div>
-            </td>
-            <td><span class="pill pill-green">En proceso</span></td>
-          </tr>
-          <tr>
-            <td class="mono">OP-2024-0183</td>
-            <td>Carcasa metálica estampada 2mm</td>
-            <td class="mono">800 u.</td>
-            <td>
-              <div style="display:flex;align-items:center;gap:0.5rem">
-                <div style="width:80px;height:4px;background:var(--border);border-radius:999px;overflow:hidden">
-                  <div style="width:45%;height:100%;background:var(--blue);border-radius:999px"></div>
-                </div>
-                <span class="mono" style="font-size:var(--text-2xs);color:var(--blue)">45%</span>
-              </div>
-            </td>
-            <td><span class="pill pill-green">En proceso</span></td>
-          </tr>
-          <tr>
-            <td class="mono">OP-2024-0182</td>
-            <td>Tubo rectangular 40x20mm galvanizado</td>
-            <td class="mono">5,000 u.</td>
-            <td>
-              <div style="display:flex;align-items:center;gap:0.5rem">
-                <div style="width:80px;height:4px;background:var(--border);border-radius:999px;overflow:hidden">
-                  <div style="width:100%;height:100%;background:var(--green);border-radius:999px"></div>
-                </div>
-                <span class="mono" style="font-size:var(--text-2xs);color:var(--green)">100%</span>
-              </div>
-            </td>
-            <td><span class="pill pill-teal">Completada</span></td>
-          </tr>
-          <tr>
-            <td class="mono">OP-2024-0181</td>
-            <td>Panel sandwich lana de roca 80mm</td>
-            <td class="mono">320 u.</td>
-            <td>
-              <div style="display:flex;align-items:center;gap:0.5rem">
-                <div style="width:80px;height:4px;background:var(--border);border-radius:999px;overflow:hidden">
-                  <div style="width:0%;height:100%;background:var(--muted);border-radius:999px"></div>
-                </div>
-                <span class="mono" style="font-size:var(--text-2xs);color:var(--muted)">0%</span>
-              </div>
-            </td>
-            <td><span class="pill pill-amber">Programada</span></td>
-          </tr>
-          <tr>
-            <td class="mono">OP-2024-0180</td>
-            <td>Revestimiento PVC para piso industrial</td>
-            <td class="mono">1,200 m²</td>
-            <td>
-              <div style="display:flex;align-items:center;gap:0.5rem">
-                <div style="width:80px;height:4px;background:var(--border);border-radius:999px;overflow:hidden">
-                  <div style="width:62%;height:100%;background:var(--blue);border-radius:999px"></div>
-                </div>
-                <span class="mono" style="font-size:var(--text-2xs);color:var(--blue)">62%</span>
-              </div>
-            </td>
-            <td><span class="pill pill-green">En proceso</span></td>
-          </tr>
-          <tr>
-            <td class="mono">OP-2024-0179</td>
-            <td>Gabinete eléctrico IP66 acero inox.</td>
-            <td class="mono">150 u.</td>
-            <td>
-              <div style="display:flex;align-items:center;gap:0.5rem">
-                <div style="width:80px;height:4px;background:var(--border);border-radius:999px;overflow:hidden">
-                  <div style="width:91%;height:100%;background:var(--green);border-radius:999px"></div>
-                </div>
-                <span class="mono" style="font-size:var(--text-2xs);color:var(--green)">91%</span>
-              </div>
-            </td>
-            <td><span class="pill pill-green">En proceso</span></td>
-          </tr>
-        }
-      </tbody>
-    </table>
-  </div>
-</app-section-panel>
+        </tbody>
+      </table>
+    </div>
+  </app-section-panel>
 
-<app-section-panel num="02" title="Estado de Líneas de Producción">
-  <div class="card-body">
-    @if (lineas.length > 0) {
-      <div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:1rem">
-        @for (linea of lineas; track linea.id) {
-          <div style="text-align:center;padding:0.75rem;border:1px solid var(--border);border-radius:4px;background:var(--bg)">
-            <div style="font-family:var(--font-mono);font-size:var(--text-2xs);color:var(--muted);letter-spacing:var(--tracking-label);text-transform:uppercase;margin-bottom:0.4rem">{{ linea.nombre }}</div>
-            <div style="font-size:1.2rem;font-weight:700;color:var(--green);margin-bottom:0.3rem">{{ linea.eficiencia }}%</div>
-            <div style="height:4px;background:var(--border);border-radius:999px;overflow:hidden;margin-bottom:0.4rem">
-              <div [style.width.%]="linea.eficiencia" style="height:100%;background:var(--green);border-radius:999px"></div>
+  <app-section-panel num="02" title="Estado de Líneas de Producción">
+    <div class="card-body">
+      @if (lineas.length > 0) {
+        <div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:1rem">
+          @for (linea of lineas; track linea.id) {
+            <div style="text-align:center;padding:0.75rem;border:1px solid var(--border);border-radius:4px;background:var(--bg)">
+              <div style="font-family:var(--font-mono);font-size:var(--text-2xs);color:var(--muted);letter-spacing:var(--tracking-label);text-transform:uppercase;margin-bottom:0.4rem">{{ linea.nombre }}</div>
+              <div style="font-size:1.2rem;font-weight:700;color:var(--green);margin-bottom:0.3rem">{{ linea.eficiencia }}%</div>
+              <div style="height:4px;background:var(--border);border-radius:999px;overflow:hidden;margin-bottom:0.4rem">
+                <div [style.width.%]="linea.eficiencia" style="height:100%;background:var(--green);border-radius:999px"></div>
+              </div>
+              <span class="pill pill-green">{{ linea.estado }}</span>
             </div>
-            <span class="pill pill-green">{{ linea.estado }}</span>
-          </div>
-        }
-      </div>
-    } @else {
-      <div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:1rem">
-        <div style="text-align:center;padding:0.75rem;border:1px solid var(--border);border-radius:4px;background:var(--bg)">
-          <div style="font-family:var(--font-mono);font-size:var(--text-2xs);color:var(--muted);letter-spacing:var(--tracking-label);text-transform:uppercase;margin-bottom:0.4rem">Línea A</div>
-          <div style="font-size:1.2rem;font-weight:700;color:var(--green);margin-bottom:0.3rem">94%</div>
-          <div style="height:4px;background:var(--border);border-radius:999px;overflow:hidden;margin-bottom:0.4rem">
-            <div style="width:94%;height:100%;background:var(--green);border-radius:999px"></div>
-          </div>
-          <span class="pill pill-green">Operativa</span>
+          }
         </div>
-        <div style="text-align:center;padding:0.75rem;border:1px solid var(--border);border-radius:4px;background:var(--bg)">
-          <div style="font-family:var(--font-mono);font-size:var(--text-2xs);color:var(--muted);letter-spacing:var(--tracking-label);text-transform:uppercase;margin-bottom:0.4rem">Línea B</div>
-          <div style="font-size:1.2rem;font-weight:700;color:var(--red);margin-bottom:0.3rem">0%</div>
-          <div style="height:4px;background:var(--border);border-radius:999px;overflow:hidden;margin-bottom:0.4rem">
-            <div style="width:0%;height:100%;background:var(--red);border-radius:999px"></div>
-          </div>
-          <span class="pill pill-red">Mantenimiento</span>
-        </div>
-        <div style="text-align:center;padding:0.75rem;border:1px solid var(--border);border-radius:4px;background:var(--bg)">
-          <div style="font-family:var(--font-mono);font-size:var(--text-2xs);color:var(--muted);letter-spacing:var(--tracking-label);text-transform:uppercase;margin-bottom:0.4rem">Línea C</div>
-          <div style="font-size:1.2rem;font-weight:700;color:var(--amber);margin-bottom:0.3rem">81%</div>
-          <div style="height:4px;background:var(--border);border-radius:999px;overflow:hidden;margin-bottom:0.4rem">
-            <div style="width:81%;height:100%;background:var(--amber);border-radius:999px"></div>
-          </div>
-          <span class="pill pill-amber">Parcial</span>
-        </div>
-        <div style="text-align:center;padding:0.75rem;border:1px solid var(--border);border-radius:4px;background:var(--bg)">
-          <div style="font-family:var(--font-mono);font-size:var(--text-2xs);color:var(--muted);letter-spacing:var(--tracking-label);text-transform:uppercase;margin-bottom:0.4rem">Línea D</div>
-          <div style="font-size:1.2rem;font-weight:700;color:var(--green);margin-bottom:0.3rem">88%</div>
-          <div style="height:4px;background:var(--border);border-radius:999px;overflow:hidden;margin-bottom:0.4rem">
-            <div style="width:88%;height:100%;background:var(--green);border-radius:999px"></div>
-          </div>
-          <span class="pill pill-green">Operativa</span>
-        </div>
-      </div>
-    }
-  </div>
-</app-section-panel>
+      } @else {
+        <p class="muted-cell">Sin líneas de producción registradas</p>
+      }
+    </div>
+  </app-section-panel>
+}
 
 @if (modalAbierto) {
   <div class="modal-overlay" (click)="cerrarModal()">

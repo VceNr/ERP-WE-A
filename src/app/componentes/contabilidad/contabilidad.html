@@ -13,217 +13,125 @@
   <div class="loading-bar">Cargando datos...</div>
 }
 
-<div class="kpi-row">
-  <div class="kpi-cell">
-    <div class="kpi-lbl">Asientos del Mes</div>
-    <div class="kpi-val">284</div>
-    <div class="kpi-delta up">↑ 22 vs mes anterior</div>
-  </div>
-  <div class="kpi-cell">
-    <div class="kpi-lbl">Cuentas por Pagar</div>
-    <div class="kpi-val">$38,400</div>
-    <div class="kpi-delta warn">⚠ $12,000 vence esta semana</div>
-  </div>
-  <div class="kpi-cell">
-    <div class="kpi-lbl">Cuentas por Cobrar</div>
-    <div class="kpi-val">$42,800</div>
-    <div class="kpi-delta warn">⚠ $8,200 vencidas</div>
-  </div>
-  <div class="kpi-cell">
-    <div class="kpi-lbl">Facturas Emitidas</div>
-    <div class="kpi-val">127</div>
-    <div class="kpi-delta up">↑ 14 vs mes anterior</div>
-  </div>
-</div>
-
-<app-section-panel num="01" title="Últimas Facturas" link="#" linkLabel="Ver libro de compras/ventas">
-  <div class="tbl-wrap">
-    <table class="tbl">
-      <thead>
-        <tr>
-          <th>N° Factura</th>
-          <th>Cliente / Proveedor</th>
-          <th>Tipo</th>
-          <th>Monto</th>
-          <th>Estado</th>
-          <th>Vence</th>
-        </tr>
-      </thead>
-      <tbody>
-        @if (facturas.length > 0) {
-          @for (factura of facturas; track factura.id) {
-            <tr>
-              <td class="mono">{{ factura.numero }}</td>
-              <td>{{ factura.cliente }}</td>
-              <td><span class="pill">{{ factura.id }}</span></td>
-              <td class="mono">{{ factura.total }}</td>
-              <td><span class="pill">{{ factura.estado }}</span></td>
-              <td class="muted-cell">{{ factura.fecha }}</td>
-            </tr>
-          }
-        } @else {
-          <tr>
-            <td class="mono">F-2024-0127</td>
-            <td>Constructora Andina S.A.</td>
-            <td><span class="pill pill-green">Venta</span></td>
-            <td class="mono">$12,400</td>
-            <td><span class="pill pill-green">Pagada</span></td>
-            <td class="muted-cell">25 Jun 2024</td>
-          </tr>
-          <tr>
-            <td class="mono">F-2024-0126</td>
-            <td>Importadora Global Ltda.</td>
-            <td><span class="pill pill-green">Venta</span></td>
-            <td class="mono">$38,750</td>
-            <td><span class="pill pill-amber">Pendiente</span></td>
-            <td class="muted-cell">28 Jun 2024</td>
-          </tr>
-          <tr>
-            <td class="mono">FC-2024-0318</td>
-            <td>Aceros del Pacífico S.A.</td>
-            <td><span class="pill pill-blue">Compra</span></td>
-            <td class="mono">$24,600</td>
-            <td><span class="pill pill-amber">Pendiente</span></td>
-            <td class="muted-cell">22 Jun 2024</td>
-          </tr>
-          <tr>
-            <td class="mono">F-2024-0125</td>
-            <td>Retail Moderno SpA</td>
-            <td><span class="pill pill-green">Venta</span></td>
-            <td class="mono">$6,200</td>
-            <td><span class="pill pill-green">Pagada</span></td>
-            <td class="muted-cell">20 Jun 2024</td>
-          </tr>
-          <tr>
-            <td class="mono">FC-2024-0314</td>
-            <td>Combustibles Araucania</td>
-            <td><span class="pill pill-blue">Compra</span></td>
-            <td class="mono">$11,200</td>
-            <td><span class="pill pill-red">Vencida</span></td>
-            <td class="muted-cell">10 Jun 2024</td>
-          </tr>
-          <tr>
-            <td class="mono">F-2024-0124</td>
-            <td>Minera Cordillera S.A.</td>
-            <td><span class="pill pill-green">Venta</span></td>
-            <td class="mono">$8,940</td>
-            <td><span class="pill pill-green">Pagada</span></td>
-            <td class="muted-cell">18 Jun 2024</td>
-          </tr>
-        }
-      </tbody>
-    </table>
-  </div>
-</app-section-panel>
-
-<div class="two-col">
-  <app-section-panel num="02" title="Balance Simplificado" link="#" linkLabel="Balance completo">
-    <div class="card-body">
-      <div style="margin-bottom:1rem">
-        <div style="font-family:var(--font-mono);font-size:var(--text-2xs);color:var(--muted);text-transform:uppercase;letter-spacing:var(--tracking-label);margin-bottom:0.4rem">Activos</div>
-        <div class="status-row">
-          <span class="status-name">Activo Corriente</span>
-          <div class="status-right">
-            <div class="mini-bar"><div class="mini-fill fill-green" style="width:72%"></div></div>
-            <span class="pct pct-green">$487,200</span>
-          </div>
-        </div>
-        <div class="status-row">
-          <span class="status-name">Activo No Corriente</span>
-          <div class="status-right">
-            <div class="mini-bar"><div class="mini-fill fill-green" style="width:88%"></div></div>
-            <span class="pct pct-green">$1,240,000</span>
-          </div>
-        </div>
-      </div>
-      <div style="margin-bottom:1rem">
-        <div style="font-family:var(--font-mono);font-size:var(--text-2xs);color:var(--muted);text-transform:uppercase;letter-spacing:var(--tracking-label);margin-bottom:0.4rem">Pasivos</div>
-        <div class="status-row">
-          <span class="status-name">Pasivo Corriente</span>
-          <div class="status-right">
-            <div class="mini-bar"><div class="mini-fill fill-amber" style="width:28%"></div></div>
-            <span class="pct pct-amber">$38,400</span>
-          </div>
-        </div>
-        <div class="status-row">
-          <span class="status-name">Pasivo No Corriente</span>
-          <div class="status-right">
-            <div class="mini-bar"><div class="mini-fill fill-amber" style="width:40%"></div></div>
-            <span class="pct pct-amber">$184,000</span>
-          </div>
-        </div>
-      </div>
-      <div>
-        <div style="font-family:var(--font-mono);font-size:var(--text-2xs);color:var(--muted);text-transform:uppercase;letter-spacing:var(--tracking-label);margin-bottom:0.4rem">Patrimonio</div>
-        <div class="status-row">
-          <span class="status-name">Patrimonio neto</span>
-          <div class="status-right">
-            <div class="mini-bar"><div class="mini-fill fill-blue" style="width:100%"></div></div>
-            <span class="pct pct-blue">$1,504,800</span>
-          </div>
-        </div>
-      </div>
+@if (!loading) {
+  <div class="kpi-row">
+    <div class="kpi-cell">
+      <div class="kpi-lbl">Asientos del Mes</div>
+      <div class="kpi-val">{{ kpis?.asientos_mes ?? 0 }}</div>
+      <div class="kpi-delta up">↑ registrados</div>
     </div>
-  </app-section-panel>
+    <div class="kpi-cell">
+      <div class="kpi-lbl">Facturas Emitidas</div>
+      <div class="kpi-val">{{ kpis?.facturas_emitidas_mes ?? 0 }}</div>
+      <div class="kpi-delta up">↑ facturas de venta</div>
+    </div>
+    <div class="kpi-cell">
+      <div class="kpi-lbl">Facturas Recibidas</div>
+      <div class="kpi-val">{{ kpis?.facturas_recibidas_mes ?? 0 }}</div>
+      <div class="kpi-delta warn">↑ facturas de compra</div>
+    </div>
+    <div class="kpi-cell">
+      <div class="kpi-lbl">IVA por Pagar</div>
+      <div class="kpi-val">{{ kpis?.iva_por_pagar | number:'1.0-0' }}</div>
+      <div class="kpi-delta warn">⚠ estimado período</div>
+    </div>
+  </div>
 
-  <app-section-panel num="03" title="Últimos Asientos Contables">
+  <app-section-panel num="01" title="Últimas Facturas" link="#" linkLabel="Ver libro de compras/ventas">
     <div class="tbl-wrap">
       <table class="tbl">
         <thead>
           <tr>
-            <th>Asiento</th>
-            <th>Cuenta</th>
-            <th>Debe</th>
-            <th>Haber</th>
+            <th>N° Factura</th>
+            <th>Cliente / Proveedor</th>
+            <th>Tipo</th>
+            <th>Monto</th>
+            <th>Estado</th>
+            <th>Vence</th>
           </tr>
         </thead>
         <tbody>
-          @if (asientos.length > 0) {
-            @for (asiento of asientos; track asiento.id) {
+          @if (facturas.length > 0) {
+            @for (factura of facturas; track factura.id) {
               <tr>
-                <td class="mono">{{ asiento.id }}</td>
-                <td>{{ asiento.descripcion }}</td>
-                <td class="mono">{{ asiento.debe }}</td>
-                <td class="mono">{{ asiento.haber }}</td>
+                <td class="mono">{{ factura.numero }}</td>
+                <td>{{ factura.cliente }}</td>
+                <td><span class="pill">{{ factura.tipo }}</span></td>
+                <td class="mono">{{ factura.monto | number:'1.0-0' }}</td>
+                <td><span class="pill">{{ factura.estado }}</span></td>
+                <td class="muted-cell">{{ factura.fecha_vencimiento }}</td>
               </tr>
             }
           } @else {
-            <tr>
-              <td class="mono">AST-0284</td>
-              <td>Caja / Ingresos venta</td>
-              <td class="mono" style="color:var(--green)">$12,400</td>
-              <td class="mono">—</td>
-            </tr>
-            <tr>
-              <td class="mono">AST-0283</td>
-              <td>Prov. — Combustibles</td>
-              <td class="mono">—</td>
-              <td class="mono" style="color:var(--red)">$11,200</td>
-            </tr>
-            <tr>
-              <td class="mono">AST-0282</td>
-              <td>Clientes / Cobros</td>
-              <td class="mono" style="color:var(--green)">$28,000</td>
-              <td class="mono">—</td>
-            </tr>
-            <tr>
-              <td class="mono">AST-0281</td>
-              <td>Remuneraciones</td>
-              <td class="mono">—</td>
-              <td class="mono" style="color:var(--red)">$48,400</td>
-            </tr>
-            <tr>
-              <td class="mono">AST-0280</td>
-              <td>Arriendo oficinas</td>
-              <td class="mono">—</td>
-              <td class="mono" style="color:var(--red)">$6,800</td>
-            </tr>
+            <tr><td colspan="6" class="muted-cell">Sin facturas registradas</td></tr>
           }
         </tbody>
       </table>
     </div>
   </app-section-panel>
-</div>
+
+  <div class="two-col">
+    <app-section-panel num="02" title="Resumen Contable" link="#" linkLabel="Balance completo">
+      <div class="card-body">
+        <div style="margin-bottom:1rem">
+          <div style="font-family:var(--font-mono);font-size:var(--text-2xs);color:var(--muted);text-transform:uppercase;letter-spacing:var(--tracking-label);margin-bottom:0.4rem">Facturación</div>
+          <div class="status-row">
+            <span class="status-name">Total facturado</span>
+            <div class="status-right">
+              <div class="mini-bar"><div class="mini-fill fill-green" style="width:100%"></div></div>
+              <span class="pct pct-green">{{ kpis?.total_facturado | number:'1.0-0' }}</span>
+            </div>
+          </div>
+          <div class="status-row">
+            <span class="status-name">IVA estimado</span>
+            <div class="status-right">
+              <div class="mini-bar"><div class="mini-fill fill-amber" style="width:19%"></div></div>
+              <span class="pct pct-amber">{{ kpis?.iva_por_pagar | number:'1.0-0' }}</span>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div style="font-family:var(--font-mono);font-size:var(--text-2xs);color:var(--muted);text-transform:uppercase;letter-spacing:var(--tracking-label);margin-bottom:0.4rem">Estado</div>
+          <div class="status-row">
+            <span class="status-name">Balance cuadrado</span>
+            <div class="status-right">
+              <span class="pill pill-green">{{ kpis?.balance_cuadrado ? 'Sí' : 'No' }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </app-section-panel>
+
+    <app-section-panel num="03" title="Últimos Asientos Contables">
+      <div class="tbl-wrap">
+        <table class="tbl">
+          <thead>
+            <tr>
+              <th>Asiento</th>
+              <th>Cuenta</th>
+              <th>Debe</th>
+              <th>Haber</th>
+            </tr>
+          </thead>
+          <tbody>
+            @if (asientos.length > 0) {
+              @for (asiento of asientos; track asiento.id) {
+                <tr>
+                  <td class="mono">{{ asiento.numero ?? asiento.id }}</td>
+                  <td>{{ asiento.descripcion }}</td>
+                  <td class="mono">{{ asiento.debe | number:'1.0-0' }}</td>
+                  <td class="mono">{{ asiento.haber | number:'1.0-0' }}</td>
+                </tr>
+              }
+            } @else {
+              <tr><td colspan="4" class="muted-cell">Sin asientos registrados</td></tr>
+            }
+          </tbody>
+        </table>
+      </div>
+    </app-section-panel>
+  </div>
+}
 
 @if (modalAbierto) {
   <div class="modal-overlay" (click)="cerrarModal()">
