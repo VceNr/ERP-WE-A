@@ -53,7 +53,7 @@
           @if (ordenes.length > 0) {
             @for (orden of ordenes; track orden.id) {
               <tr>
-                <td class="mono">{{ orden.numero ?? orden.id }}</td>
+                <td class="mono">{{ orden.numero }}</td>
                 <td>{{ orden.producto }}</td>
                 <td class="mono">{{ orden.cantidad }}</td>
                 <td>

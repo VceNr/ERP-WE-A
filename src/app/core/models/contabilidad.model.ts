@@ -1,2 +1,2 @@
-export interface Factura { id: string; numero: string; cliente: string; fecha: string; total: number; estado: string; }
-export interface AsientoContable { id: string; fecha: string; descripcion: string; debe: number; haber: number; }
+export interface Factura { id: number; numero: string; cliente_proveedor: string; tipo: string; monto: number; estado: string; fecha_vencimiento: string; }
+export interface AsientoContable { id: number; numero: string; cuenta: string; debe: number; haber: number; fecha: string; descripcion: string; }

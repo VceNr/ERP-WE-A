@@ -59,7 +59,7 @@
                 <td><span class="pill">{{ cliente.segmento }}</span></td>
                 <td class="mono">{{ cliente.deuda | number:'1.0-0' }}</td>
                 <td class="muted-cell">{{ cliente.email }}</td>
-                <td><span class="pill pill-green">{{ cliente.estado ?? 'Activo' }}</span></td>
+                <td><span class="pill pill-green">{{ cliente.estado }}</span></td>
               </tr>
             }
           } @else {

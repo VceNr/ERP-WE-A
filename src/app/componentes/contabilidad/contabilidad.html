@@ -55,7 +55,7 @@
             @for (factura of facturas; track factura.id) {
               <tr>
                 <td class="mono">{{ factura.numero }}</td>
-                <td>{{ factura.cliente }}</td>
+                <td>{{ factura.cliente_proveedor }}</td>
                 <td><span class="pill">{{ factura.tipo }}</span></td>
                 <td class="mono">{{ factura.monto | number:'1.0-0' }}</td>
                 <td><span class="pill">{{ factura.estado }}</span></td>

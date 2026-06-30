@@ -54,7 +54,7 @@
             @for (orden of ordenes; track orden.id) {
               <tr>
                 <td class="mono">{{ orden.numero }}</td>
-                <td>{{ orden.proveedor }}</td>
+                <td>{{ orden.proveedor_id }}</td>
                 <td class="mono">{{ orden.monto | number:'1.0-0' }}</td>
                 <td><span class="pill">{{ orden.estado }}</span></td>
                 <td class="muted-cell">{{ orden.fecha_entrega }}</td>
@@ -80,7 +80,7 @@
               </div>
               <div class="status-right">
                 <span class="mono" style="color:var(--text-2)">{{ prov.total_ordenes }} OC</span>
-                <span class="pill pill-green">{{ prov.estado ?? 'Activo' }}</span>
+                <span class="pill pill-green">{{ prov.estado }}</span>
               </div>
             </div>
           }
