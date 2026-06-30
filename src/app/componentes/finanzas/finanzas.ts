@@ -3,13 +3,14 @@ import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { forkJoin, catchError, of } from 'rxjs';
 import { SectionPanel } from '../section-panel/section-panel';
+import { Skeleton } from '../skeleton/skeleton';
 import { FinanzasService } from '../../core/services/finanzas.service';
 import { MovimientoFinanciero, CuentaBancaria } from '../../core/models/finanzas.model';
 
 @Component({
   selector: 'app-finanzas',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, SectionPanel],
+  imports: [CommonModule, ReactiveFormsModule, SectionPanel, Skeleton],
   templateUrl: './finanzas.html',
   styleUrl: './finanzas.css',
 })

@@ -7,6 +7,7 @@ import { OverviewHeader } from '../overview-header/overview-header';
 import { QuickActions } from '../quick-actions/quick-actions';
 import { KpiCard } from '../kpi-card/kpi-card';
 import { SectionPanel } from '../section-panel/section-panel';
+import { Skeleton } from '../skeleton/skeleton';
 import { DashboardService } from '../../core/services/dashboard.service';
 import { KpiData, FinancialSummary, RecentOrder, Alert, RecentActivity } from '../../core/models/dashboard.model';
 import { VentasService } from '../../core/services/ventas.service';
@@ -18,7 +19,7 @@ import { ContabilidadService } from '../../core/services/contabilidad.service';
 @Component({
   selector: 'app-overview',
   standalone: true,
-  imports: [CommonModule, DecimalPipe, ReactiveFormsModule, OverviewHeader, QuickActions, KpiCard, SectionPanel],
+  imports: [CommonModule, DecimalPipe, ReactiveFormsModule, OverviewHeader, QuickActions, KpiCard, SectionPanel, Skeleton],
   templateUrl: './overview.html',
   styleUrl: './overview.css',
 })

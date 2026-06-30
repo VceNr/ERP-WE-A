@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { forkJoin, catchError, of, switchMap, map } from 'rxjs';
 import { SectionPanel } from '../section-panel/section-panel';
+import { Skeleton } from '../skeleton/skeleton';
 import { ProyectosService } from '../../core/services/proyectos.service';
 import { ClientesService } from '../../core/services/clientes.service';
 import { Proyecto } from '../../core/models/proyectos.model';
@@ -10,7 +11,7 @@ import { Proyecto } from '../../core/models/proyectos.model';
 @Component({
   selector: 'app-proyectos',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, SectionPanel],
+  imports: [CommonModule, ReactiveFormsModule, SectionPanel, Skeleton],
   templateUrl: './proyectos.html',
   styleUrl: './proyectos.css',
 })

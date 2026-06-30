@@ -3,13 +3,14 @@ import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { forkJoin, catchError, of } from 'rxjs';
 import { SectionPanel } from '../section-panel/section-panel';
+import { Skeleton } from '../skeleton/skeleton';
 import { ContabilidadService } from '../../core/services/contabilidad.service';
 import { Factura, AsientoContable } from '../../core/models/contabilidad.model';
 
 @Component({
   selector: 'app-contabilidad',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, SectionPanel],
+  imports: [CommonModule, ReactiveFormsModule, SectionPanel, Skeleton],
   templateUrl: './contabilidad.html',
   styleUrl: './contabilidad.css',
 })

@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { forkJoin, catchError, of } from 'rxjs';
 import { SectionPanel } from '../section-panel/section-panel';
+import { Skeleton } from '../skeleton/skeleton';
 import { VentasService } from '../../core/services/ventas.service';
 import { ClientesService } from '../../core/services/clientes.service';
 import { OrdenVenta, Vendedor, CanalVenta } from '../../core/models/ventas.model';
@@ -10,7 +11,7 @@ import { OrdenVenta, Vendedor, CanalVenta } from '../../core/models/ventas.model
 @Component({
   selector: 'app-ventas',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, SectionPanel],
+  imports: [CommonModule, ReactiveFormsModule, SectionPanel, Skeleton],
   templateUrl: './ventas.html',
   styleUrl: './ventas.css',
 })

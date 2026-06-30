@@ -3,13 +3,14 @@ import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { forkJoin, catchError, of } from 'rxjs';
 import { SectionPanel } from '../section-panel/section-panel';
+import { Skeleton } from '../skeleton/skeleton';
 import { RrhhService } from '../../core/services/rrhh.service';
 import { Empleado, Departamento } from '../../core/models/rrhh.model';
 
 @Component({
   selector: 'app-rrhh',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, SectionPanel],
+  imports: [CommonModule, ReactiveFormsModule, SectionPanel, Skeleton],
   templateUrl: './rrhh.html',
   styleUrl: './rrhh.css',
 })

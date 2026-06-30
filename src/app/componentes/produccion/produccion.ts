@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { forkJoin, catchError, of } from 'rxjs';
 import { SectionPanel } from '../section-panel/section-panel';
+import { Skeleton } from '../skeleton/skeleton';
 import { ProduccionService } from '../../core/services/produccion.service';
 import { InventarioService } from '../../core/services/inventario.service';
 import { OrdenProduccion, LineaProduccion } from '../../core/models/produccion.model';
@@ -11,7 +12,7 @@ import { Producto } from '../../core/models/inventario.model';
 @Component({
   selector: 'app-produccion',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, SectionPanel],
+  imports: [CommonModule, ReactiveFormsModule, SectionPanel, Skeleton],
   templateUrl: './produccion.html',
   styleUrl: './produccion.css',
 })

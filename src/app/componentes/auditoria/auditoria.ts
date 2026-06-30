@@ -2,13 +2,14 @@ import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { forkJoin, catchError, of } from 'rxjs';
 import { SectionPanel } from '../section-panel/section-panel';
+import { Skeleton } from '../skeleton/skeleton';
 import { AuditoriaService } from '../../core/services/auditoria.service';
 import { LogAuditoria, AlertaSeguridad } from '../../core/models/auditoria.model';
 
 @Component({
   selector: 'app-auditoria',
   standalone: true,
-  imports: [CommonModule, SectionPanel],
+  imports: [CommonModule, SectionPanel, Skeleton],
   templateUrl: './auditoria.html',
   styleUrl: './auditoria.css',
 })

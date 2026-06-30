@@ -1,5 +1,6 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Skeleton } from '../skeleton/skeleton';
 import { forkJoin, catchError, of } from 'rxjs';
 import { ConfiguracionService } from '../../core/services/configuracion.service';
 import { ConfiguracionGeneral, Integracion, ConfiguracionNotificacion } from '../../core/models/configuracion.model';
@@ -7,7 +8,7 @@ import { ConfiguracionGeneral, Integracion, ConfiguracionNotificacion } from '..
 @Component({
   selector: 'app-configuracion',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, Skeleton],
   templateUrl: './configuracion.html',
   styleUrl: './configuracion.css',
 })
