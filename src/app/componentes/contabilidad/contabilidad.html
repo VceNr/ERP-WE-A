@@ -117,7 +117,7 @@
             @if (asientos.length > 0) {
               @for (asiento of asientos; track asiento.id) {
                 <tr>
-                  <td class="mono">{{ asiento.numero ?? asiento.id }}</td>
+                  <td class="mono">{{ asiento.numero }}</td>
                   <td>{{ asiento.descripcion }}</td>
                   <td class="mono">{{ asiento.debe | number:'1.0-0' }}</td>
                   <td class="mono">{{ asiento.haber | number:'1.0-0' }}</td>

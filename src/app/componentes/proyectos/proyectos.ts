@@ -61,7 +61,7 @@ export class Proyectos implements OnInit {
     }).pipe(
       switchMap(({ kpis, proyectos, clientesLista }) => {
         const tareas$ = proyectos.length > 0
-          ? this.proyectosService.getTareas(proyectos[0].id).pipe(catchError(() => of([])))
+          ? this.proyectosService.getTareas(String(proyectos[0].id)).pipe(catchError(() => of([])))
           : of([]);
         return tareas$.pipe(map(tareas => ({ kpis, proyectos, tareas, clientesLista })));
       })
