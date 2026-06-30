@@ -149,29 +149,49 @@
   </table>
 </app-section-panel>
 
-<app-section-panel num="02" title="RESUMEN FINANCIERO - JUN 2026" link="#" linkLabel="Contabilidad">
-  <div class="finance-grid">
-    <div class="finance-item">
-      <span class="finance-label">Ingresos</span>
-      <span class="finance-value green">$284,500</span>
-      <div class="mini-bar"><span style="width: 71%" class="mini-fill green"></span></div>
+<app-section-panel num="02" title="RESUMEN FINANCIERO" link="#" linkLabel="Contabilidad">
+  @if (financialSummary) {
+    <div class="finance-grid">
+      <div class="finance-item">
+        <span class="finance-label">Ingresos</span>
+        <span class="finance-value green">{{ formatCurrency(financialSummary.ingresos) }}</span>
+        <div class="mini-bar">
+          <span class="mini-fill green"
+            [style.width.%]="financialSummary.ingresos > 0 ? 100 : 0">
+          </span>
+        </div>
+      </div>
+      <div class="finance-item">
+        <span class="finance-label">Gastos</span>
+        <span class="finance-value red">{{ formatCurrency(financialSummary.gastos) }}</span>
+        <div class="mini-bar">
+          <span class="mini-fill red"
+            [style.width.%]="financialSummary.ingresos > 0 ? (financialSummary.gastos / financialSummary.ingresos * 100) : 0">
+          </span>
+        </div>
+      </div>
+      <div class="finance-item">
+        <span class="finance-label">Utilidad Neta</span>
+        <span class="finance-value blue">{{ formatCurrency(financialSummary.utilidad) }}</span>
+        <div class="mini-bar">
+          <span class="mini-fill blue"
+            [style.width.%]="financialSummary.ingresos > 0 ? (financialSummary.utilidad / financialSummary.ingresos * 100) : 0">
+          </span>
+        </div>
+      </div>
+      <div class="finance-item">
+        <span class="finance-label">Cuentas por Cobrar</span>
+        <span class="finance-value amber">{{ formatCurrency(financialSummary.cuentas_por_cobrar) }}</span>
+        <div class="mini-bar">
+          <span class="mini-fill amber"
+            [style.width.%]="financialSummary.ingresos > 0 ? (financialSummary.cuentas_por_cobrar / financialSummary.ingresos * 100) : 0">
+          </span>
+        </div>
+      </div>
     </div>
-    <div class="finance-item">
-      <span class="finance-label">Gastos</span>
-      <span class="finance-value red">$91,200</span>
-      <div class="mini-bar"><span style="width: 23%" class="mini-fill red"></span></div>
-    </div>
-    <div class="finance-item">
-      <span class="finance-label">Utilidad Neta</span>
-      <span class="finance-value blue">$193,300</span>
-      <div class="mini-bar"><span style="width: 48%" class="mini-fill blue"></span></div>
-    </div>
-    <div class="finance-item">
-      <span class="finance-label">Cuentas por Cobrar</span>
-      <span class="finance-value amber">$42,800</span>
-      <div class="mini-bar"><span style="width: 11%" class="mini-fill amber"></span></div>
-    </div>
-  </div>
+  } @else {
+    <p class="muted-cell">Cargando resumen financiero...</p>
+  }
 </app-section-panel>
 
 <app-section-panel num="03" title="ALERTAS" [badge]="alerts.length > 0 ? alerts.length : 5">
@@ -275,41 +295,24 @@
 
 <app-section-panel num="05" title="ACTIVIDAD RECIENTE">
   <ul class="activity-list">
-    <li class="act-item">
-      <div class="act-dot act-blue"></div>
-      <div class="act-body">
-        <span class="act-text">Juan García creó orden <strong>#ORD-8821</strong></span>
-        <span class="act-time">10:42</span>
-      </div>
-    </li>
-    <li class="act-item">
-      <div class="act-dot act-green"></div>
-      <div class="act-body">
-        <span class="act-text">Pago aprobado para factura <strong>#F-4489</strong></span>
-        <span class="act-time">10:15</span>
-      </div>
-    </li>
-    <li class="act-item">
-      <div class="act-dot act-amber"></div>
-      <div class="act-body">
-        <span class="act-text">Stock actualizado — Bodega Central</span>
-        <span class="act-time">09:58</span>
-      </div>
-    </li>
-    <li class="act-item">
-      <div class="act-dot act-purple"></div>
-      <div class="act-body">
-        <span class="act-text">Cliente <strong>Tech Solutions</strong> actualizado</span>
-        <span class="act-time">09:30</span>
-      </div>
-    </li>
-    <li class="act-item">
-      <div class="act-dot act-red"></div>
-      <div class="act-body">
-        <span class="act-text">Orden <strong>#ORD-8817</strong> cancelada por cliente</span>
-        <span class="act-time">08:55</span>
-      </div>
-    </li>
+    @if (recentActivity.length > 0) {
+      @for (act of recentActivity; track act.fecha) {
+        <li class="act-item">
+          <div class="act-dot act-blue"></div>
+          <div class="act-body">
+            <span class="act-text"><strong>{{ act.usuario }}</strong> — {{ act.accion }}</span>
+            <span class="act-time">{{ act.fecha | date:'HH:mm' }}</span>
+          </div>
+        </li>
+      }
+    } @else {
+      <li class="act-item">
+        <div class="act-dot act-blue"></div>
+        <div class="act-body">
+          <span class="act-text muted-cell">Sin actividad reciente registrada</span>
+        </div>
+      </li>
+    }
   </ul>
 </app-section-panel>
 

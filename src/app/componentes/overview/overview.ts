@@ -8,7 +8,7 @@ import { QuickActions } from '../quick-actions/quick-actions';
 import { KpiCard } from '../kpi-card/kpi-card';
 import { SectionPanel } from '../section-panel/section-panel';
 import { DashboardService } from '../../core/services/dashboard.service';
-import { KpiData, RecentOrder, Alert } from '../../core/models/dashboard.model';
+import { KpiData, FinancialSummary, RecentOrder, Alert, RecentActivity } from '../../core/models/dashboard.model';
 import { VentasService } from '../../core/services/ventas.service';
 import { ComprasService } from '../../core/services/compras.service';
 import { InventarioService } from '../../core/services/inventario.service';
@@ -36,6 +36,8 @@ export class Overview implements OnInit {
   kpis: KpiData[] = [];
   recentOrders: RecentOrder[] = [];
   alerts: Alert[] = [];
+  financialSummary: FinancialSummary | null = null;
+  recentActivity: RecentActivity[] = [];
 
   clientesLista: any[] = [];
   vendedoresLista: any[] = [];
@@ -88,8 +90,15 @@ export class Overview implements OnInit {
     fecha:       [''],
   });
 
-  abrirModal(tipo: string) { this.modalActivo = tipo; this.errorModal = ''; }
-  cerrarModal() { this.modalActivo = null; this.errorModal = ''; }
+  abrirModal(tipo: string) {
+    this.modalActivo = tipo;
+    this.errorModal = '';
+  }
+
+  cerrarModal() {
+    this.modalActivo = null;
+    this.errorModal = '';
+  }
 
   seleccionarProductoOverview(event: Event) {
     const sku = (event.target as HTMLSelectElement).value;
@@ -159,20 +168,29 @@ export class Overview implements OnInit {
     });
   }
 
+  formatCurrency(value: number): string {
+    return value.toLocaleString('es-CL', { style: 'currency', currency: 'CLP', maximumFractionDigits: 0 });
+  }
+
   ngOnInit() {
     forkJoin({
-      kpis:          this.dashboardService.getKpis().pipe(catchError(() => of([]))),
-      recentOrders:  this.dashboardService.getRecentOrders().pipe(catchError(() => of([]))),
-      alerts:        this.dashboardService.getAlerts().pipe(catchError(() => of([]))),
-      clientesLista: this.clientesService.getClientes().pipe(catchError(() => of([]))),
-      vendedoresLista: this.ventasService.getVendedores().pipe(catchError(() => of([]))),
+      kpis:             this.dashboardService.getKpis().pipe(catchError(() => of([]))),
+      recentOrders:     this.dashboardService.getRecentOrders().pipe(catchError(() => of([]))),
+      alerts:           this.dashboardService.getAlerts().pipe(catchError(() => of([]))),
+      financialSummary: this.dashboardService.getFinancialSummary().pipe(catchError(() => of(null))),
+      recentActivity:   this.dashboardService.getRecentActivity().pipe(catchError(() => of([]))),
+      clientesLista:    this.clientesService.getClientes().pipe(catchError(() => of([]))),
+      vendedoresLista:  this.ventasService.getVendedores().pipe(catchError(() => of([]))),
       proveedoresLista: this.comprasService.getProveedores().pipe(catchError(() => of([]))),
-      productosLista: this.inventarioService.getProductos().pipe(catchError(() => of([]))),
+      productosLista:   this.inventarioService.getProductos().pipe(catchError(() => of([]))),
     }).subscribe({
-      next: ({ kpis, recentOrders, alerts, clientesLista, vendedoresLista, proveedoresLista, productosLista }) => {
+      next: ({ kpis, recentOrders, alerts, financialSummary, recentActivity,
+               clientesLista, vendedoresLista, proveedoresLista, productosLista }) => {
         this.kpis             = kpis;
         this.recentOrders     = recentOrders;
         this.alerts           = alerts;
+        this.financialSummary = financialSummary;
+        this.recentActivity   = recentActivity;
         this.clientesLista    = clientesLista;
         this.vendedoresLista  = vendedoresLista;
         this.proveedoresLista = proveedoresLista;

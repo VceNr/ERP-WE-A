@@ -15,6 +15,7 @@ import { Proyectos }    from './componentes/proyectos/proyectos';
 import { Reportes }     from './componentes/reportes/reportes';
 import { Auditoria }    from './componentes/auditoria/auditoria';
 import { Configuracion } from './componentes/configuracion/configuracion';
+import { authGuard }    from './core/guards/auth.guard';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -23,6 +24,7 @@ export const routes: Routes = [
   {
     path: 'dashboard',
     component: Dashboard,
+    canActivate: [authGuard],
     children: [
       { path: '', redirectTo: 'overview', pathMatch: 'full' },
       { path: 'overview',      component: Overview },
